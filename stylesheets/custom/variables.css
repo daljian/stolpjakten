@@ -1,0 +1,166 @@
+/* Top color depending on map id for menu*/
+
+/* -1 is before city is selected */
+div#mainView div.map-1 {
+  background-color: #FF4C00;
+  font-size: 18px;
+  color: white;
+}
+ .icon-1 {
+  color: #FFF;
+}
+ .icon-1:hover {
+  color: #FFF;
+}
+
+/* 12 DEMO Friska Norden 'orange' */
+div#mainView div.map12 {
+  background-color: #4298B5;
+  font-size: 18px;
+}
+ .icon12 {
+  color: #FFF;
+}
+ .icon12:hover {
+  color: #FFF;
+}
+
+/* 14 Friska Karlstad 'blue' */
+div#mainView div.map14 {
+  background-color: #FF4C00;
+  font-size: 18px;
+  color: white;
+}
+ .icon14 {
+  color: #FFF;
+}
+ .icon14:hover {
+  color: #FFF;
+}
+
+/* 1 Friska Molkom 'yellow' */
+div#mainView div.map1 {
+  background-color: #E44619;
+  font-size: 18px;
+  color: white;
+}
+ .icon1 {
+  color: #FFF;
+}
+ .icon1:hover {
+  color: #FFF;
+}
+
+/* 9 Friska Test 'green' */
+div#mainView div.map9 {
+  background-color: green;
+  font-size: 18px;
+}
+ .icon9 {
+  color: #FFF;
+}
+ .icon9:hover {
+  color: #FFF;
+}
+
+/* 8 Friskare Arvika 'black' */
+div#mainView div.map8 {
+  background-color: #00A0D9;
+  font-size: 18px;
+}
+ .icon8 {
+  color: #FFF;
+}
+ .icon8:hover {
+  color: #FFF;
+}
+
+/* 11 Sprek i Gjövik 'white' */
+div#mainView div.map11 {
+  background-color: #27ae61;
+  font-size: 18px;
+}
+ .icon11 {
+  color: #FFF;
+}
+ .icon11:hover {
+  color: #FFF;
+}
+
+/* 5 Fresk i Sarp 'white on pink' */
+div#mainView div.map5 {
+  background-color: #075266;
+  font-size: 18px;
+  color: #FFF;
+}
+ .icon5 {
+  color: #FFF;
+}
+ .icon5:hover {
+  color: #FFF;
+}
+
+/* 6 Friska Sala */
+div#mainView div.map6 {
+  background-color: #86cbe9;
+  font-size: 18px;
+  color: #FFF;
+}
+ .icon6 {
+  color: #FFF;
+}
+ .icon6:hover {
+  color: #FFF;
+}
+/* 16 Friska Sala */
+div#mainView div.map16 {
+  background-color: #f32726;
+  font-size: 18px;
+  color: #FFF;
+}
+ .icon16 {
+  color: #FFF;
+}
+ .icon16:hover {
+  color: #FFF;
+}
+
+/* Color on marker depending on marker difficulty */
+
+/* difficulty 1 */
+.level1 {
+  background-color: #95c11f;
+}
+.leaflet-popup-content .level1 {
+  border-color: #95c11f !important;
+  background-color: white !important;
+}
+/* difficulty 2 */
+.level2 {
+  background-color: #1d71b8 !important;
+}
+.leaflet-popup-content .level2 {
+  border-color: #1d71b8 !important;
+  background-color: white !important;
+}
+/* difficulty 3 */
+.level3 {
+  background-color: #e6332a !important;
+}
+.leaflet-popup-content .level3 {
+  border-color: #e6332a !important;
+  background-color: white !important;
+}
+/* difficulty 4 */
+.level4 {
+  background-color: #101010 !important;
+}
+.leaflet-popup-content .level4 {
+  border-color: #101010 !important;
+  background-color: white !important;
+}
+
+/*div#mainView div.navigation {
+  height: 55px;  
+}*/
+

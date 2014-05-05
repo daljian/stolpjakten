@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="se.friskakarlstad.phonegap.client" version="1.0.2" versionCode="492" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Stolpjakten</name>
+    <description>
+        Official application for Stolpjakten
+    </description>
+    <content src="index.html" />
+    
+    <author email="info@friskakarlstad.se" href="http://oktyr.se">
+        Stolpjakten - OK Tyr, Friska Karlstad
+    </author>
+    <preference name="phonegap-version" value="3.3.0" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" />
+    <gap:plugin name="com.phonegap.plugins.barcodescanner" />
+    <gap:plugin name="com.phonegap.plugin.statusbar"/> 
+    <gap:config-file platform="ios" parent="UIStatusBarHidden">
+        <true/>
+    </gap:config-file>
+    <gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
+        <false/>
+    </gap:config-file>
+    <feature name="http://api.phonegap.com/1.0/device" />
+    <feature name="http://api.phonegap.com/1.0/geolocation"/>
+    <gap:plugin name="org.apache.cordova.geolocation"  />
+    <preference name="StatusBarOverlaysWebView" value="false"/> 
+    <preference name="permissions" value="none" />
+    <preference name="orientation" value="portrait" />
+    <preference name="target-device" value="universal" />
+    <preference name="fullscreen" value="true" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="stay-in-webview" value="false" />
+    <preference name="ios-statusbarstyle" value="default" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+    <preference name="show-splash-screen-spinner" value="true" />
+    <preference name="auto-hide-splash-screen" value="true" />
+    <preference name="disable-cursor" value="false" />
+    <preference name="android-minSdkVersion" value="7" />
+    <preference name="android-installLocation" value="auto" />
+    <preference name="exit-on-suspend" value="true" />
+    <preference name="BackupWebStorage" value="none" />
+    <icon src="icon.png" />
+    <icon src="icons/ios/icon-57.png"        gap:platform="ios" width="57"  height="57"  />
+    <icon src="icons/ios/icon-72.png"        gap:platform="ios" width="72"  height="72"  />
+    <icon src="icons/ios/icon-76.png"        gap:platform="ios" width="76"  height="76"  />
+    <icon src="icons/ios/icon-57-2x.png"     gap:platform="ios" width="114" height="114" />
+    <icon src="icons/ios/icon-72-2x.png"     gap:platform="ios" width="144" height="144" />
+    <icon src="icons/ios/icon-120.png"     gap:platform="ios" width="120" height="120" />
+    <icon src="icons/ios/icon-152.png"     gap:platform="ios" width="152" height="152" />
+    <gap:splash src="splash/ios/iphone.png"                 gap:platform="ios" width="320"  height="480"  />
+    <gap:splash src="splash/ios/iphone-2x.png"           gap:platform="ios" width="640"  height="960"  />
+    <gap:splash src="splash/ios/iphone5.png"         gap:platform="ios" width="640"  height="1136" />
+    <gap:splash src="splash/ios/iphone-landscape.png"       gap:platform="ios" width="1024" height="748"  />
+    <gap:splash src="splash/ios/iphone-portrait.png"        gap:platform="ios" width="768"  height="1004" />
+    <!-- retina iPad -->
+    <gap:splash src="splash/ios/ipad-landscape.png" gap:platform="ios" width="2048" height="1496" />
+    <gap:splash src="splash/ios/ipad-portrait.png"  gap:platform="ios" width="1536" height="2008" />
+    <access origin="*" subdomains="true"/>
+</widget>

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+    <link rel="apple-touch-icon-precomposed" href="icon.png">
+    <link rel="shortcut icon" href="icon.png">
+    <title>Stolpjakten</title>
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/custom/variables.css"/>
+    <link rel="stylesheet" type="text/css" href="app.stolpjakten.se/app/stylesheets/custom/variables.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/users/index.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/users/login.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/users/register.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/maps/show.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/maps/marker.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/menu/index.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/menu/show.css"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/menu/city.css"/>
+    <link rel="stylesheet" type="text/css" href="thirdparty/bootstrap/css/bootstrap.css"/>
+    
+    <link rel="stylesheet" href="thirdparty/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="thirdparty/Leaflet.markercluster-master/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" type="text/css" href="thirdparty/Leaflet.MousePosition-master/L.Control.MousePosition.css"/>
+</head>
+<body>
+  
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="thirdparty/knockout/knockout-3.0.0.js"></script>
+<script type="text/javascript" src="thirdparty/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="thirdparty/xml2json/jquery.xml2json.js"></script>
+<script type="text/javascript" src="thirdparty/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="thirdparty/toastr-master/toastr.js"></script>
+<script type="text/javascript" src="thirdparty/noty-2.2.2/js/noty/packaged/jquery.noty.packaged.js"></script>
+
+<script type="text/javascript" src="utils/barcodescanner.js"></script>
+
+<script type="text/javascript" src="utils/utils.js"></script>
+<script type="text/javascript" src="utils/net.js"></script>
+
+
+<!--<script src="http://documentcloud.github.com/underscore/underscore-min.js"></script> 
+<script src="http://documentcloud.github.com/backbone/backbone-min.js"></script> -->
+<script type="text/javascript" src="thirdparty/underscore/underscore-min.js"></script>
+<script type="text/javascript" src="thirdparty/backbone/backbone-min.js"></script>
+
+<script src="thirdparty/leaflet/leaflet-src.js"></script>
+<script src="thirdparty/Leaflet.markercluster-master/dist/leaflet.markercluster.js"></script>
+<script type="text/javascript" src="thirdparty/Leaflet.MousePosition-master/L.Control.MousePosition.js"></script>
+<script type='application/javascript' src='thirdparty/fastclick/fastclick.js'></script>
+
+<script>
+  window.App = {
+    Views: {},
+    Routers: {}
+  };
+  window.addEventListener('load', function() {
+    FastClick.attach(document.body);
+}, false);
+</script>
+
+<script src="utils/storage.js"></script>
+<script src="utils/library.js"></script>
+<script src="utils/cache.js"></script>
+<script src="thirdparty/handlebars/handlebars-v1.3.0.js"></script>
+<script src="i18n/i18n.js"></script>
+<script src="i18n/sv.js"></script>
+<script src="i18n/en.js"></script>
+<script src="i18n/no.js"></script>
+<script src="application.js"></script>
+<script src="views/base.js"></script>
+<script src="views/users/index.js"></script>
+<script src="views/users/login.js"></script>
+<script src="views/users/register.js"></script>
+<script src="views/maps/show.js"></script>
+<script src="views/maps/marker.js"></script>
+<script src="views/menu/index.js"></script>
+<script src="views/menu/show.js"></script>
+<script src="views/menu/city.js"></script>
+<script src="routers/users.js"></script>
+<script src="routers/maps.js"></script>
+<script src="routers/menu.js"></script>
+
+<script type="text/javascript">
+  $(function() {
+    App.initialize();
+    var credentials = JSON.parse(localStorage.getItem(getCredentialsKey()));
+    if (credentials != null && typeof credentials.email != "undefined"){
+      var user = localStorage.getItem(getUserKey());
+      if (typeof user != "undefined"){
+       var mapId = getCurrentMapId();
+       if (typeof mapId == "undefined"){
+          mapId = 12;
+        }
+        window.location.href = '#maps/'+mapId+'/show';
+        return;
+      }
+    }
+    window.location.href='#user/information';
+  });
+  
+  // width: 340 förut    480px
+  // height: 536 förut   800px
+  //$('#mainView').height(536);
+  //$('#mainView').width(340);
+  //
+  //
+</script>
+
+<div id="mainView" style="width: 100%;height:100% !important;position:absolute;">
+  <!--a href="#user/information">Gå till "appen"</a-->
+</div>
+
+</body>
+</html>

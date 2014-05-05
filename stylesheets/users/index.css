@@ -1,0 +1,58 @@
+div.users-index {
+  background-color: #468ee5;
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+
+div.users-index h3 {
+  margin-top: 0px;
+}
+
+div.users-index div.nations {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  
+}
+
+div.users-index span.nation {
+  width: 35px;
+  height: 25px;
+  margin-left: 15px;
+  float: left;
+  cursor: pointer;
+  border: thin solid grey;
+  text-align: center;
+}
+
+div.users-index div.navigation div {
+  color: white;
+  height: 55px;
+  width: 50%;
+  position: absolute;
+  bottom: 0px;  
+  line-height: 50px;
+  text-align: center;
+}
+
+div.users-index div.navigation div.left {
+  background-color: #4a4a4a;
+  cursor: pointer;
+}
+
+div.users-index div.navigation div.right {
+  background-color: #007575;
+  cursor: pointer;
+  left:50%;
+}
+
+div.users-index div.information-text {
+  padding: 0px 15px;
+  position: absolute;
+  top: 150px;
+}
+
+div.users-index div.information-text h3 {
+  text-align: center;
+} 

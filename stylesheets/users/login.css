@@ -1,0 +1,79 @@
+input {
+    -webkit-appearance:none;  
+    -webkit-border-radius:0px;
+    border: none;
+}
+
+div.users-login {
+  background-color: #468ee5;
+  color: black;
+  width: 100%;
+  height: 100%;
+}
+
+div.users-login p {
+  margin: 8px 3px;
+}
+
+div.users-login div.navigation {
+  background-color: #4a4a4a;
+  color: white;
+  height: 55px;
+  width: 100%;
+  position: absolute;
+  top: 0px;  
+}
+
+div.users-login div.navigation div.top {
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 14px;
+  float: left;
+}
+
+div.users-login div.navigation div.title {
+  /*font-size: 20px;*/
+  text-align: center;
+  width: 100%;
+  padding-right: 56px;
+  padding-top: 5px;
+  line-height: 45px;
+}
+
+div.users-login div.login-form {
+  position: absolute;
+  top: 150px;
+  width: 100%;
+  padding: 0px 15px;
+  color: black;
+  display: block;
+}
+
+div.users-login div.login-form input {
+  clear: both;
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+ /* border-bottom: 1px solid #468ee5 !important;*/
+  border:none;
+  background-color: #2f5f99;
+  color: whitesmoke;
+}
+
+
+div.users-login div.login-form p {
+  margin: 0px 0px;
+}
+
+div.users-login div.submit-button {
+  background-color: #007575;
+  color: white;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  cursor: pointer;
+}
+
+div.users-login a {
+  color: white;
+}

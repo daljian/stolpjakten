@@ -1,0 +1,8 @@
+blå: 1d71b8
+grön: 95c11f
+oreggad: e6007e
+reggad: c6c6c6
+röd: e6332a
+svart: 101010
+
+

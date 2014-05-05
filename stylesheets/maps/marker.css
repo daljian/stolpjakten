@@ -1,0 +1,117 @@
+div.maps-marker {
+  background-color: #4a4a4a;
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+
+div.maps-marker div.navigation {  
+  color: white;
+  height: 55px;
+  width: 100%;
+  /*position: absolute;*/
+  top: 0px;  
+}
+
+div.maps-marker div.navigation div.top {
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-top: 14px;
+  text-align: center; 
+}
+
+
+div.maps-marker div.marker-body {
+  position: absolute;
+  background-color: #4a4a4a;
+  min-height: 466px;
+  top: 55px;
+ /* width: 300px;*/
+  width: 100%;
+  /*left: 20px;*/
+  display: block;  
+}
+
+div.maps-marker div.normal{
+  width: 90%;
+  height: 40px;
+  clear: both;
+  margin: 20px auto;
+}
+
+
+div.maps-marker div.info1 {
+  color: black;
+  background-color: white;
+  line-height: 40px;
+  border-left: 8px solid #95c11f;
+}
+div.maps-marker div.info2 {
+  color: black;
+  background-color: white;
+  line-height: 40px;
+  border-left: 8px solid #1d71b8;
+}
+div.maps-marker div.info3 {
+  color: black;
+  background-color: white;
+  line-height: 40px;
+  border-left: 8px solid #e6332a;
+}
+div.maps-marker div.info4 {
+  color: black;
+  background-color: white;
+  line-height: 40px;
+  border-left: 8px solid #101010;
+}
+
+div.maps-marker span.markerNumber {
+  font-size: 22px;
+  padding: 0 10px;
+}
+
+div.maps-marker div.advert {
+  /*background-color: #468ee5;*/
+  min-height: 130px;
+  width: 90%;
+  height: 100%;
+  clear: both;
+  padding: 0;
+  margin: 0 auto 20px;
+  background-color: #666666;
+}
+
+div.maps-marker div.advert img {
+  width: 100%;
+  max-width: 400px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+div.maps-marker div.advert p {
+  font-weight: 300;
+  padding: 10px 20px 0;
+}
+
+div.maps-marker div.advert .opensponsor h3 {
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+}
+
+div.maps-marker div.button {
+  background-color: #df5c27;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+div.maps-marker input {
+  height: 100%;
+  float: left;
+  color: #101010;
+}
+
+
