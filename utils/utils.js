@@ -221,16 +221,12 @@ var utils = (function() {
   },
   warning: function(msg){
 //        navigator.notification.alert(msg, null, ":(", "OK");
-    return noty({layout: 'center', type: 'warning', text: msg});
+    return noty({layout: 'center', type: 'warning', text: msg, closeWith: ["button", "click"]});
     //toastr.warning(msg);
   },
   error: function(msg){
 //        navigator.notification.alert(msg, null, ";(", "OK");
-    return noty({layout: 'center', type: 'error', text: msg,
-        /*buttons: [
-            {text: 'Ok',
-            onClick: function($noty) {$noty.close();}
-            }]*/});
+    return noty({layout: 'center', type: 'error', text: msg, closeWith: ["button", "click"]});
   },
   success: function(msg){
 //        navigator.notification.confirm(msg, null, ":)", "OK");
@@ -242,7 +238,7 @@ var utils = (function() {
   },
 
   logDebug: function(msg){
-    console.log(msg);
+    //console.log(msg);
   },
 
 

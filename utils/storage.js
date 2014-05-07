@@ -46,6 +46,17 @@ function getUserKey(){
 function getLanguageKey() {
   return 'stolpjakten.language';
 }
+
+function getOnlineStatusKey() {
+  return 'stolpjakten.onlinestatus';
+}
+function toggleOnlineStatus(){
+  toggleSetting(getOnlineStatusKey());
+}
+function getOnlineStatus(){
+  return getSetting(getOnlineStatusKey());
+}
+
 function getFilterOnKey() {
   return 'stolpjakten.filter';
 }

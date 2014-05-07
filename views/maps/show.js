@@ -18,7 +18,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
 
   // The model passed into the view can be any `App.Models.User`.
   initialize: function() {
-    try{
+    //try{
         var myself = this;
         var selectedMarker = JSON.parse(localStorage.getItem(getSelectedMarkerKey()));
         var openPopup = -1;
@@ -66,11 +66,11 @@ App.Views.Maps.Show = App.Views.Base.extend({
 
         
         this.render();
-    }catch(err){
+   /* }catch(err){
       console.log("Found issue while rendering, will clear cache and go back");
       localStorage.clear();
       window.location.reload();
-    }
+    }*/
   },
   validateMapCode: function(code, mapId){
     var valid = false;
@@ -215,8 +215,9 @@ App.Views.Maps.Show = App.Views.Base.extend({
     //osmLayer.getTileUrl = this.getTileUrl;
     osmLayer.addTo(map);
     //utils.logDebug("Will enable Location tracking!");
+    //old way this.enableLocationTracking(map);
     if (getGPS()){
-        this.enableLocationTracking(map);
+        map.addControl( new L.Control.Gps() );
     }
     
         // initialize the filesystem where we store cached tiles. when this is ready, proceed with the map
@@ -241,7 +242,6 @@ App.Views.Maps.Show = App.Views.Base.extend({
 //Päjsta här
 L.control.mousePosition().addTo(map);
 //Right click on the map activated
-
 map.on('contextmenu', function(e) {
     window.prompt("Copy to clipboard: Ctrl+C, Enter", e.latlng.lat +","+e.latlng.lng);
 });
@@ -337,7 +337,7 @@ map.on('contextmenu', function(e) {
         var marker = new Object();
         this.marker = marker;
         utils.logDebug("in if");
-          map.locate({setView: false, watch:true, enableHighAccuracy: true});
+          map.locate({setView: false, watch:true, enableHighAccuracy: getGPS()});
           map.on('locationfound', function (e) {
               utils.logDebug("Found location with event " + e + " map: " + map);
               var radius = e.accuracy / 2;

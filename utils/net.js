@@ -184,6 +184,8 @@ var net = (function() {
   var NET_OPERATION_GET_MY_RESULTS= "GetMyResults";
   var GETMAPS_CACHE_INVALIDITY_TIME_MS = 604800000;
   var GETMAP_CACHE_INVALIDITY_TIME_MS = 604800000;
+  var GET_ALL_RESULTS_CACHE_INVALIDITY_TIME_MS= 30000;
+  var GET_MY_RESULTS_CACHE_INVALIDITY_TIME_MS= 30000;
   var CACHE_INVALIDITY_TIME_MS = 604800000; //one week is 604800000
   var SERVER_GET_GRACE_TIME_MS = 60000; //one minute before we proactively update cache
   var previousOnlineStatus = true;
@@ -202,6 +204,10 @@ var net = (function() {
       invalidityTime = GETMAPS_CACHE_INVALIDITY_TIME_MS;
     }else if(url.indexOf(NET_OPERATION_GET_MAP) != -1){
       invalidityTime = GETMAP_CACHE_INVALIDITY_TIME_MS;
+    }else if(url.indexOf(NET_OPERATION_GET_ALL_RESULTS) != -1){
+      invalidityTime = GET_ALL_RESULTS_CACHE_INVALIDITY_TIME_MS;
+    }else if(url.indexOf(NET_OPERATION_GET_MY_RESULTS) != -1){
+      invalidityTime = GET_MY_RESULTS_CACHE_INVALIDITY_TIME_MS;
     }
     if (cached != null &&
         ((Date.now() - cached.timestamp) < invalidityTime)){
@@ -213,8 +219,8 @@ var net = (function() {
     }
   }
   function shouldUpdateCache(url){
-    var result = true;
-    if (isCacheUpToDate(url)){
+    var result = getOnlineStatus();
+    if (isCacheUpToDate(url) && result){
       var cached = getFromCache(url);
       if ((Date.now() - cached.timestamp) < SERVER_GET_GRACE_TIME_MS){
         result = false;
@@ -267,6 +273,13 @@ var net = (function() {
 
   function sendToServer(operation, xml)
   {
+        if (!getOnlineStatus()){
+          if (operation != NET_OPERATION_GET_SERVER_STATUS){
+            //We are offline and request is not checking server status
+            //so we return offline to client.
+            return getFromCache(createURL(operation, xml));
+          }
+        }
         //console.time('sendToServer');
         utils.logDebug("request: " + xml);
         xml = toUTF(xml);
@@ -354,25 +367,50 @@ var net = (function() {
       return jsonResult
 
     },
+
+    trackOnlineStatus:  function() {
+        this.isOnline();
+        setInterval(this.isOnline, 30000);
+    },
 /**
 * @returns true if (and only if) .NET server and it's database is operational.
 */
     isOnline: function() {
-      var online = false;
-      try{
-        var serverResult = sendToServer(NET_OPERATION_GET_SERVER_STATUS,"");
-      }catch(err){
-        console.log(err);
-      }
-      utils.logDebug("["+serverResult+"]");
-      if (serverResult){
-        online = true;
-      }
-      if (previousOnlineStatus != online){
-        previousOnlineStatus = online;
-      }
-      utils.logDebug('online status: ['+online+']');
-        if (online){
+        console.time('isOnline');
+        utils.logDebug("checking online status...");
+        if (!window.navigator.onLine){
+          if (getOnlineStatus() == true){
+            toggleOnlineStatus();
+            
+          }
+        }else{
+          //serverResult = sendToServer(NET_OPERATION_GET_SERVER_STATUS,"");
+          var xmlHttp = new XMLHttpRequest();
+          xmlHttp.timeout=1000;
+          xmlHttp.onreadystatechange = function (oEvent) {  
+            if (xmlHttp.readyState === 4) {  
+              if (xmlHttp.status === 200) {  
+                console.timeEnd('isOnline');
+                if (getOnlineStatus() != true){
+                  toggleOnlineStatus();
+                }
+              } else {  
+                console.timeEnd('isOnline');
+                if (getOnlineStatus() == true){
+                  toggleOnlineStatus();
+                  utils.warning("offline!");
+                }
+              }  
+            }  
+          };
+        xmlHttp.ontimeout = function () { 
+          console.timeEnd('isOnline');
+        }
+        xmlHttp.open("GET", createURL(NET_OPERATION_GET_SERVER_STATUS), true);
+        xmlHttp.send(null);
+        
+        }
+        if (getOnlineStatus()){
           var pendingSticks = utils.getPendingSticks();
           if (pendingSticks.length > 0 ){
           var credentials = localStorage.getItem(getCredentialsKey());
@@ -389,7 +427,8 @@ var net = (function() {
           localStorage.setItem(getPendingSticksKey(), pendingSticks);
           }
         }
-      return online;
+
+      return getOnlineStatus();
     },
 
 /**

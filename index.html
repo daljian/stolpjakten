@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="thirdparty/leaflet/leaflet.css" />
     <link rel="stylesheet" href="thirdparty/Leaflet.markercluster-master/dist/MarkerCluster.Default.css" />
     <link rel="stylesheet" type="text/css" href="thirdparty/Leaflet.MousePosition-master/L.Control.MousePosition.css"/>
+    <link rel="stylesheet" type="text/css" href="thirdparty/leaflet-gps-master/dist/leaflet-gps.src.css"/>
 </head>
 <body>
   
@@ -48,6 +49,8 @@
 <script src="thirdparty/Leaflet.markercluster-master/dist/leaflet.markercluster.js"></script>
 <script type="text/javascript" src="thirdparty/Leaflet.MousePosition-master/L.Control.MousePosition.js"></script>
 <script type='application/javascript' src='thirdparty/fastclick/fastclick.js'></script>
+<script type='application/javascript' src='thirdparty/leaflet-gps-master/dist/leaflet-gps.src.js'></script>
+
 
 <script>
   window.App = {
@@ -57,6 +60,7 @@
   window.addEventListener('load', function() {
     FastClick.attach(document.body);
 }, false);
+  net.trackOnlineStatus();
 </script>
 
 <script src="utils/storage.js"></script>
