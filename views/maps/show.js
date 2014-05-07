@@ -215,10 +215,10 @@ App.Views.Maps.Show = App.Views.Base.extend({
     //osmLayer.getTileUrl = this.getTileUrl;
     osmLayer.addTo(map);
     //utils.logDebug("Will enable Location tracking!");
-    //old way this.enableLocationTracking(map);
-    if (getGPS()){
+    this.enableLocationTracking(map);
+    /*if (getGPS()){
         map.addControl( new L.Control.Gps() );
-    }
+    }*/
     
         // initialize the filesystem where we store cached tiles. when this is ready, proceed with the map
     //console.log("tileArray: " + JSON.stringify(this.tileArray));
