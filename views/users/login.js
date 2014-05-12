@@ -80,7 +80,7 @@ App.Views.Users.Login = App.Views.Base.extend({
     var source = '<div class="navigation"><div class="top"><a class="icon{{mapCss}}" style="font-size: 20px" href="#user/information"><span class="glyphicon glyphicon-remove-circle" style:float:left;></span></a></div>'+
                  '<div class="title">{{menuTitle}}</div></div>' +
                  '<div class="login-form">' +
-                 '<p><input name="email" placeholder="{{email}}"/></p>' + 
+                 '<p><input name="email" placeholder="{{email}}" type="email"/></p>' + 
                  '<p><input name="pwd" placeholder="{{password}}" type="password"/></p>' +
                  '<p><div class="submit-button">{{menuTitle}}</div></p>'+
                  '</div>';
