@@ -360,13 +360,6 @@ map.on('contextmenu', function(e) {
               myself.marker = L.circleMarker(e.latlng, {"radius":radius});
               myself.marker.addTo(map);
       });
-    }else{
-        utils.logDebug("in else");
-        if (myself.marker != null){
-          map.removeLayer(myself.marker)
-        }
-
-        this.marker.addTo(map);
     }
   },
   
