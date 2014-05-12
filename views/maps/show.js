@@ -346,12 +346,9 @@ map.on('contextmenu', function(e) {
               gpsPos.latitude = e.latlng.lat;
               gpsPos.longitude = e.latlng.lng;
               var radius = e.accuracy / 2;
+              radius = 12.5; //hard coded, pixelvalue to match other markers on map.
+            
               
-              if (radius < 50){
-                radius = 50;
-              }else if (radius > 500){
-                radius = 500;
-              }
               
               gpsPos.radius = radius;
               localStorage.setItem(getGPSPositionKey(), JSON.stringify(gpsPos));
@@ -360,7 +357,7 @@ map.on('contextmenu', function(e) {
               if (myself.marker != null){
                 map.removeLayer(myself.marker)
               }
-              myself.marker = L.circle(e.latlng, radius);
+              myself.marker = L.circleMarker(e.latlng, {"radius":radius});
               myself.marker.addTo(map);
       });
     }else{
@@ -449,8 +446,15 @@ map.on('contextmenu', function(e) {
     this.render();
   },
   doFindMe: function(){
+    if (this.marker != null){
+      this.map.removeLayer(this.marker)
+    }
     utils.logDebug("GPS: " + localStorage.getItem(getGPSPositionKey()));
     var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
+    utils.logDebug("lng: " +gpsPosition.longitude);
+    var marker = L.circleMarker(L.latLng(gpsPosition.latitude, gpsPosition.longitude), {"radius":gpsPosition.radius});
+    this.marker = marker;
+    this.marker.addTo(this.map);
     this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
   },
   toMenu: function(){
