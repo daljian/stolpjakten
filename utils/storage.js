@@ -27,6 +27,9 @@ function getLastAttemptedRegistrationKey(){
 function getZoomPositionKey(){
   return 'stolpjakten.'+getCurrentMapId()+'.zoomposition';
 }
+function getGPSPositionKey(){
+  return 'stolpjakten.'+getCurrentMapId()+'.gpsposition';
+}
 function getExtraMapIdsKey(){
   return 'stolpjakten.' + getCurrentMapId()+'.extramapids';
 }

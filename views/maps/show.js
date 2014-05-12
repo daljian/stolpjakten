@@ -13,6 +13,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     'click .glyphicon-filter':   'doFilter',
     'click .glyphicon-compressed': 'doToggleMarkerCluster',
     'click .glyphicon-qrcode' : 'doScan',
+    'click .glyphicon-screenshot' : 'doFindMe',
     'click a.tomenu':                  'toMenu'
   },
 
@@ -240,6 +241,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     }
     
 //Päjsta här
+//Admin features
 L.control.mousePosition().addTo(map);
 //Right click on the map activated
 map.on('contextmenu', function(e) {
@@ -340,7 +342,21 @@ map.on('contextmenu', function(e) {
           map.locate({setView: false, watch:true, enableHighAccuracy: getGPS()});
           map.on('locationfound', function (e) {
               utils.logDebug("Found location with event " + e + " map: " + map);
+              var gpsPos = new Object()
+              gpsPos.latitude = e.latlng.lat;
+              gpsPos.longitude = e.latlng.lng;
               var radius = e.accuracy / 2;
+              
+              if (radius < 50){
+                radius = 50;
+              }else if (radius > 500){
+                radius = 500;
+              }
+              
+              gpsPos.radius = radius;
+              localStorage.setItem(getGPSPositionKey(), JSON.stringify(gpsPos));
+              
+              
               if (myself.marker != null){
                 map.removeLayer(myself.marker)
               }
@@ -378,6 +394,7 @@ map.on('contextmenu', function(e) {
                  this.createFilterIconHtml() +
                  this.createMarkerClusterIconHtml()+
                  this.createScanIconHtml()+
+                 this.createGPSIconHtml()+
                 
 
                  //'<span class="filter"><a href="javascript:void(0);" onclick="javascript:myself.seedLayerByIndex(0)"><span class="glyphicon glyphicon-download-alt"></span></a></span>'+
@@ -387,6 +404,11 @@ map.on('contextmenu', function(e) {
                  '</div>';
     
     return source;
+  },
+  createGPSIconHtml: function() {
+    if (getGPS()){
+      return '<span class="filter"><a class="icon'+getCurrentMapId()+'" href="#"><span class="glyphicon glyphicon-screenshot"></span></a></span>';
+    }
   },
   createFilterIconHtml: function() {
     return ''; //disable
@@ -425,6 +447,11 @@ map.on('contextmenu', function(e) {
   doScan: function(){
     utils.scan(this);
     this.render();
+  },
+  doFindMe: function(){
+    utils.logDebug("GPS: " + localStorage.getItem(getGPSPositionKey()));
+    var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
+    this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
   },
   toMenu: function(){
     this.saveMapPosition();

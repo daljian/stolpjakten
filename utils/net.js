@@ -369,7 +369,7 @@ var net = (function() {
     },
 
     trackOnlineStatus:  function() {
-        this.isOnline();
+        setTimeout(this.isOnline, 3000);
         setInterval(this.isOnline, 30000);
     },
 /**
