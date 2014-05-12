@@ -362,6 +362,10 @@ map.on('contextmenu', function(e) {
       });
     }else{
         utils.logDebug("in else");
+        if (myself.marker != null){
+          map.removeLayer(myself.marker)
+        }
+
         this.marker.addTo(map);
     }
   },
