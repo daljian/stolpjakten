@@ -386,7 +386,7 @@ var net = (function() {
         }else{
           //serverResult = sendToServer(NET_OPERATION_GET_SERVER_STATUS,"");
           var xmlHttp = new XMLHttpRequest();
-          xmlHttp.timeout=1000;
+          xmlHttp.timeout=3000;
           xmlHttp.onreadystatechange = function (oEvent) {  
             if (xmlHttp.readyState === 4) {  
               if (xmlHttp.status === 200) {  
