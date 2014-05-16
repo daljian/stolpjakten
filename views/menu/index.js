@@ -65,15 +65,23 @@ App.Views.Menu.Index = App.Views.Base.extend({
   
   // variabler som skickas in i html
   createData: function() {
-
-    var storage = getCurrentMap(),
+    var data;
+    try{
+        var storage = getCurrentMap(),
         menuTitle = storage.mn,
         mapView = storage.mid;
-    var retrievedObject = JSON.parse(localStorage.getItem(getUserKey())),
+        var retrievedObject = JSON.parse(localStorage.getItem(getUserKey())),
         firstName = retrievedObject.ud.fn,
         lastName = retrievedObject.ud.ln;
+        data = { "firstName": firstName, "lastName": lastName, "menuTitle": menuTitle, "login": I18n.t('views.menu.loginlabel'), mapCss: mapView};
+    }catch(err){
+      console.log("Tried to retrive using key " + getUserKey());
+      var retrievedObject = net.getUser(getNetCredentials());
+      firstName = retrievedObject.ud.fn,
+      lastName = retrievedObject.ud.ln;
+      data = { "firstName": firstName, "lastName": lastName, "menuTitle": menuTitle, "login": I18n.t('views.menu.loginlabel'), mapCss: mapView};
+    }
     
-    var data = { "firstName": firstName, "lastName": lastName, "menuTitle": menuTitle, "login": I18n.t('views.menu.loginlabel'), mapCss: mapView};
     return data;  
   }
    
