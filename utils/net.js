@@ -399,6 +399,7 @@ var net = (function() {
                 utils.logDebug("we are online");
                 console.timeEnd('isOnline');
                 if (getOnlineStatus() != true){
+                  utils.success("online!");
                   toggleOnlineStatus();
                 }
               } else {  

@@ -352,6 +352,7 @@ map.on('contextmenu', function(e) {
               gpsPos.latitude = e.coords.latitude;
               gpsPos.longitude = e.coords.longitude;
               var radius = e.accuracy / 2;
+              utils.success("radius: " + radius + "\nlat: " + gpsPos.latitude + " lng: " + gpsPos.longitude);
               radius = 12.5; //hard coded, pixelvalue to match other markers on map.
             
               
@@ -366,7 +367,7 @@ map.on('contextmenu', function(e) {
               myself.marker = L.circleMarker(L.latLng(e.coords.latitude, e.coords.longitude), {"radius":radius});
               myself.marker.addTo(map);
       }, function (e) {console.log("Failed to track GPS")},{
-            maximumAge: 5000, 
+            maximumAge: 250, 
             enableHighAccuracy: true
         });
       var oldId = localStorage.getItem(getGPSWatchKey());
