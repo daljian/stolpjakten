@@ -367,7 +367,7 @@ map.on('contextmenu', function(e) {
               myself.marker = L.circleMarker(L.latLng(e.coords.latitude, e.coords.longitude), {"radius":radius});
               myself.marker.addTo(map);
       }, function (e) {console.log("Failed to track GPS")},{
-            maximumAge: 250, 
+            maximumAge: 0, 
             enableHighAccuracy: true
         });
       var oldId = localStorage.getItem(getGPSWatchKey());
