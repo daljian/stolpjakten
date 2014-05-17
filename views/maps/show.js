@@ -219,7 +219,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     if (getGPS()){
       this.enableLocationTracking(map);
     }else{
-      this.enableLocationTracking(map);
+      this.disableLocationTracking(map);
     }
     
         // initialize the filesystem where we store cached tiles. when this is ready, proceed with the map
