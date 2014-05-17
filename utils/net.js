@@ -277,7 +277,13 @@ var net = (function() {
           if (operation != NET_OPERATION_GET_SERVER_STATUS){
             //We are offline and request is not checking server status
             //so we return offline to client.
-            return getFromCache(createURL(operation, xml));
+            var cached =  getFromCache(createURL(operation, xml));
+            if (typeof cached == "undefined" || cached == null){
+              utils.logDebug("We missed in cache, operation: " + operation);
+              cached = new NetResult();
+              cached.success = false;
+            }
+            return cached;
           }
         }
         //console.time('sendToServer');
@@ -378,12 +384,12 @@ var net = (function() {
     isOnline: function() {
         console.time('isOnline');
         utils.logDebug("checking online status...");
-        if (!window.navigator.onLine){
+/*        if (!window.navigator.onLine){
           if (getOnlineStatus() == true){
             toggleOnlineStatus();
             
           }
-        }else{
+        }else{*/
           //serverResult = sendToServer(NET_OPERATION_GET_SERVER_STATUS,"");
           var xmlHttp = new XMLHttpRequest();
           xmlHttp.timeout=3000;
@@ -416,7 +422,7 @@ var net = (function() {
         xmlHttp.open("GET", createURL(NET_OPERATION_GET_SERVER_STATUS), true);
         xmlHttp.send(null);
         
-        }
+        //}
         if (getOnlineStatus()){
           var pendingSticks = utils.getPendingSticks();
           if (pendingSticks.length > 0 ){
