@@ -216,10 +216,11 @@ App.Views.Maps.Show = App.Views.Base.extend({
     //osmLayer.getTileUrl = this.getTileUrl;
     osmLayer.addTo(map);
     //utils.logDebug("Will enable Location tracking!");
-    this.enableLocationTracking(map);
-    /*if (getGPS()){
-        map.addControl( new L.Control.Gps() );
-    }*/
+    if (getGPS()){
+      this.enableLocationTracking(map);
+    }else{
+      this.enableLocationTracking(map);
+    }
     
         // initialize the filesystem where we store cached tiles. when this is ready, proceed with the map
     //console.log("tileArray: " + JSON.stringify(this.tileArray));
@@ -332,6 +333,13 @@ map.on('contextmenu', function(e) {
 
     
   },
+  disableLocationTracking: function(map){
+    var myself = this;
+    if (myself.marker != null){
+      map.removeLayer(myself.marker)
+    }
+    map.stopLocate();
+  },
   enableLocationTracking: function(map){
       //TODO, rewrite this with localStore
       var myself = this;
@@ -402,6 +410,8 @@ map.on('contextmenu', function(e) {
   createGPSIconHtml: function() {
     if (getGPS()){
       return '<span class="filter"><a class="icon'+getCurrentMapId()+'" href="#"><span class="glyphicon glyphicon-screenshot"></span></a></span>';
+    }else{
+      return '';
     }
   },
   createFilterIconHtml: function() {
