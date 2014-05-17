@@ -390,12 +390,14 @@ var net = (function() {
           xmlHttp.onreadystatechange = function (oEvent) {  
             if (xmlHttp.readyState === 4) {  
               if (xmlHttp.status === 200) {  
+                utils.logDebug("we are online");
                 console.timeEnd('isOnline');
                 if (getOnlineStatus() != true){
                   toggleOnlineStatus();
                 }
               } else {  
                 console.timeEnd('isOnline');
+                utils.logDebug("we are not online");
                 if (getOnlineStatus() == true){
                   toggleOnlineStatus();
                   utils.warning("offline!");
@@ -404,7 +406,12 @@ var net = (function() {
             }  
           };
         xmlHttp.ontimeout = function () { 
+          utils.logDebug("we are offline due to timeout");
           console.timeEnd('isOnline');
+                if (getOnlineStatus() == true){
+                  toggleOnlineStatus();
+                  utils.warning("offline!");
+                }
         }
         xmlHttp.open("GET", createURL(NET_OPERATION_GET_SERVER_STATUS), true);
         xmlHttp.send(null);
