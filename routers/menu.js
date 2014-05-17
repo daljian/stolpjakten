@@ -98,11 +98,12 @@ App.Routers.Menu = Backbone.Router.extend({
     }
   },
   createGPSHtml: function() {
-    if (getGPS()){
+    /*if (getGPS()){
       return '<div class="option" <p><input id="toggleGPS" type="checkbox" onchange="toggleGPS()" checked/> <label for="toggleGPS" style="font-weight:normal">'+I18n.t('views.menu.gpslabel')+'</p></label></div>';
     }else{
       return '<div class="option" <p><input id="toggleGPS" type="checkbox" onchange="toggleGPS()"/> <label for="toggleGPS" style="font-weight:normal">'+I18n.t('views.menu.gpslabel')+'</p></label></div>';
-    }
+    }*/
+    return '';
   },
   getMarkers: function() {
     var storage = getCurrentMap();

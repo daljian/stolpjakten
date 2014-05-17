@@ -347,7 +347,7 @@ map.on('contextmenu', function(e) {
         var marker = new Object();
         this.marker = marker;
         utils.logDebug("in if");
-          map.locate({setView: false, watch:true, enableHighAccuracy: getGPS()});
+          map.locate({setView: true, watch:true, enableHighAccuracy: getGPS()});
           map.on('locationfound', function (e) {
               utils.logDebug("Found location with event " + e + " map: " + map);
               var gpsPos = new Object()
@@ -408,11 +408,7 @@ map.on('contextmenu', function(e) {
     return source;
   },
   createGPSIconHtml: function() {
-    if (getGPS()){
-      return '<span class="filter"><a class="icon'+getCurrentMapId()+'" href="#"><span class="glyphicon glyphicon-screenshot"></span></a></span>';
-    }else{
-      return '';
-    }
+    return '<span class="filter"><a class="icon'+getCurrentMapId()+'" href="#"><span class="glyphicon glyphicon-screenshot"></span></a></span>';
   },
   createFilterIconHtml: function() {
     return ''; //disable
@@ -453,16 +449,23 @@ map.on('contextmenu', function(e) {
     this.render();
   },
   doFindMe: function(){
+    toggleGPS();
     if (this.marker != null){
       this.map.removeLayer(this.marker)
     }
-    utils.logDebug("GPS: " + localStorage.getItem(getGPSPositionKey()));
-    var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
-    utils.logDebug("lng: " +gpsPosition.longitude);
-    var marker = L.circleMarker(L.latLng(gpsPosition.latitude, gpsPosition.longitude), {"radius":gpsPosition.radius});
-    this.marker = marker;
-    this.marker.addTo(this.map);
-    this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
+    if (getGPS()){
+      this.enableLocationTracking(this.map);
+      utils.logDebug("GPS: " + localStorage.getItem(getGPSPositionKey()));
+      var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
+      utils.logDebug("lng: " +gpsPosition.longitude);
+      var marker = L.circleMarker(L.latLng(gpsPosition.latitude, gpsPosition.longitude), {"radius":gpsPosition.radius});
+      this.marker = marker;
+      this.marker.addTo(this.map);
+      this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
+    }else{
+      this.disableLocationTracking(this.map);
+    }
+ 
   },
   toMenu: function(){
     this.saveMapPosition();
