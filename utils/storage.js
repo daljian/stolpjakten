@@ -30,6 +30,9 @@ function getZoomPositionKey(){
 function getGPSPositionKey(){
   return 'stolpjakten.'+getCurrentMapId()+'.gpsposition';
 }
+function getGPSWatchKey(){
+  return 'stolpjakten.'+getCurrentMapId()+'.gpswatch';
+}
 function getExtraMapIdsKey(){
   return 'stolpjakten.' + getCurrentMapId()+'.extramapids';
 }

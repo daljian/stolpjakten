@@ -338,9 +338,44 @@ map.on('contextmenu', function(e) {
     if (myself.marker != null){
       map.removeLayer(myself.marker)
     }
-    map.stopLocate();
+    var oldId = localStorage.getItem(getGPSWatchKey());
+    if (typeof oldId != "undefined"){
+      navigator.geolocation.clearWatch(oldId);
+    }
   },
   enableLocationTracking: function(map){
+ var myself = this;
+    if (navigator.geolocation){
+    var id = navigator.geolocation.watchPosition(function (e) {
+              utils.logDebug("Found location with event " + e + " map: " + map);
+              var gpsPos = new Object()
+              gpsPos.latitude = e.coords.latitude;
+              gpsPos.longitude = e.coords.longitude;
+              var radius = e.accuracy / 2;
+              radius = 12.5; //hard coded, pixelvalue to match other markers on map.
+            
+              
+              
+              gpsPos.radius = radius;
+              localStorage.setItem(getGPSPositionKey(), JSON.stringify(gpsPos));
+              
+              
+              if (myself.marker != null){
+                map.removeLayer(myself.marker)
+              }
+              myself.marker = L.circleMarker(L.latLng(e.coords.latitude, e.coords.longitude), {"radius":radius});
+              myself.marker.addTo(map);
+      });
+      var oldId = localStorage.getItem(getGPSWatchKey());
+      if (typeof oldId != "undefined" && oldId != id){
+        navigator.geolocation.clearWatch(oldId);
+      }
+      localStorage.setItem(getGPSWatchKey(), id);
+      utils.logDebug("id: " + id); //TODO, store this in localstorage to survive cross views and clear it properly.
+    }
+
+  },
+  oldenableLocationTracking: function(map){
       //TODO, rewrite this with localStore
       var myself = this;
       if (this.marker == null){
