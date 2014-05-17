@@ -365,7 +365,10 @@ map.on('contextmenu', function(e) {
               }
               myself.marker = L.circleMarker(L.latLng(e.coords.latitude, e.coords.longitude), {"radius":radius});
               myself.marker.addTo(map);
-      });
+      }, function (e) {console.log("Failed to track GPS")},{
+            maximumAge: 5000, 
+            enableHighAccuracy: true
+        });
       var oldId = localStorage.getItem(getGPSWatchKey());
       if (typeof oldId != "undefined" && oldId != id){
         navigator.geolocation.clearWatch(oldId);
@@ -492,11 +495,13 @@ map.on('contextmenu', function(e) {
       this.enableLocationTracking(this.map);
       utils.logDebug("GPS: " + localStorage.getItem(getGPSPositionKey()));
       var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
-      utils.logDebug("lng: " +gpsPosition.longitude);
-      var marker = L.circleMarker(L.latLng(gpsPosition.latitude, gpsPosition.longitude), {"radius":gpsPosition.radius});
-      this.marker = marker;
-      this.marker.addTo(this.map);
-      this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
+      if (gpsPosition != null){
+          utils.logDebug("lng: " +gpsPosition.longitude);
+          var marker = L.circleMarker(L.latLng(gpsPosition.latitude, gpsPosition.longitude), {"radius":gpsPosition.radius});
+          this.marker = marker;
+          this.marker.addTo(this.map);
+          this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
+      }
     }else{
       this.disableLocationTracking(this.map);
     }
