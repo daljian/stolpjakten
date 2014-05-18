@@ -381,6 +381,8 @@ map.on('contextmenu', function(e) {
 
   },
   disableLocationTracking: function(map){
+    utils.success("disabled location tracking!");
+
     var myself = this;
     if (myself.marker != null){
       map.removeLayer(myself.marker)
@@ -389,6 +391,7 @@ map.on('contextmenu', function(e) {
   },
   enableLocationTracking: function(map){
       //TODO, rewrite this with localStore
+      utils.success("enabled location tracking!");
       var myself = this;
       if (this.marker == null){
         var marker = new Object();
@@ -401,6 +404,7 @@ map.on('contextmenu', function(e) {
               gpsPos.latitude = e.latlng.lat;
               gpsPos.longitude = e.latlng.lng;
               var radius = e.accuracy / 2;
+              utils.success("radius: " + radius + "lat: " + gpsPos.latitude + " lng: " + gpsPos.longitude);
               radius = 12.5; //hard coded, pixelvalue to match other markers on map.
             
               
