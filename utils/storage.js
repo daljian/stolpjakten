@@ -1,4 +1,5 @@
 var fs;
+var map = null;
 
 // KEYS
 function getTilesStorageBaseDir(){
@@ -80,6 +81,14 @@ function toggleOLMap(){
 }
 function getOLMap(){
   return getSetting(getOLMapOnKey());
+}
+function getNewMap(){
+  if (map != null){
+    map.stopLocate();
+    map.remove();
+  }
+  map = L.map('map', {maxZoom: 18, attributionControl: false});
+  return map;
 }
 
 function getMarkerClusterOnKey() {

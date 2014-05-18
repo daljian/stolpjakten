@@ -164,7 +164,8 @@ App.Views.Maps.Show = App.Views.Base.extend({
             maxLng = Math.max(maxLng,sticks[i].longitude.replace(",","."));
             minLng = Math.min(minLng,sticks[i].longitude.replace(",","."));
     }
-    var map = L.map('map', {maxZoom: 18, attributionControl: false});
+    var map = getNewMap();//L.map('map', {maxZoom: 18, attributionControl: false});
+    
     this.map = map;
     
     map.saveMapPosition = this.saveMapPosition;
@@ -333,7 +334,7 @@ map.on('contextmenu', function(e) {
 
     
   },
-  disableLocationTracking: function(map){
+  olddisableLocationTracking: function(map){
     var myself = this;
     if (myself.marker != null){
       map.removeLayer(myself.marker)
@@ -343,7 +344,7 @@ map.on('contextmenu', function(e) {
       navigator.geolocation.clearWatch(oldId);
     }
   },
-  enableLocationTracking: function(map){
+  oldenableLocationTracking: function(map){
  var myself = this;
     if (navigator.geolocation){
     var id = navigator.geolocation.watchPosition(function (e) {
@@ -379,7 +380,14 @@ map.on('contextmenu', function(e) {
     }
 
   },
-  oldenableLocationTracking: function(map){
+  disableLocationTracking: function(map){
+    var myself = this;
+    if (myself.marker != null){
+      map.removeLayer(myself.marker)
+    }
+    map.stopLocate();
+  },
+  enableLocationTracking: function(map){
       //TODO, rewrite this with localStore
       var myself = this;
       if (this.marker == null){
