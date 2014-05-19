@@ -60,18 +60,18 @@
     // PhoneGap is ready
     //
     function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        navigator.geolocation.watchPosition(onSuccess, onError);
     }
     // onSuccess Geolocation
     //
     function onSuccess(position) {
-        alert("We got a position, lat: " + position.coords.latitude  + " lng: " + position.coords.longitude );
+        utils.success("We got a position, lat: " + position.coords.latitude  + " lng: " + position.coords.longitude );
     }
 
     // onError Callback receives a PositionError object
     //
     function onError(error) {
-        alert('code: '    + error.code    + '\n' +
+        utils.error('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
   window.App = {
