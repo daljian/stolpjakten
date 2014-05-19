@@ -19,9 +19,7 @@
     <gap:config-file platform="ios" parent="UIViewControllerBasedStatusBarAppearance">
         <false/>
     </gap:config-file>
-    <!--feature name="http://api.phonegap.com/1.0/device" /-->
     <feature name="http://api.phonegap.com/1.0/geolocation"/>
-    <!--gap:plugin name="org.apache.cordova.geolocation"  /-->
     <preference name="StatusBarOverlaysWebView" value="false"/> 
     <preference name="permissions" value="none" />
     <preference name="orientation" value="portrait" />
