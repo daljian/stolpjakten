@@ -60,7 +60,12 @@
     // PhoneGap is ready
     //
     function onDeviceReady() {
-        navigator.geolocation.watchPosition(onSuccess, onError);
+        navigator.geolocation.watchPosition(onSuccess, onError, {maximumAge: 0, enableHighAccuracy: true});
+      //So we add a poll as a workaround...
+      navigator.geolocation.getCurrentPosition( gpsTracker.onNewCoordinates, gpsTracker.onError, {
+        enableHighAccuracy : true,
+        maximumAge: 0
+      });
     }
     // onSuccess Geolocation
     //
