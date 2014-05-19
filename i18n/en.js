@@ -78,6 +78,7 @@ I18n.Translations.en = {
       friendsresultserror: "Sorry, could not retreive friends results at the moment due to an error",
       melabel: "Me",
       viewolmap: "Show overlayed map",
+      gpswarning: "Disable positioning under settings to reduce power consumption",
       gpslabel: "Show my position"
 
 

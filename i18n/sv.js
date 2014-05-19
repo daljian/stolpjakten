@@ -79,6 +79,7 @@ I18n.Translations.sv = {
       friendsresultserror: "Tyvärr gick det inte att hämta dina bevakningar just nu.",
       melabel: "Jag",
       viewolmap: "Visa OL-karta",
+      gpswarning: "Slå av positionering under inställningar för att spara batteri",
       gpslabel: "Visa min position"
 
     },

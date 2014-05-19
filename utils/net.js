@@ -399,7 +399,7 @@ var net = (function() {
                 utils.logDebug("we are online");
                 console.timeEnd('isOnline');
                 if (getOnlineStatus() != true){
-                  utils.success("online!");
+                  //utils.success("online!");
                   toggleOnlineStatus();
                 }
               } else {  
@@ -407,7 +407,8 @@ var net = (function() {
                 utils.logDebug("we are not online");
                 if (getOnlineStatus() == true){
                   toggleOnlineStatus();
-                  utils.warning("offline!");
+                  isOnline(); //if we just went offline, try one more time just to be sure
+                  //utils.warning("offline!");
                 }
               }  
             }  

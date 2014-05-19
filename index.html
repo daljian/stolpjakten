@@ -90,6 +90,7 @@
     FastClick.attach(document.body);
 }, false);
   net.trackOnlineStatus();
+
 </script>
 
 <script src="utils/storage.js"></script>
@@ -117,17 +118,24 @@
 <script type="text/javascript">
   $(function() {
     App.initialize();
-    var credentials = JSON.parse(localStorage.getItem(getCredentialsKey()));
-    if (credentials != null && typeof credentials.email != "undefined"){
-      var user = localStorage.getItem(getUserKey());
-      if (typeof user != "undefined"){
-       var mapId = getCurrentMapId();
-       if (typeof mapId == "undefined"){
-          mapId = 12;
+    if (getGPS()){
+      utils.warning(I18n.t('views.menu.gpswarning'));
+    }
+    try{
+      var credentials = JSON.parse(localStorage.getItem(getCredentialsKey()));
+      if (credentials != null && typeof credentials.email != "undefined"){
+        var user = localStorage.getItem(getUserKey());
+        if (typeof user != "undefined"){
+         var mapId = getCurrentMapId();
+         if (typeof mapId == "undefined"){
+            mapId = 12;
+          }
+          window.location.href = '#maps/'+mapId+'/show';
+          return;
         }
-        window.location.href = '#maps/'+mapId+'/show';
-        return;
       }
+    }catch(err){
+      localStorage.clear();
     }
     window.location.href='#user/information';
   });

@@ -455,7 +455,11 @@ map.on('contextmenu', function(e) {
     return source;
   },
   createGPSIconHtml: function() {
-    return '<span class="filter"><a class="icon'+getCurrentMapId()+'" href="#"><span class="glyphicon glyphicon-screenshot"></span></a></span>';
+    if (getGPS()){
+      return '<span class="filter"><a class="icon'+getCurrentMapId()+'" href="#"><span class="glyphicon glyphicon-screenshot"></span></a></span>';
+    }else{
+        return '';
+    }
   },
   createFilterIconHtml: function() {
     return ''; //disable

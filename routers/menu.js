@@ -129,6 +129,7 @@ App.Routers.Menu = Backbone.Router.extend({
       if (sticks[i].taken == true){htmlFragment += '</s>';}
       htmlFragment += '</span><span><a style="color:#FFF" href="#/maps/'+mapView+'/'+sticks[i].number+'">';
       if (sticks[i].taken == true){htmlFragment += '<s>';}
+      if (typeof sticks[i].culture != "undefined"){ htmlFragment += '<span class="glyphicon glyphicon-info-sign"></span> ';}
       htmlFragment += sticks[i].description;
       if (sticks[i].taken == true){htmlFragment += '</s>';}
       htmlFragment +='</a></span></div>';

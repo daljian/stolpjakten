@@ -79,6 +79,7 @@ I18n.Translations.no = {
       friendsresultserror: "Dessverre gikk det ikke å hente dine overvåkninger akkurat nå.",
       melabel: "Jeg",
       viewolmap: "Vis OL-kartet",
+      gpswarning: "Deaktiver posisjonering under Innstillinger for å redusere strømforbruket",
       gpslabel: "Vis min posisjon"
 
     },
