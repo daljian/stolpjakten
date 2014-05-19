@@ -352,8 +352,8 @@ map.on('contextmenu', function(e) {
               gpsPos.latitude = e.coords.latitude;
               gpsPos.longitude = e.coords.longitude;
               var radius = e.accuracy / 2;
-              utils.logDebug("found location radius: " + radius + "\nlat: " + gpsPos.latitude + " lng: " + gpsPos.longitude);
-              utils.success("radius: " + radius + "\nlat: " + gpsPos.latitude + " lng: " + gpsPos.longitude);
+              //utils.logDebug("found location radius: " + radius + "\nlat: " + gpsPos.latitude + " lng: " + gpsPos.longitude);
+              //utils.success("radius: " + radius + "\nlat: " + gpsPos.latitude + " lng: " + gpsPos.longitude);
               radius = 12.5; //hard coded, pixelvalue to match other markers on map.
             
               
