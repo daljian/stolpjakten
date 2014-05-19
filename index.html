@@ -60,9 +60,6 @@
     // PhoneGap is ready
     //
     function onDeviceReady() {
-      if (getGPS()){
-        toggleGPS();
-      }
         //navigator.geolocation.watchPosition(onSuccess, onError, {maximumAge: 1000, timeout: 2000, enableHighAccuracy: true});
       //So we add a poll as a workaround...
      /* setInterval(

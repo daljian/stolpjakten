@@ -381,8 +381,6 @@ map.on('contextmenu', function(e) {
 
   },
   disableLocationTracking: function(map){
-    utils.success("disabled location tracking!");
-
     var myself = this;
     if (myself.marker != null){
       map.removeLayer(myself.marker)
@@ -390,21 +388,19 @@ map.on('contextmenu', function(e) {
     map.stopLocate();
   },
   enableLocationTracking: function(map){
-      //TODO, rewrite this with localStore
-      utils.success("enabled location tracking!");
       var myself = this;
       if (this.marker == null){
         var marker = new Object();
         this.marker = marker;
         utils.logDebug("in if");
-          map.locate({setView: true, watch:true, enableHighAccuracy: getGPS(), maximumAge: 1000, timeout: 2000});
+          map.locate({setView: false, watch:true, enableHighAccuracy: getGPS(), maximumAge: 1000, timeout: 2000});
           map.on('locationfound', function (e) {
-              utils.logDebug("Found location with event " + e + " map: " + map);
+              
               var gpsPos = new Object()
               gpsPos.latitude = e.latlng.lat;
               gpsPos.longitude = e.latlng.lng;
               var radius = e.accuracy / 2;
-              utils.success("radius: " + radius + "lat: " + gpsPos.latitude + " lng: " + gpsPos.longitude);
+              
               radius = 12.5; //hard coded, pixelvalue to match other markers on map.
             
               
@@ -500,7 +496,9 @@ map.on('contextmenu', function(e) {
     this.render();
   },
   doFindMe: function(){
-    toggleGPS();
+    var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
+    this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
+/*    toggleGPS();
     if (this.marker != null){
       this.map.removeLayer(this.marker)
     }
@@ -518,7 +516,7 @@ map.on('contextmenu', function(e) {
     }else{
       this.disableLocationTracking(this.map);
     }
- 
+ */
   },
   toMenu: function(){
     this.saveMapPosition();
