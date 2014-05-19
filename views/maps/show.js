@@ -397,7 +397,7 @@ map.on('contextmenu', function(e) {
         var marker = new Object();
         this.marker = marker;
         utils.logDebug("in if");
-          map.locate({setView: true, watch:true, enableHighAccuracy: getGPS()});
+          map.locate({setView: true, watch:true, enableHighAccuracy: getGPS(), maximumAge: 1000, timeout: 2000});
           map.on('locationfound', function (e) {
               utils.logDebug("Found location with event " + e + " map: " + map);
               var gpsPos = new Object()
