@@ -43,8 +43,8 @@ App.Views.Users.Login = App.Views.Base.extend({
       }
     });
     if (validReg){
-      var email = $('input[name="email"]').val();
-      var password = $('input[name="pwd"]').val();
+      var email = utils.encodeHTML($('input[name="email"]').val());
+      var password = utils.encodeHTML($('input[name="pwd"]').val());
       var mapId = getCurrentMapId();
       var showMap = true;
       if (mapId == -1){

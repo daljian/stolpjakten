@@ -592,8 +592,8 @@ var net = (function() {
         utils.assertDefined(serverResult);
         if (serverResult == "user created"){
           jsonResult.success = true;
-          jsonResult.result = serverResult;
         }
+        jsonResult.result = serverResult;
 
       }catch(err){console.log(err);}
 

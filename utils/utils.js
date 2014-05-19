@@ -40,6 +40,20 @@ var utils = (function() {
         throw utils.getCacheKeyNullException(); 
       }
     },
+    decodeHTML: function (value){
+      return value.replace(/&apos;/g, "'")
+               .replace(/&quot;/g, '"')
+               .replace(/&gt;/g, '>')
+               .replace(/&lt;/g, '<')
+               .replace(/&amp;/g, '&');
+    },
+    encodeHTML: function (value){
+      return value.replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
+               .replace(/"/g, '&quot;')
+               .replace(/'/g, '&apos;');
+    },
     complexAndUndefinedToEmptyString: function (what) {
         var retVal = "";
         if (typeof what != "undefined" && what.toString() != "[object Object]") {

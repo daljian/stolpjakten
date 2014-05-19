@@ -33,37 +33,85 @@ App.Views.Users.Register = App.Views.Base.extend({
   },
   
   // Controll if all fields have data and then create an user
+  
   onSubmit: function() {
     var validReg = true;
+
     $('input').each( function(key, value){
-      if ( !($(this).val()) ) {
-        if ( !($(this).attr('name') == 'pc') ) {
-          $(this).css( "background-color", "#CC3333" );
+      //Validate pwd
+      $(this).css( "background-color", "#2f5f99" ); //default to 'OK'
+      console.log("data: " + $(this).attr('name'));
+      var name = $(this).attr('name');
+      var value = $('input[name="'+name+'"]').val();
+      if (name == 'em'){
+        if (value.length < 5 || value.indexOf('.') == -1 || value.indexOf('@') == -1){
+          utils.warning(I18n.t('views.users.register.validateemail'));
           validReg = false;
-        }else{
-          $(this).css( "background-color", "#2f5f99" );
+          $(this).css( "background-color", "#CC3333" );
         }
-      }   
+      }else if ( name == 'fn') {
+        if (value.length < 1 ){
+          utils.warning(I18n.t('views.users.register.validateforname'));
+          validReg = false;
+          $(this).css( "background-color", "#CC3333" );
+        }
+      }else if ( name == 'ln') {
+        if (value.length < 1 ){
+          utils.warning(I18n.t('views.users.register.validatelastname'));
+          validReg = false;
+          $(this).css( "background-color", "#CC3333" );
+        }
+      }else if ( name == 'sa') {
+        if (value.length < 1 ){
+          utils.warning(I18n.t('views.users.register.validatestreet'));
+          validReg = false;
+          $(this).css( "background-color", "#CC3333" );
+        }
+      }else if ( name == 'zip') {
+        if (value.length < 4 || value.length > 6 || value != parseInt(value)){
+          utils.warning(I18n.t('views.users.register.validatezip'));
+          validReg = false;
+          $(this).css( "background-color", "#CC3333" );
+        }
+      }else if ( name == 'ci') {
+        if (value.length < 1 ){
+          utils.warning(I18n.t('views.users.register.validatecity'));
+          validReg = false;
+          $(this).css( "background-color", "#CC3333" );
+        }
+      }else if ( name == 'ph') {
+        if (value.length < 1 ){
+          utils.warning(I18n.t('views.users.register.validatephone'));
+          validReg = false;
+          $(this).css( "background-color", "#CC3333" );
+        }
+      }else if ( name == 'pw') {
+        if (value.length < 6 ){
+          utils.warning(I18n.t('views.users.register.validatepassword'));
+          validReg = false;
+          $(this).css( "background-color", "#CC3333" );
+        }
+      }
     });
 
     if (validReg) {
       var sil = $('input[name="sil"]').is(":checked") ? "1" : "0";
       var nl = $('input[name="nl"]').is(":checked") ? "1" : "0";
       var userData = new UserData(
-        $('input[name="em"]').val(),
-        $('input[name="fn"]').val(),
-        $('input[name="ln"]').val(),
-        $('input[name="dn"]').val(),
-        $('input[name="sa"]').val(),
-        $('input[name="zip"]').val(),
-        $('input[name="ci"]').val(),
-        $('input[name="ph"]').val(),
-        $('select[name="ge"]').val(),
-        $('input[name="pw"]').val(),
+        utils.encodeHTML($('input[name="em"]').val()),
+        utils.encodeHTML($('input[name="fn"]').val()),
+        utils.encodeHTML($('input[name="ln"]').val()),
+        utils.encodeHTML($('input[name="dn"]').val()),
+        utils.encodeHTML($('input[name="sa"]').val()),
+        utils.encodeHTML($('input[name="zip"]').val()),
+        utils.encodeHTML($('input[name="ci"]').val()),
+        utils.encodeHTML($('input[name="ph"]').val()),
+        utils.encodeHTML($('select[name="ge"]').val()),
+        utils.encodeHTML($('input[name="pw"]').val()),
         sil,
         nl,
         $('select[name="ag"]').val(),
-        $('input[name="pc"]').val(),
+        '', //skip premium code
         new Array());
       
       var email = $('input[name="em"]').val(),
@@ -87,7 +135,11 @@ App.Views.Users.Register = App.Views.Base.extend({
         window.location.href = '#maps/'+mapId+'/show';
         //window.location.href = '#user/login';
       } else {
-        utils.error(I18n.t('views.users.register.registrationfailed'));
+        if (result.result == 'User exists'){
+          utils.error(I18n.t('views.users.register.registrationfaileduserexists'));
+        }else{
+          utils.error(I18n.t('views.users.register.registrationfailed') + ": " + result.result);
+        }
       }  
     }
     
@@ -125,7 +177,10 @@ App.Views.Users.Register = App.Views.Base.extend({
     '<p><label>{{birth}}:</label><div class="dropdown"><select name="ag">'+year+'</select></div></p>'+
     '<p><input type="checkbox" name="sil" id="sil" value="1" CHECKED/> <label for="sil"> {{inlist}}</label></p>' +
     '<p><input type="checkbox" name="nl" id="nl" value="1" CHECKED/> <label for="nl">{{news}}</label></p>' +
-    '<p><!-- <label>{{premium}}:</label> --> <input name="pc" placeholder="{{premium}}"></p><div style="clear:both;display:block;overflow:hidden;"></div>' +
+
+//    '<p><!-- <label>{{premium}}:</label> --> <input name="pc" placeholder="{{premium}}"></p><div style="clear:both;display:block;overflow:hidden;"></div>' +
+    '<div style="clear:both;display:block;overflow:hidden;"></div>' +
+
     '<p><div class="submit-button">{{regButton}}</div></p>' +
     '</div>';
     return source;

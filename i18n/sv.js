@@ -19,7 +19,16 @@ I18n.Translations.sv = {
         loginrejected: "Ej godkänd inloggning, kontrollera stavning och versaler"
       },
       register: {
-        registrationfailed: "Registrering misslyckades!",
+        registrationfailed: "Registrering misslyckades, prova att registrera dig på webben: stolpjakten.se",
+        registrationfaileduserexists: "Användaren finns redan, har du glömt lösenord kan du få ett nytt på stolpjakten.se!",
+        validateemail: "Epostaddressen måste vara minst fem tecken lång med minst en förekomst av '@' och '.'",
+        validateforname: "Förnamn måste vara minst ett tecken långt",
+        validatelastname: "Efternamn måste vara minst ett tecken långt",
+        validatestreet: "Gatuaddress måste vara minst ett tecken lång",
+        validatezip: "Postaddress måste vara fyra till sex siffor utan mellanslag",
+        validatecity: "Stad måste vara minst ett tecken långt",
+        validatephone: "Telefon måste vara minst ett tecken långt",
+        validatepassword: "Lösenordet måste vara minst sex tecken långt",
         register: "Registrera",
         email: "Epost",
         first_name: "Förnamn",

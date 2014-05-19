@@ -19,7 +19,16 @@ I18n.Translations.en = {
         loginrejected: "Login not correct, check spelling and capitals"
       },
       register: {
-        registrationfailed: "Register failed!",
+        registrationfailed: "Registration failed. Please go to the web page to complete the registration: stolpjakten.se",
+        registrationfaileduserexists: "The user already exists, if you forgot your password you can get a new one at stolpjakten.se!",
+        validateemail: "Email address needs to have a minimum lenght of five characters and contain both '@' and '.'",
+        validateforname: "First name minimum lenght is one character",
+        validatelastname: "Last name minimum lenght is one character",
+        validatestreet: "Street address minimum lenght is one character",
+        validatezip: "Zipcode needs to be a four to six numbers string without any spaces",
+        validatecity: "City minimum lenght is one character",
+        validatephone: "Phone minimum lenght is one character",
+        validatepassword: "Password minimum lenght is six characters",
         register: "Register",
         email: "E-mail",
         first_name: "First name",
