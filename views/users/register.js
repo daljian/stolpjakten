@@ -163,14 +163,14 @@ App.Views.Users.Register = App.Views.Base.extend({
     var source = '<div class="navigation"><div class="top"><a href="#user/information" style="float:left;"><span class="glyphicon glyphicon-remove-circle"></span></a>'+
     '{{menuTitle}}</div></div>' +
     '<div class="register-form">' +
-    '<p><!-- <label>{{email}}:</label> --> <input name="em" placeholder="{{email}}"></p>' + 
+    '<p><!-- <label>{{email}}:</label> --> <input name="em" type="email" placeholder="{{email}}"></p>' + 
     '<p><!-- <label>{{fname}}:</label> --> <input name="fn" placeholder="{{fname}}"></p>' + 
     '<p><!-- <label>{{lname}}:</label> --> <input name="ln" placeholder="{{lname}}"></p>' + 
     '<p><!-- <label>{{alias}}:</label> --> <input name="dn" placeholder="{{alias}}"></p>' + 
     '<p><!-- <label>{{street}}:</label> --> <input name="sa" placeholder="{{street}}"></p>' + 
-    '<p><!-- <label>{{zip}}:</label> --> <input name="zip" placeholder="{{zip}}"></p>' + 
+    '<p><!-- <label>{{zip}}:</label> --> <input name="zip" type="number" placeholder="{{zip}}"></p>' + 
     '<p><!-- <label>{{city}}:</label> --> <input name="ci" placeholder="{{city}}"></p>' + 
-    '<p><!-- <label>{{phone}}:</label> --> <input name="ph" placeholder="{{phone}}"></p>' + 
+    '<p><!-- <label>{{phone}}:</label> --> <input name="ph" type="number" placeholder="{{phone}}"></p>' + 
     '<p><!-- <label>{{password}}:</label> --> <input name="pw" type="password" placeholder="{{password}}"></p>' + 
     '<p><label>{{map}}:</label><div class="dropdown"><select name="mapid">'+optionsString+'</select></div></p>'+
     '<p><label>{{sex}}:</label><div class="dropdown"><select name="ge"><option value="0">{{female}}</option><option value="1">{{male}}</option></select></div></p>'+
