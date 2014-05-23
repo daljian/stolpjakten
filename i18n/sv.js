@@ -3,7 +3,7 @@ I18n.Translations.sv = {
   views: {
     users: {
       index: {
-        register: "Registrera",
+        register: "Skapa konto",
         login: "Logga in",
         information_title: "Välkommen till Stolpjakten",
         information_text: "Tänk dig den perfekta motionsaktiviteten. Enkelt att komma igång. Kan utövas i ditt" +

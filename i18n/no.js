@@ -3,7 +3,7 @@ I18n.Translations.no = {
   views: {
     users: {
       index: {
-        register: "Registrere",
+        register: "Skape konto",
         login: "Logg inn",
         information_title: "Velkommen til Stolpejakten",
         information_text: "Tenk deg den perfekte mosjonsaktiviteten. Enkelt å komme igang. Kan utøves i ditt" +

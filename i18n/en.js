@@ -3,7 +3,7 @@ I18n.Translations.en = {
   views: {
     users: {
       index: {
-        register: "Register",
+        register: "Create account",
         login: "Login",
         information_title: "Welcome to The Post Hunt",
         information_text: "Imagine the perfect exercise activity. Easy to get going. You can do it in your own pace " +
