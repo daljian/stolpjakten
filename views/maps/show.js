@@ -250,6 +250,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
 //    window.prompt("Copy to clipboard: Ctrl+C, Enter", e.latlng.lat +","+e.latlng.lng);
 //});
     L.control.scale().addTo(map);
+    L.control.compass().addTo(map);
 
 
 
