@@ -13,6 +13,7 @@
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     <gap:plugin name="com.phonegap.plugin.statusbar"/> 
+    <gap:plugin name="Compass" value="org.apache.cordova.core.CompassListener" />
     <gap:config-file platform="ios" parent="UIStatusBarHidden">
         <true/>
     </gap:config-file>
