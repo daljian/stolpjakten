@@ -244,11 +244,12 @@ App.Views.Maps.Show = App.Views.Base.extend({
     
 //Päjsta här
 //Admin features
-L.control.mousePosition().addTo(map);
+//L.control.mousePosition().addTo(map);
 //Right click on the map activated
-map.on('contextmenu', function(e) {
-    window.prompt("Copy to clipboard: Ctrl+C, Enter", e.latlng.lat +","+e.latlng.lng);
-});
+//map.on('contextmenu', function(e) {
+//    window.prompt("Copy to clipboard: Ctrl+C, Enter", e.latlng.lat +","+e.latlng.lng);
+//});
+    L.control.scale().addTo(map);
 
 
 
