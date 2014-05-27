@@ -71,6 +71,22 @@
         maximumAge: 0
       }), 1000);
 */
+
+    document.addEventListener("pause", onPause, false);
+    document.addEventListener("resume", onResume, false);
+
+      function onPause() {
+          // Handle the pause event
+          if (typeof map != "undefined!" && getGPS()){
+            map.stopLocate();
+          }
+      }
+      function onResume() {
+          // Handle the pause event
+          if (typeof map != "undefined!" && getGPS()){
+            map.locate({setView: false, watch:true, enableHighAccuracy: getGPS(), maximumAge: 1000, timeout: 2000});
+          }
+      }
     }
     // onSuccess Geolocation
     //
