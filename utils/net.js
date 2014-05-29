@@ -399,7 +399,7 @@ var net = (function() {
                 utils.logDebug("we are online");
                 console.timeEnd('isOnline');
                 if (getOnlineStatus() != true){
-                  utils.success("online!");
+                  //utils.success("online!");
                   toggleOnlineStatus();
                 }
               } else {  
@@ -418,7 +418,7 @@ var net = (function() {
           console.timeEnd('isOnline');
                 if (getOnlineStatus() == true){
                   toggleOnlineStatus();
-                  utils.warning("offline!");
+                  //utils.warning("offline!");
                 }
         }
         xmlHttp.open("GET", createURL(NET_OPERATION_GET_SERVER_STATUS), true);

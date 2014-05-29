@@ -63,10 +63,6 @@
     // PhoneGap is ready
     //
     function onDeviceReady() {
-      var isGPSset = localStorage.getItem(getGPSOnKey());
-      if (typeof isGPSset == "undefined"){
-        toggleGPS();//unset means flag is true, but we want default false so toggle.
-      }
         //navigator.geolocation.watchPosition(onSuccess, onError, {maximumAge: 1000, timeout: 2000, enableHighAccuracy: true});
       //So we add a poll as a workaround...
      /* setInterval(
@@ -148,6 +144,12 @@
 <script type="text/javascript">
   $(function() {
     App.initialize();
+    var isGPSset = localStorage.getItem(getGPSOnKey());
+    if (isGPSset == null){
+      toggleGPS();//unset means flag is true, but we want default false so toggle.
+    }else{
+      utils.logDebug("gps set to: " + isGPSset);
+    }
     if (getGPS()){
       utils.warning(I18n.t('views.menu.gpswarning'));
     }

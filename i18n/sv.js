@@ -29,7 +29,7 @@ I18n.Translations.sv = {
         validatecity: "Stad måste vara minst ett tecken långt",
         validatephone: "Telefon måste vara minst ett tecken långt",
         validatepassword: "Lösenordet måste vara minst sex tecken långt",
-        register: "Registrera",
+        register: "Skapa konto",
         email: "Epost",
         first_name: "Förnamn",
         last_name: "Efternamn",

@@ -29,7 +29,7 @@ I18n.Translations.en = {
         validatecity: "City minimum lenght is one character",
         validatephone: "Phone minimum lenght is one character",
         validatepassword: "Password minimum lenght is six characters",
-        register: "Register",
+        register: "Create account",
         email: "E-mail",
         first_name: "First name",
         last_name: "Surname",
