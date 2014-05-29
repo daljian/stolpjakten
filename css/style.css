@@ -1,0 +1,125 @@
+#mainView .map-1, #mainView .map12, #mainView .map14, #mainView .map1, #mainView .map9, #mainView .map8, #mainView .map11, #mainView .map5, #mainView .map6 {
+  font-size: 18px; }
+
+/* 
+Map -1 
+*/
+#mainView .map-1 {
+  color: white;
+  background-color: #ff4c00; }
+
+.icon-1, .icon-1:hover {
+  color: white; }
+
+/* 
+Map 12 
+*/
+#mainView .map12 {
+  color: white;
+  background-color: #4298b5; }
+
+.icon12, .icon12:hover {
+  color: white; }
+
+/* 
+Map 14 
+*/
+#mainView .map14 {
+  color: white;
+  background-color: #ff4c00; }
+
+.icon14, .icon14:hover {
+  color: white; }
+
+/* 
+Map 1 
+*/
+#mainView .map1 {
+  color: white;
+  background-color: #e44619; }
+
+.icon1, .icon1:hover {
+  color: white; }
+
+/* 
+Map 9 
+*/
+#mainView .map9 {
+  color: white;
+  background-color: green; }
+
+.icon9, .icon9:hover {
+  color: white; }
+
+/* 
+Map 8 
+*/
+#mainView .map8 {
+  color: black;
+  background-color: #00a0d9; }
+
+.icon8, .icon8:hover {
+  color: black; }
+
+/* 
+Map 11 
+*/
+#mainView .map11 {
+  color: white;
+  background-color: #27ae61; }
+
+.icon11, .icon11:hover {
+  color: white; }
+
+/* 
+Map 5 
+*/
+#mainView .map5 {
+  color: white;
+  background-color: #075266; }
+
+.icon5, .icon5:hover {
+  color: white; }
+
+/* 
+Map 6 
+*/
+#mainView .map6 {
+  color: white;
+  background-color: #86cbe9; }
+
+.icon6, .icon6:hover {
+  color: white; }
+
+/* Color on marker depending on marker difficulty */
+/* difficulty 1 */
+.level1 {
+  background-color: #95c11f; }
+
+.leaflet-popup-content .level1 {
+  border-color: #95c11f !important;
+  background-color: white !important; }
+
+/* difficulty 2 */
+.level2 {
+  background-color: #1d71b8 !important; }
+
+.leaflet-popup-content .level2 {
+  border-color: #1d71b8 !important;
+  background-color: white !important; }
+
+/* difficulty 3 */
+.level3 {
+  background-color: #e6332a !important; }
+
+.leaflet-popup-content .level3 {
+  border-color: #e6332a !important;
+  background-color: white !important; }
+
+/* difficulty 4 */
+.level4 {
+  background-color: #101010 !important; }
+
+.leaflet-popup-content .level4 {
+  border-color: #101010 !important;
+  background-color: white !important; }

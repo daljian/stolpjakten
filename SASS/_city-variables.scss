@@ -1,0 +1,29 @@
+%message-box {
+    font-size: 18px;
+}
+
+$city-types: 
+    ( -1 white #FF4C00 /* No city */
+    , 12 white #4298B5 /* DEMO */
+    , 14 white #FF4C00 /* Karlstad */
+    , 1 white #E44619 /* Molkom */
+    , 9 white green /* TEST */
+    , 8 black #00A0D9 /* Arvika */
+    , 11 white #27ae61 /* Gjövik */
+    , 5 white #075266 /* Sarpsborg */
+    , 6 white #86cbe9 /* Sala */
+    );
+
+@each $type in $city-types {
+	/* 
+	Map #{nth($type, 1)} 
+	*/
+    #mainView .map#{nth($type, 1)} {
+        @extend %message-box;
+        color: nth($type, 2);
+        background-color: nth($type, 3);
+    }
+    .icon#{nth($type, 1)}, .icon#{nth($type, 1)}:hover {
+    	color: nth($type, 2);
+    }
+}
