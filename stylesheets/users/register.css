@@ -55,38 +55,20 @@ div.users-register div.register-form input, div.users-register div.register-form
   -webkit-border-radius:0px;
 }
 
-div.users-register div.register-form input[type="checkbox"] {
-  margin: 0 0 -5px 20px;
-  background-color: #468ee5;
-  border: 3px solid #2f5f99;
+input[type="checkbox"], div.users-register div.register-form input[type="checkbox"] {
+  margin: 0 10px -5px 10px;
+  background-color: darkred;
+  border: 3px solid rgba(0, 0, 0, 0.5);
   float: none;
-  content: "OFF";
-  height: 20px;
-  width: 20px;
-  border-radius: 20px;
+  height: 25px;
+  width: 25px;
+  border-radius: 5px;
   padding: 0;
-}
-
-input[type="checkbox"]{
-  float: none;
-  content: "OFF";
-  height: 20px;
-  width: 20px;
-  border-radius: 20px;
-  margin: 0 10px 0 0;
-  padding: 0;
-  background-color: #666666;
-  border: 3px solid #333333;
 }
 input[type="checkbox"]:checked, div.users-register div.register-form input[type="checkbox"]:checked {
-  content: "ON";
-  height: 20px;
-  width: 20px;
-  border-radius: 20px;
-  padding: 0;
-  background-color: #007575;
-  border: 3px solid #006666;
+  background-color: #71af28;
 }
+
 
 
 div.users-register div.register-form .dropdown {
