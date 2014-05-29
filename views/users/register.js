@@ -39,10 +39,14 @@ App.Views.Users.Register = App.Views.Base.extend({
 
     $('input').each( function(key, value){
       //Validate pwd
-      $(this).css( "background-color", "#2f5f99" ); //default to 'OK'
+      
       console.log("data: " + $(this).attr('name'));
       var name = $(this).attr('name');
       var value = $('input[name="'+name+'"]').val();
+      utils.logDebug("name is " + name);
+      if (name != "sil" && name != "nl"){
+        $(this).css( "background-color", "#2f5f99" ); //default to 'OK'
+      }
       if (name == 'em'){
         if (value.length < 5 || value.indexOf('.') == -1 || value.indexOf('@') == -1){
           utils.warning(I18n.t('views.users.register.validateemail'));
