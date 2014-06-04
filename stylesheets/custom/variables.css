@@ -164,3 +164,10 @@ div#mainView div.map16 {
   height: 55px;  
 }*/
 
+element {
+    -webkit-overflow-scrolling: touch;
+}
+
+element > * {
+    -webkit-transform: translateZ(0px);
+}

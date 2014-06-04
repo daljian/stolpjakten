@@ -129,13 +129,13 @@ App.Routers.Menu = Backbone.Router.extend({
       if (sticks[i].taken == true){htmlFragment += '</s>';}
       htmlFragment += '</span><span><a style="color:#FFF" href="#/maps/'+mapView+'/'+sticks[i].number+'">';
       if (sticks[i].taken == true){htmlFragment += '<s>';}
-      if (typeof sticks[i].culture != "undefined"){ htmlFragment += '<span class="glyphicon glyphicon-info-sign"></span> ';}
+      if (typeof sticks[i].culture != "undefined"){ htmlFragment += '<span class="glyphicon glyphicon-info-sign" style="position:inherit"></span> ';}
       htmlFragment += sticks[i].description;
       if (sticks[i].taken == true){htmlFragment += '</s>';}
       htmlFragment +='</a></span></div>';
     }
     html += htmlFragment + '</div>'
-    return '<div style="overflow: auto"><div class="option"><span class="stick_info">'+numberOfTakenSticks + '/' +sticks.length+'</span><span>'+I18n.t('views.menu.takenstickslabel')+'</span></div>' + html;
+    return '<div style="overflow: scroll;z-index: 99"><div class="option"><span class="stick_info">'+numberOfTakenSticks + '/' +sticks.length+'</span><span>'+I18n.t('views.menu.takenstickslabel')+'</span></div>' + html;
   },
   
   getAccount: function() {
