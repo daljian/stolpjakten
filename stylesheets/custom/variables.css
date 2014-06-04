@@ -160,14 +160,8 @@ div#mainView div.map16 {
   background-color: white !important;
 }
 
-/*div#mainView div.navigation {
-  height: 55px;  
-}*/
-
-element {
-    -webkit-overflow-scrolling: touch;
+.navigation {
+  z-index: 999;  
 }
 
-element > * {
-    -webkit-transform: translateZ(0px);
-}
+

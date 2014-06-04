@@ -135,7 +135,7 @@ App.Routers.Menu = Backbone.Router.extend({
       htmlFragment +='</a></span></div>';
     }
     html += htmlFragment + '</div>'
-    return '<div style="overflow: scroll;z-index: 99"><div class="option"><span class="stick_info">'+numberOfTakenSticks + '/' +sticks.length+'</span><span>'+I18n.t('views.menu.takenstickslabel')+'</span></div>' + html;
+    return '<div style="z-index:99; -webkit-overflow-scrolling: touch;-webkit-transform: translate3d(0px, 0px, 0px)"><div class="option"><span class="stick_info">'+numberOfTakenSticks + '/' +sticks.length+'</span><span>'+I18n.t('views.menu.takenstickslabel')+'</span></div>' + html;
   },
   
   getAccount: function() {
