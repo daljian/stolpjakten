@@ -77,9 +77,13 @@ App.Views.Maps.Show = App.Views.Base.extend({
     var valid = false;
     var mapcodes = toArray(net.getUser(getNetCredentials()).result.ud.emmcs.emmc);
     for (var i = 0; i < mapcodes.length; i++){
-        if (code == mapcodes[i]){
-            valid = true;
-            break;
+        try{
+          if (code == mapcodes[i] || code.toLowerCase() == mapcodes[i].toLowerCase()){
+              valid = true;
+              break;
+          }
+        }catch (err){
+          //We probably got an empty code.. 
         }
     }
     if (valid){
