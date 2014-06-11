@@ -1,4 +1,4 @@
-#mainView .map-1, #mainView .map12, #mainView .map14, #mainView .map1, #mainView .map9, #mainView .map8, #mainView .map11, #mainView .map5, #mainView .map6 {
+#mainView .map-1, #mainView .map12, #mainView .map14, #mainView .map1, #mainView .map9, #mainView .map8, #mainView .map11, #mainView .map5, #mainView .map6, #mainView .map17 {
   font-size: 18px; }
 
 /* 
@@ -90,6 +90,49 @@ Map 6
 
 .icon6, .icon6:hover {
   color: white; }
+
+/* 
+Map 17 
+*/
+#mainView .map17 {
+  color: white;
+  background-color: #4fdd4d; }
+
+.icon17, .icon17:hover {
+  color: white; }
+
+/* Color on marker depending on marker difficulty */
+/* difficulty 1 */
+.level1 {
+  background-color: #95c11f; }
+
+.leaflet-popup-content .level1 {
+  border-color: #95c11f !important;
+  background-color: white !important; }
+
+/* difficulty 2 */
+.level2 {
+  background-color: #1d71b8 !important; }
+
+.leaflet-popup-content .level2 {
+  border-color: #1d71b8 !important;
+  background-color: white !important; }
+
+/* difficulty 3 */
+.level3 {
+  background-color: #e6332a !important; }
+
+.leaflet-popup-content .level3 {
+  border-color: #e6332a !important;
+  background-color: white !important; }
+
+/* difficulty 4 */
+.level4 {
+  background-color: #101010 !important; }
+
+.leaflet-popup-content .level4 {
+  border-color: #101010 !important;
+  background-color: white !important; }
 
 /* Color on marker depending on marker difficulty */
 /* difficulty 1 */

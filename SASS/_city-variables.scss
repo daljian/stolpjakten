@@ -12,6 +12,7 @@ $city-types:
     , 11 white #27ae61 /* Gjövik */
     , 5 white #075266 /* Sarpsborg */
     , 6 white #86cbe9 /* Sala */
+    , 17 white #4fdd4d /* Gjerdrum */
     );
 
 @each $type in $city-types {

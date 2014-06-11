@@ -125,6 +125,18 @@ div#mainView div.map16 {
   color: #FFF;
 }
 
+/* 17 Gjerdrum  */
+div#mainView div.map17 {
+  background-color: #4fdd4d;
+  font-size: 18px;
+}
+ .icon17 {
+  color: #FFF;
+}
+ .icon17:hover {
+  color: #FFF;
+}
+
 /* Color on marker depending on marker difficulty */
 
 /* difficulty 1 */
