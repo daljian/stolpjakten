@@ -563,7 +563,7 @@ L.Mixin.Events.fire = L.Mixin.Events.fireEvent;
 		div.removeAttribute(startName);
 		div = null;
 
-		return supported;
+		return false;
 	}());
 
 
