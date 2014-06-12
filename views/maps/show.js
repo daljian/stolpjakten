@@ -130,7 +130,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
   // Ritar ut kartan
   drawMap: function() {
     //var result = $("#myDiv").height();
-    var iconRadius = 50;
+    var iconRadius = 25;
     var LeafIcon = L.Icon.extend({
         
         options: {
