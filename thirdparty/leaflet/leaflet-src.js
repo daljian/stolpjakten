@@ -565,7 +565,7 @@ L.Mixin.Events.fire = L.Mixin.Events.fireEvent;
 
 		return supported;
 	}());
-	touch = false; //gengdahl Hard set to false for test
+	
 
 
 	L.Browser = {
