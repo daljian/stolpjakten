@@ -537,7 +537,7 @@ L.Mixin.Events.fire = L.Mixin.Events.fireEvent;
 
 	// PhantomJS has 'ontouchstart' in document.documentElement, but doesn't actually support touch.
 	// https://github.com/Leaflet/Leaflet/pull/1434#issuecomment-13843151
-
+	
 	var touch = !window.L_NO_TOUCH && !phantomjs && (function () {
 
 		var startName = 'ontouchstart';
@@ -563,8 +563,9 @@ L.Mixin.Events.fire = L.Mixin.Events.fireEvent;
 		div.removeAttribute(startName);
 		div = null;
 
-		return false;
+		return supported;
 	}());
+	touch = false; //gengdahl Hard set to false for test
 
 
 	L.Browser = {
