@@ -9,7 +9,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
 
   // DOM events in the view that we are interested in
   events: {
-    'click span.marker':  'goToMarker',
+    'click .marker':  'goToMarker',
     'click .glyphicon-filter':   'doFilter',
     'click .glyphicon-compressed': 'doToggleMarkerCluster',
     'click .glyphicon-qrcode' : 'doScan',
@@ -250,9 +250,9 @@ App.Views.Maps.Show = App.Views.Base.extend({
 //Admin features
 //L.control.mousePosition().addTo(map);
 //Right click on the map activated
-map.on('contextmenu', function(e) {
-    window.prompt("Copy to clipboard: Ctrl+C, Enter", e.latlng.lat +","+e.latlng.lng);
-});
+//map.on('contextmenu', function(e) {
+//    window.prompt("Copy to clipboard: Ctrl+C, Enter", e.latlng.lat +","+e.latlng.lng);
+//});
     L.control.scale().addTo(map);
 //    L.control.compass().addTo(map);
 
