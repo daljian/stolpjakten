@@ -428,6 +428,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
   goToMarker: function(event) {
     var marker = $(event.target).attr('markerId');
     this.saveMapPosition();
+    this.disableLocationTracking(map);
     //console.log('Du har klickat på stolpe för navigering: '+marker);
     //console.log(lat+' '+lng);
     var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
@@ -502,6 +503,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     this.render();
   },
   doScan: function(){
+    this.disableLocationTracking(this.map);
     utils.scan(this);
     this.render();
   },
@@ -530,6 +532,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
   },
   toMenu: function(){
     this.saveMapPosition();
+    this.disableLocationTracking(map);
     window.location.href="#menu/index";
     
   },
