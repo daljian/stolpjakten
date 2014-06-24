@@ -54,6 +54,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
                 }
                 for (var i = 0; i < extraMaps.length; i++){
                     //TODO, check if user has bought the map (map code entered)
+                        utils.logDebug("\nPushing " + extraMaps[i].tp + " if premium: " + hasPremiumCode + "\n");
                     if (hasPremiumCode){
                         tileArray.push(extraMaps[i].tp);
                     }else if (this.validateMapCode(extraMaps[i].mc, extraMaps[i].emid)){ // getCurrentMapId() +""+i -> 12 + "1" -> 121
@@ -74,7 +75,8 @@ App.Views.Maps.Show = App.Views.Base.extend({
     }*/
   },
   validateMapCode: function(code, mapId){
-    var valid = false;
+    utils.logDebug("code is " + code);
+    var valid = (code === "Gratis");
     var mapcodes = toArray(net.getUser(getNetCredentials()).result.ud.emmcs.emmc);
     for (var i = 0; i < mapcodes.length; i++){
         try{

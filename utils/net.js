@@ -98,7 +98,7 @@ function UserData(em,fn,ln,dn,sa,zip,ci,ph,ge,pw,sil,nl,ag,pc, emmcs){
   self.emmcs = emmcs;
 
   self.fromXML = function(xml){
-    utils.logDebug("xml: " + xml);
+    //utils.logDebug("xml: " + xml);
     var t = $.xml2json(xml);
     return fromUserData(t);
   }
@@ -241,9 +241,9 @@ var net = (function() {
   }
 
   function getFromCache(url){
-    utils.logDebug("will try to read from cache " + url)
+    //utils.logDebug("will try to read from cache " + url)
     var result = JSON.parse(localStorage.getItem(createStorageKey(url)));
-    utils.logDebug('We got: ' + JSON.stringify(result) + ' when reading with key ' + createStorageKey(url));
+    //utils.logDebug('We got: ' + JSON.stringify(result) + ' when reading with key ' + createStorageKey(url));
     return result;
   }
   function cache(url, result){
@@ -310,7 +310,7 @@ var net = (function() {
                 result = $.xml2json(msg);
                 result.timestamp = Date.now();
                 cache(url, result);
-                utils.logDebug("\n\nXml response:\n"+msg);
+                //utils.logDebug("\n\nXml response:\n"+msg);
             }
         }
         result = getFromCache(url);
@@ -515,7 +515,7 @@ var net = (function() {
         //TODO would be much nicer if there was a way to add the 
         //     toXML operation instead of re-create entire ud object
         serverResult.ud = new UserData().fromUserData(serverResult);
-        utils.logDebug("getUser JSON: " + JSON.stringify(serverResult));
+        //utils.logDebug("getUser JSON: " + JSON.stringify(serverResult));
         
         utils.assertDefined(serverResult.ud.em);
         if (typeof serverResult != "undefined"){
