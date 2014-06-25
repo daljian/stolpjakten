@@ -76,7 +76,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
   },
   validateMapCode: function(code, mapId){
     utils.logDebug("code is " + code);
-    var valid = (code === "Gratis");
+    var valid = (code === "");
     var mapcodes = toArray(net.getUser(getNetCredentials()).result.ud.emmcs.emmc);
     for (var i = 0; i < mapcodes.length; i++){
         try{
