@@ -54,6 +54,8 @@ App.Routers.Menu = Backbone.Router.extend({
     } else if (where === 'toplist') {
       var data = this.getToplist();
       var title = I18n.t('views.menu.toplistlabel');
+    } else if (where === 'sync') {
+      this.sync();
     } else if (where === 'logout') {
       this.logout();
     } else {
@@ -198,6 +200,38 @@ App.Routers.Menu = Backbone.Router.extend({
     return html;
   },
   
+  sync: function(){
+    //Save some data that can be handy to keep until next login session
+    var currentMap = getCurrentMap();
+    var language = localStorage.getItem(getLanguageKey());
+    var filter = getFilter()
+    var cluster = getMarkerCluster();
+    var netCreds = getNetCredentials();
+    localStorage.clear();
+    
+
+    try{
+      var result = net.getUser(netCreds);
+      if(result.success) {
+        var creds = new Object();
+        creds.email = netCreds.em;
+        creds.password = netCreds.pwd;
+        localStorage.setItem(getCredentialsKey(), JSON.stringify(creds));
+        localStorage.setItem(getUserKey(), JSON.stringify(result.result));
+        localStorage.setItem(getLanguageKey(), language);
+        localStorage.setItem(getCurrentMapKey(), JSON.stringify(currentMap));
+        localStorage.setItem(getFilterOnKey(), filter);
+        localStorage.setItem(getMarkerClusterOnKey(), cluster);
+      }
+    }catch(err){
+      console.log(err);
+      utils.error(I18n.t('views.users.login.logininternalerror'));
+    }finally{
+        window.location.href='#maps/'+getCurrentMapId()+'/show';
+    }
+
+    
+  },
   logout: function(){
     //Save some data that can be handy to keep until next login session
     var currentMap = getCurrentMap();
