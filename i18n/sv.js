@@ -89,7 +89,8 @@ I18n.Translations.sv = {
       melabel: "Jag",
       viewolmap: "Visa OL-karta",
       gpswarning: "Slå av positionering under inställningar för att spara batteri",
-      gpslabel: "Visa min position"
+      gpslabel: "Visa min position",
+      synclabel: "Uppdatera stolpar"
 
     },
 

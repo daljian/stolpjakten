@@ -56,6 +56,7 @@ App.Routers.Menu = Backbone.Router.extend({
       var title = I18n.t('views.menu.toplistlabel');
     } else if (where === 'sync') {
       this.sync();
+      return;
     } else if (where === 'logout') {
       this.logout();
     } else {

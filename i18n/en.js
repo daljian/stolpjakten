@@ -88,7 +88,8 @@ I18n.Translations.en = {
       melabel: "Me",
       viewolmap: "Show overlayed map",
       gpswarning: "Disable positioning under settings to reduce power consumption",
-      gpslabel: "Show my position"
+      gpslabel: "Show my position",
+      synclabel: "Update posts"
 
 
     },

@@ -89,7 +89,8 @@ I18n.Translations.no = {
       melabel: "Jeg",
       viewolmap: "Vis OL-kartet",
       gpswarning: "Deaktiver posisjonering under Innstillinger for å redusere strømforbruket",
-      gpslabel: "Vis min posisjon"
+      gpslabel: "Vis min posisjon",
+      synclabel: "Oppdatere stolper"
 
     },
 
