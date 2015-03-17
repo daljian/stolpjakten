@@ -353,17 +353,15 @@ var utils = (function() {
           var data = self.decodeQRText(result.text);
           var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
           var foundScannedStick = false;
-          for (var i = 0; i < sticks.length && !foundScannedStick; i++){
+          for (var i = 0; i < sticks.length; i++){
             if (sticks[i].number == data.id){
                 foundScannedStick = true;
                 var attempedRegistration = new ControlRegistration(sticks[i].id, data.code);
                 var key = getLastAttemptedRegistrationKey();
                 var result = net.addControl(getNetCredentials(), attempedRegistration);
-                
 
                 if (!result.success){
                     if (result.alreadyTaken == true){
-                      localStorage.setItem(key, JSON.stringify(attempedRegistration));
                       self.warning(I18n.t('views.map.marker.registerduplicate'));
                     }else{
                       if (net.isOnline() == false){
