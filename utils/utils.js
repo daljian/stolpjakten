@@ -378,6 +378,9 @@ var utils = (function() {
                     localStorage.setItem(getSelectedMarkerKey(), JSON.stringify(sticks[i]));
                     localStorage.setItem(getSticksKey(), JSON.stringify(sticks));
                     attempedRegistration.success = true;
+                    if (sticks[i].culture != "undefined" || sticks[i].sponsore != "undefined"){
+                      attempedRegistration.redirect = '#maps/'+getCurrentMapId()+'/'+sticks[i].id;
+                    }
                     localStorage.setItem(key, JSON.stringify(attempedRegistration));
                     self.updateStorageAfterRegistration(attempedRegistration);
 
