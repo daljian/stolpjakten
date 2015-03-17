@@ -509,7 +509,7 @@ map.on('contextmenu', function(e) {
     utils.scan(this);
     if (typeof getLastAttemptedRegistration().redirect != "undefined"){
         alert('Will redirect to ' + getLastAttemptedRegistration().redirect);
-        //window.location = getLastAttemptedRegistration().redirect;
+        window.location.href = getLastAttemptedRegistration().redirect;
     }else{
         this.render();
     }

@@ -378,9 +378,9 @@ var utils = (function() {
                     localStorage.setItem(getSelectedMarkerKey(), JSON.stringify(sticks[i]));
                     localStorage.setItem(getSticksKey(), JSON.stringify(sticks));
                     attempedRegistration.success = true;
-                    //if (typeof sticks[i].culture != "undefined" || typeof sticks[i].sponsore != "undefined"){
+                    if (typeof sticks[i].culture != "undefined" || typeof sticks[i].sponsore != "undefined"){
                       attempedRegistration.redirect = '#maps/'+getCurrentMapId()+'/'+sticks[i].number;
-                    //}
+                    }
                     localStorage.setItem(key, JSON.stringify(attempedRegistration));
                     self.updateStorageAfterRegistration(attempedRegistration);
 
