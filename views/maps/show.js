@@ -507,12 +507,7 @@ map.on('contextmenu', function(e) {
   doScan: function(){
     this.disableLocationTracking(this.map);
     utils.scan(this);
-    alert('getLastAttemptedRegistration().success): ' + getLastAttemptedRegistration().success);
-    if (getLastAttemptedRegistration().success === true){
-      window.location.href = '#maps/'+getCurrentMapId()+'/'+getLastAttemptedRegistration().id;
-    }else{
-      this.render();
-    }
+    this.render();
   },
   doFindMe: function(){
     var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
@@ -601,7 +596,6 @@ map.on('contextmenu', function(e) {
     return url;
     
 	},
-
 
    
 });
