@@ -361,7 +361,10 @@ var utils = (function() {
                 var result = net.addControl(getNetCredentials(), attempedRegistration);
                 attempedRegistration.success = result.success;
                 if (!result.success){
+
                     if (result.alreadyTaken == true){
+                      attempedRegistration.success = true;
+                      localStorage.setItem(key, JSON.stringify(attempedRegistration));
                       self.warning(I18n.t('views.map.marker.registerduplicate'));
                     }else{
                       if (net.isOnline() == false){
