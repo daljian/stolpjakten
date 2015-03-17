@@ -380,7 +380,6 @@ var utils = (function() {
                     attempedRegistration.success = true;
                     localStorage.setItem(key, JSON.stringify(attempedRegistration));
                     self.updateStorageAfterRegistration(attempedRegistration);
-                    window.location.href='#maps/' + getCurrentMapId +'/' + sticks[i].number;
                     self.success(I18n.t('views.map.marker.registersuccess'));
                     break;
                 }
