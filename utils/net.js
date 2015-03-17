@@ -463,6 +463,8 @@ var net = (function() {
         
         utils.logDebug("["+serverResult+"]");
         utils.assertDefined(serverResult);
+        console.log('Result: ' + serverResult)
+
         if (serverResult == "1 stolpe registrerad"){
           jsonResult.success = true;
           jsonResult.result = serverResult;
@@ -471,7 +473,10 @@ var net = (function() {
           jsonResult.result = serverResult;
           jsonResult.alreadyTaken = true;
 
+        }else {
+          console.log('No match for result string')
         }
+        alert('Result: ' + serverResult + ' alreadyTaken: ' + jsonResult.alreadyTaken);
       }catch(err){console.log(err);}
       if (jsonResult.success){
         //invalidateUserCache(netCredentials);
