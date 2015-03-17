@@ -379,7 +379,7 @@ var utils = (function() {
                     localStorage.setItem(getSticksKey(), JSON.stringify(sticks));
                     attempedRegistration.success = true;
                     if (sticks[i].culture != "undefined" || sticks[i].sponsore != "undefined"){
-                      attempedRegistration.redirect = '#maps/'+getCurrentMapId()+'/'+sticks[i].id;
+                      attempedRegistration.redirect = '#maps/'+getCurrentMapId()+'/'+sticks[i].number;
                     }
                     localStorage.setItem(key, JSON.stringify(attempedRegistration));
                     self.updateStorageAfterRegistration(attempedRegistration);
