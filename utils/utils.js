@@ -359,11 +359,7 @@ var utils = (function() {
                 var attempedRegistration = new ControlRegistration(sticks[i].id, data.code);
                 var key = getLastAttemptedRegistrationKey();
                 var result = net.addControl(getNetCredentials(), attempedRegistration);
-                if(true){
-                    window.location.href = '#maps/'+getCurrentMapId()+'/'+marker;
-
-                }
-
+                window.location.href = '#maps/'+getCurrentMapId()+'/'+sticks[i].number;
                 if (!result.success){
                     if (result.alreadyTaken == true){
                       self.warning(I18n.t('views.map.marker.registerduplicate'));
@@ -386,11 +382,7 @@ var utils = (function() {
                     self.updateStorageAfterRegistration(attempedRegistration);
 
                     
-                    if (sticks[i].culture != "undefined" || sticks[i].sponsore != "undefined"){
-                        window.location.href = '#maps/'+getCurrentMapId()+'/'+marker;
-                    }else{
-                        self.success(I18n.t('views.map.marker.registersuccess'));
-                    }
+                    self.success(I18n.t('views.map.marker.registersuccess'));
                     break;
                 }
             }
