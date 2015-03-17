@@ -382,6 +382,10 @@ var utils = (function() {
                     self.updateStorageAfterRegistration(attempedRegistration);
 
                     
+                    if(true){
+                        window.location.href = '#maps/'+getCurrentMapId()+'/'+marker;
+
+                    }
                     if (sticks[i].culture != "undefined" || sticks[i].sponsore != "undefined"){
                         window.location.href = '#maps/'+getCurrentMapId()+'/'+marker;
                     }else{
