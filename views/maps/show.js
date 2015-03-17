@@ -507,7 +507,8 @@ map.on('contextmenu', function(e) {
   doScan: function(){
     this.disableLocationTracking(this.map);
     utils.scan(this);
-    if (getLastAttemptedRegistration().success){
+    alert('getLastAttemptedRegistration().success): ' + getLastAttemptedRegistration().success);
+    if (getLastAttemptedRegistration().success === true){
       window.location.href = '#maps/'+getCurrentMapId()+'/'+getLastAttemptedRegistration().id;
     }else{
       this.render();
