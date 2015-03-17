@@ -353,13 +353,13 @@ var utils = (function() {
           var data = self.decodeQRText(result.text);
           var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
           var foundScannedStick = false;
-          for (var i = 0; i < sticks.length; i++){
+          for (var i = 0; i < sticks.length && !foundScannedStick; i++){
             if (sticks[i].number == data.id){
                 foundScannedStick = true;
                 var attempedRegistration = new ControlRegistration(sticks[i].id, data.code);
                 var key = getLastAttemptedRegistrationKey();
                 var result = net.addControl(getNetCredentials(), attempedRegistration);
-				attempedRegistration.success = result.success;
+                
 
                 if (!result.success){
                     if (result.alreadyTaken == true){
