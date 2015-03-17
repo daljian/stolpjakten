@@ -362,6 +362,7 @@ var utils = (function() {
                 attempedRegistration.success = result.success;
                 if (!result.success){
 
+                    alert('string with key' + key + '\nThe value: ' + JSON.stringify(attempedRegistration) + ' and result: ' + JSON.stringify(result));
                     if (result.alreadyTaken == true){
                       attempedRegistration.success = true;
                       localStorage.setItem(key, JSON.stringify(attempedRegistration));
@@ -369,7 +370,6 @@ var utils = (function() {
                     }else{
                       if (net.isOnline() == false){
                         localStorage.setItem(key, JSON.stringify(attempedRegistration));
-                        alert('string with key' + key + '\nThe value: ' + JSON.stringify(attempedRegistration));
                         self.updateStorageAfterRegistration(attempedRegistration);
                         self.warning(I18n.t('views.map.marker.registerfailoffline'));
                       }else{
