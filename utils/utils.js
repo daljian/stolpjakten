@@ -359,7 +359,6 @@ var utils = (function() {
                 var attempedRegistration = new ControlRegistration(sticks[i].id, data.code);
                 var key = getLastAttemptedRegistrationKey();
                 var result = net.addControl(getNetCredentials(), attempedRegistration);
-                window.location.href = '#maps/'+getCurrentMapId()+'/'+sticks[i].number;
                 if (!result.success){
                     if (result.alreadyTaken == true){
                       self.warning(I18n.t('views.map.marker.registerduplicate'));

@@ -507,7 +507,11 @@ map.on('contextmenu', function(e) {
   doScan: function(){
     this.disableLocationTracking(this.map);
     utils.scan(this);
-    this.render();
+    if (getLastAttemptedRegistration().success){
+      window.location.href = '#maps/'+getCurrentMapId()+'/'+getLastAttemptedRegistration().id;
+    }else{
+      this.render();
+    }
   },
   doFindMe: function(){
     var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
