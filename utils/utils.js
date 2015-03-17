@@ -382,7 +382,11 @@ var utils = (function() {
                     self.updateStorageAfterRegistration(attempedRegistration);
 
                     
-                    self.success(I18n.t('views.map.marker.registersuccess'));
+                    if (sticks[i].culture != "undefined" || sticks[i].sponsore != "undefined"){
+                        window.location.href = '#maps/'+getCurrentMapId()+'/'+marker;
+                    }else{
+                        self.success(I18n.t('views.map.marker.registersuccess'));
+                    }
                     break;
                 }
             }
