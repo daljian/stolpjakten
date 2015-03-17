@@ -359,16 +359,15 @@ var utils = (function() {
                 var attempedRegistration = new ControlRegistration(sticks[i].id, data.code);
                 var key = getLastAttemptedRegistrationKey();
                 var result = net.addControl(getNetCredentials(), attempedRegistration);
-                attempedRegistration.success = result.success;
-                if (!result.success){
+				attempedRegistration.success = result.success;
 
-                    alert('string with key' + key + '\nThe value: ' + JSON.stringify(attempedRegistration) + ' and result: ' + JSON.stringify(result));
+                if (!result.success){
                     if (result.alreadyTaken == true){
-                      attempedRegistration.success = true;
                       localStorage.setItem(key, JSON.stringify(attempedRegistration));
                       self.warning(I18n.t('views.map.marker.registerduplicate'));
                     }else{
                       if (net.isOnline() == false){
+                        attempedRegistration.success = false;
                         localStorage.setItem(key, JSON.stringify(attempedRegistration));
                         self.updateStorageAfterRegistration(attempedRegistration);
                         self.warning(I18n.t('views.map.marker.registerfailoffline'));
