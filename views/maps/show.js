@@ -507,9 +507,9 @@ map.on('contextmenu', function(e) {
   doScan: function(){
     this.disableLocationTracking(this.map);
     utils.scan(this);
-    if (getLastAttemptedRegistration().redirect != "undefined"){
+    if (typeof getLastAttemptedRegistration().redirect != "undefined"){
         alert('Will redirect to ' + getLastAttemptedRegistration().redirect);
-        window.location = getLastAttemptedRegistration().redirect;
+        //window.location = getLastAttemptedRegistration().redirect;
     }else{
         this.render();
     }
