@@ -140,7 +140,7 @@ function getSetting(setting){
 
 
 function getLastAttemptedRegistration(){
-  return JSON.parse(localStorage.getItem(getLastAttemptedRegistrationKey());
+  return JSON.parse(localStorage.getItem(getLastAttemptedRegistrationKey()));
 }
 
 function getCurrentMap(){
