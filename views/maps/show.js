@@ -507,12 +507,16 @@ map.on('contextmenu', function(e) {
   doScan: function(){
     this.disableLocationTracking(this.map);
     utils.scan(this);
+    this.render();
+    alert('Will redirect to ' + getLastAttemptedRegistration().redirect);
+
+/*
     if (typeof getLastAttemptedRegistration().redirect != "undefined"){
         alert('Will redirect to ' + getLastAttemptedRegistration().redirect);
         window.location.href = getLastAttemptedRegistration().redirect;
     }else{
-        this.render();
     }
+*/
   },
   doFindMe: function(){
     var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
