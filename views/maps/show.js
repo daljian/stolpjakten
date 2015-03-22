@@ -108,6 +108,10 @@ App.Views.Maps.Show = App.Views.Base.extend({
     return valid;
   },
 
+  renderWithArgument: function(bosse) {
+    alert("bosse is " + bosse);
+    myself.render();
+  },
 
   /**
    * Renders the view using the `views/users/edit.hbs` template.
