@@ -108,7 +108,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     return valid;
   },
 
-  renderWithArgument: function(bosse) {
+  render: function(bosse) {
     window.location.href = bosse;
   },
 
@@ -510,7 +510,7 @@ map.on('contextmenu', function(e) {
   doScan: function(){
     this.disableLocationTracking(this.map);
     utils.scan(this);
-    this.render();
+    //this.render();
   },
   doFindMe: function(){
     var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
