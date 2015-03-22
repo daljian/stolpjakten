@@ -56,6 +56,7 @@ App.Views.Menu.Index = App.Views.Base.extend({
                  //'<div class="option" data-action="info">'+I18n.t('views.menu.infolabel')+'</div>'+
                  '<div class="option" data-action="result">'+I18n.t('views.menu.resultslabel')+'</div>'+
                  '<div class="option" data-action="toplist">'+I18n.t('views.menu.toplistlabel')+'</div>'+
+                 '<div class="option" data-action="choosecity">'+I18n.t('views.menu.choosecity')+'</div>'+
                  '<div class="option" data-action="settings">'+I18n.t('views.menu.settingslabel')+'</div>'+
                  '<div class="option" data-action="sync">'+I18n.t('views.menu.synclabel')+'</div>'+
                  '<div class="option" data-action="logout">'+I18n.t('views.menu.logoutlabel')+'</div>'+

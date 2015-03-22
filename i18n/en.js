@@ -82,7 +82,7 @@ I18n.Translations.en = {
       groupstickslabel: "Group posts",
       hidetakenstickslabel: "Hide taken posts",
       mapsettings: "Map settings",
-      choosecity: "Choose city",
+      choosecity: "Change city",
       toplisterror: "Sorry, could not retreive Top 100 at the moment due to an error",
       friendsresultserror: "Sorry, could not retreive friends results at the moment due to an error",
       melabel: "Me",

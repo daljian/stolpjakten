@@ -54,6 +54,8 @@ App.Routers.Menu = Backbone.Router.extend({
     } else if (where === 'toplist') {
       var data = this.getToplist();
       var title = I18n.t('views.menu.toplistlabel');
+    } else if (where === 'choosecity') {
+      window.location.href="#/menu/select";
     } else if (where === 'sync') {
       this.sync();
       return;
@@ -69,7 +71,7 @@ App.Routers.Menu = Backbone.Router.extend({
   getSettings: function() {
     // inställningar för appen
     return '<div class="option">'+
-            '<div class="option"> <a href="#/menu/select" style="text-decoration:none; color:#FFF">'+I18n.t('views.menu.choosecity')+'</a></div>'+
+           // '<div class="option"> <a href="#/menu/select" style="text-decoration:none; color:#FFF">'+I18n.t('views.menu.choosecity')+'</a></div>'+
             '<div class="option"><p><label>'+I18n.t('views.menu.mapsettings')+'</label></p></div>'+
             
            this.createMarkerClusterHtml()+

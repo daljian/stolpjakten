@@ -34,8 +34,8 @@ App.Views.Menu.City = App.Views.Base.extend({
   back: function() {
     
     var mapView = getCurrentMapId();
-    //window.location.href = '#maps/'+mapView+'/show';
-    window.history.back();
+    window.location.href = '#maps/'+mapView+'/show';
+    //window.history.back();
   },
   
   mapSelect: function(event) {

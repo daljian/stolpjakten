@@ -83,7 +83,7 @@ I18n.Translations.sv = {
       groupstickslabel: "Gruppera stolpar",
       hidetakenstickslabel: "Dölj tagna stolpar",
       mapsettings: "Kartinställningar",
-      choosecity: "Välj stad",
+      choosecity: "Byt arrangemang",
       toplisterror: "Tyvärr gick det inte att hämta toplistan just nu",
       friendsresultserror: "Tyvärr gick det inte att hämta dina bevakningar just nu.",
       melabel: "Jag",
