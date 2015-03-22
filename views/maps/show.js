@@ -109,8 +109,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
   },
 
   renderWithArgument: function(bosse) {
-    alert("bosse is " + bosse);
-    myself.render();
+    window.location.href = bosse;
   },
 
   /**
