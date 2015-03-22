@@ -124,12 +124,9 @@ function toggleSetting(setting){
   }
   localStorage.setItem(setting, enabled);
   var count = 0;
-  while (enabled != getSetting(setting).toString()){
+//Samsung fix for not getting storage to work...
+  while (count < 10){
     localStorage.setItem(setting, enabled);
-    count++;
-    if (count > 10){
-        break;
-    }
   }
   return getSetting(setting);
 }
