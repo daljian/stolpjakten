@@ -123,7 +123,7 @@ function toggleSetting(setting){
     enabled = 'true';
   }
   localStorage.setItem(setting, enabled);
-  return enabled;
+  return getSetting(setting);
 }
 function getSetting(setting){
   var enabled = localStorage.getItem(setting);
