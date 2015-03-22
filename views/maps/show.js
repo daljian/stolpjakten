@@ -108,11 +108,13 @@ App.Views.Maps.Show = App.Views.Base.extend({
     return valid;
   },
 
-
+  redirect: function(where) {
+    window.location.href = where;
+  },
   /**
    * Renders the view using the `views/users/edit.hbs` template.
    */
-  render: function(redirect) {
+  render: function() {
     var myself = this;
     var source = this.createHtml();
     var template = Handlebars.compile(source);
@@ -124,9 +126,6 @@ App.Views.Maps.Show = App.Views.Base.extend({
     setTimeout(function () {
       myself.drawMap();
     }, 10);
-    if (typeof redirect != "undefined"){
-      window.location.href = bosse;
-    }
     
 
   },

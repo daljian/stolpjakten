@@ -389,7 +389,7 @@ var utils = (function() {
             self.error(I18n.t('views.map.marker.registerfail'));
           }
           if (self.callback != null){
-            self.callback.render("#/maps/"+getCurrentMapId()+"/" +sticks[i].number);
+            self.callback.redirect("#/maps/"+getCurrentMapId()+"/" +sticks[i].number);
           }
         }
         
