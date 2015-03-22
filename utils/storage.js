@@ -123,6 +123,14 @@ function toggleSetting(setting){
     enabled = 'true';
   }
   localStorage.setItem(setting, enabled);
+  var count = 0;
+  while (enabled != getSetting(setting).toString()){
+    localStorage.setItem(setting, enabled);
+    count++;
+    if (count > 10){
+        break;
+    }
+  }
   return getSetting(setting);
 }
 function getSetting(setting){
