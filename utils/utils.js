@@ -95,6 +95,36 @@ var utils = (function() {
       //allow multiple langues in errors.
       return CACHE_KEY_NULL_EXCEPTION;
     },
+    sendToServer: function(operation, xml, redirectUrl) {
+
+        var xmlHttp = null;
+        var url = createURL(operation, xml);
+        
+
+        xmlHttp = new XMLHttpRequest();
+        var parent = this;
+             
+        xmlHttp.onreadystatechange = function()
+        {
+            
+            
+            //console.log(xmlHttp);
+            if (xmlHttp.readyState==4 && xmlHttp.status==200)
+            {
+                var msg = xmlHttp.responseText;
+                //console.log("Raw Request:\n" + url +"\n\nXml Request:\n"+xml+"\n\nXml response:\n"+window.atob(msg));
+                if (window.atob(msg).indexOf('Ogiltiga inloggningsuppgifter') == -1){
+                  window.location = redirectUrl;
+                }else{
+                  alert("incorrect login");
+                }
+            }
+        }
+        //We use synchronous call
+        xmlHttp.open( "GET", url, false );
+        xmlHttp.send( null );
+        return xmlHttp.responseText;
+    },
 
 // -- Sticks operations --
 // Class to represent a row in the stick  grid
@@ -345,9 +375,7 @@ var utils = (function() {
                     }
                 }else{
                     sticks[i].taken = true;
-                    var selectedMarker = sticks[i];
-                    selectedMarker.openpopup=true;
-                    localStorage.setItem(getSelectedMarkerKey(), JSON.stringify(selectedMarker));
+                    localStorage.setItem(getSelectedMarkerKey(), JSON.stringify(sticks[i]));
                     localStorage.setItem(getSticksKey(), JSON.stringify(sticks));
                     attempedRegistration.success = true;
                     localStorage.setItem(key, JSON.stringify(attempedRegistration));
@@ -361,8 +389,6 @@ var utils = (function() {
             self.error(I18n.t('views.map.marker.registerfail'));
           }
           if (self.callback != null){
-            var redirectUrl = "#/maps/"+getCurrentMapId()+"/" +sticks[i].number;
-            //alert('scan will redirect to ' +redirectUrl);
             self.callback.render();
           }
         }

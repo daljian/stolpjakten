@@ -25,8 +25,8 @@ App.Views.Maps.Show = App.Views.Base.extend({
         var openPopup = -1;
         this.openPopup = openPopup;
         if (selectedMarker != null && selectedMarker.openpopup){
-            
-            openSelectedMarker();
+            this.openPopup = selectedMarker.number;
+            localStorage.removeItem(getSelectedMarkerKey());
         }
         getTilesStorageBaseDir();
 
@@ -108,9 +108,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     return valid;
   },
 
-  redirect: function(where) {
-    window.location.href = where;
-  },
+
   /**
    * Renders the view using the `views/users/edit.hbs` template.
    */
@@ -289,8 +287,8 @@ map.on('contextmenu', function(e) {
                 continue; //No right to see marker - skip to next marker
             }
         }
-        if (filter && stick.taken == true && this.openPopup != stick.number){
-          continue;
+        if (filter && stick.taken == true){
+            continue;
         }
         var markerIcon = new Object();
                      
@@ -509,22 +507,30 @@ map.on('contextmenu', function(e) {
   doScan: function(){
     this.disableLocationTracking(this.map);
     utils.scan(this);
-    this.initialize();
+    this.render();
   },
   doFindMe: function(){
     var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
     this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
-  },
-  openMarker: function(number){
-    var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
-    for (var i = 0 ; i < sticks.length; i++){
-        if (sticks[i].number == number){
-            this.map.panTo(L.latLng(sticks[i].latitude, sticks[i].longitude));
-            this.openPopup = number;
-            break;
-        }
+/*    toggleGPS();
+    if (this.marker != null){
+      this.map.removeLayer(this.marker)
     }
-    this.render();
+    if (getGPS()){
+      this.enableLocationTracking(this.map);
+      utils.logDebug("GPS: " + localStorage.getItem(getGPSPositionKey()));
+      var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
+      if (gpsPosition != null){
+          utils.logDebug("lng: " +gpsPosition.longitude);
+          var marker = L.circleMarker(L.latLng(gpsPosition.latitude, gpsPosition.longitude), {"radius":gpsPosition.radius});
+          this.marker = marker;
+          this.marker.addTo(this.map);
+          this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
+      }
+    }else{
+      this.disableLocationTracking(this.map);
+    }
+ */
   },
   toMenu: function(){
     this.saveMapPosition();
