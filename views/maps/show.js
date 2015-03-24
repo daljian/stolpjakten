@@ -519,12 +519,16 @@ map.on('contextmenu', function(e) {
     var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
     this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
   },
-  openSelectedMarker: function(){
-    var selectedMarker = getSelectedMarker();
-    this.map.panTo(L.latLng(selectedMarker.latitude, selectedMarker.longitude));
-    this.openPopup = selectedMarker.number;
-    localStorage.removeItem(getSelectedMarkerKey());
-
+  openMarker: function(number){
+    var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
+    for (var i = 0 ; i < sticks.length; i++){
+        if (sticks[i].number == number){
+            this.map.panTo(L.latLng(sticks[i].latitude, sticks[i].longitude));
+            this.openPopup = number;
+            break;
+        }
+    }
+    this.render();
   },
   toMenu: function(){
     this.saveMapPosition();

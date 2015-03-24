@@ -364,6 +364,7 @@ var utils = (function() {
             var redirectUrl = "#/maps/"+getCurrentMapId()+"/" +sticks[i].number;
             //alert('scan will redirect to ' +redirectUrl);
             self.callback.openMarker(sticks[i].number);
+            self.callback.render();
           }
         }
         
