@@ -509,30 +509,10 @@ map.on('contextmenu', function(e) {
   doScan: function(){
     this.disableLocationTracking(this.map);
     utils.scan(this);
-    //this.render();
   },
   doFindMe: function(){
     var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
     this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
-/*    toggleGPS();
-    if (this.marker != null){
-      this.map.removeLayer(this.marker)
-    }
-    if (getGPS()){
-      this.enableLocationTracking(this.map);
-      utils.logDebug("GPS: " + localStorage.getItem(getGPSPositionKey()));
-      var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
-      if (gpsPosition != null){
-          utils.logDebug("lng: " +gpsPosition.longitude);
-          var marker = L.circleMarker(L.latLng(gpsPosition.latitude, gpsPosition.longitude), {"radius":gpsPosition.radius});
-          this.marker = marker;
-          this.marker.addTo(this.map);
-          this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
-      }
-    }else{
-      this.disableLocationTracking(this.map);
-    }
- */
   },
   toMenu: function(){
     this.saveMapPosition();
