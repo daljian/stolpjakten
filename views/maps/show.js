@@ -25,8 +25,8 @@ App.Views.Maps.Show = App.Views.Base.extend({
         var openPopup = -1;
         this.openPopup = openPopup;
         if (selectedMarker != null && selectedMarker.openpopup){
-            this.openPopup = selectedMarker.number;
-            localStorage.removeItem(getSelectedMarkerKey());
+            
+            openSelectedMarker();
         }
         getTilesStorageBaseDir();
 
@@ -290,7 +290,11 @@ map.on('contextmenu', function(e) {
             }
         }
         if (filter && stick.taken == true){
-            continue;
+            if (typeof getSelectedMarker() != null && stick.number == getSelectedMarker().number){
+                //The marker we currently have selected will be drawn
+            }else{
+              continue;
+            }
         }
         var markerIcon = new Object();
                      
@@ -518,6 +522,9 @@ map.on('contextmenu', function(e) {
   openSelectedMarker: function(){
     var selectedMarker = getSelectedMarker();
     this.map.panTo(L.latLng(selectedMarker.latitude, selectedMarker.longitude));
+    this.openPopup = selectedMarker.number;
+    localStorage.removeItem(getSelectedMarkerKey());
+
   },
   toMenu: function(){
     this.saveMapPosition();
