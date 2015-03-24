@@ -345,7 +345,9 @@ var utils = (function() {
                     }
                 }else{
                     sticks[i].taken = true;
-                    localStorage.setItem(getSelectedMarkerKey(), JSON.stringify(sticks[i]));
+                    var selectedMarker = sticks[i];
+                    selectedMarker.openpopup=true;
+                    localStorage.setItem(getSelectedMarkerKey(), JSON.stringify(selectedMarker));
                     localStorage.setItem(getSticksKey(), JSON.stringify(sticks));
                     attempedRegistration.success = true;
                     localStorage.setItem(key, JSON.stringify(attempedRegistration));
@@ -360,8 +362,8 @@ var utils = (function() {
           }
           if (self.callback != null){
             var redirectUrl = "#/maps/"+getCurrentMapId()+"/" +sticks[i].number;
-            alert('scan will redirect to ' +redirectUrl);
-            self.callback.redirect(redirectUrl);
+            //alert('scan will redirect to ' +redirectUrl);
+            self.callback.openSelectedMarker();
           }
         }
         

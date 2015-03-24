@@ -514,6 +514,10 @@ map.on('contextmenu', function(e) {
     var gpsPosition = JSON.parse(localStorage.getItem(getGPSPositionKey()));
     this.map.panTo(L.latLng(gpsPosition.latitude, gpsPosition.longitude));
   },
+  openSelectedMarker: function(){
+    var selectedMarker = getSelectedMarker();
+    this.map.panTo(L.latLng(selectedMarker.latitude, selectedMarker.longitude));
+  },
   toMenu: function(){
     this.saveMapPosition();
     this.disableLocationTracking(map);

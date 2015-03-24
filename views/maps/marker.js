@@ -54,7 +54,6 @@ App.Views.Maps.Marker = App.Views.Base.extend({
   },
 
   initialize: function() {
-    alert('init');
     //console.log(this.options.mapid);
     //console.log(this.options.markerid);
     
@@ -78,7 +77,6 @@ App.Views.Maps.Marker = App.Views.Base.extend({
   },
 
   render: function() {
-    alert('render');
     this.selectedStick = JSON.parse(localStorage.getItem(getSelectedMarkerKey()));
     var self = this;
     var source = this.createHtml();

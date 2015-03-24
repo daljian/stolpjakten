@@ -150,6 +150,10 @@ function getLastAttemptedRegistration(){
   return JSON.parse(localStorage.getItem(getLastAttemptedRegistrationKey()));
 }
 
+function getSelectedMarker(){
+  return JSON.parse(localStorage.getItem(getSelectedMarkerKey()));
+}
+
 function getCurrentMap(){
   return JSON.parse(localStorage.getItem(getCurrentMapKey()));
 }
