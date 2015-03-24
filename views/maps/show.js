@@ -289,12 +289,8 @@ map.on('contextmenu', function(e) {
                 continue; //No right to see marker - skip to next marker
             }
         }
-        if (filter && stick.taken == true){
-            if (typeof getSelectedMarker() != null && stick.number == getSelectedMarker().number){
-                //The marker we currently have selected will be drawn
-            }else{
-              continue;
-            }
+        if (filter && stick.taken == true && this.openPopup != stick.number){
+          continue;
         }
         var markerIcon = new Object();
                      

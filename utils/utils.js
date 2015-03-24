@@ -363,7 +363,6 @@ var utils = (function() {
           if (self.callback != null){
             var redirectUrl = "#/maps/"+getCurrentMapId()+"/" +sticks[i].number;
             //alert('scan will redirect to ' +redirectUrl);
-            self.callback.openMarker(sticks[i].number);
             self.callback.render();
           }
         }
