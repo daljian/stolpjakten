@@ -116,7 +116,6 @@ function getGPS(){
 //Generic boolean settings operations
 function toggleSetting(setting){
   var enabled = getSetting(setting)
-  alert("Will change " + setting + " from " + enabled + " to " +!enabled);
   
   if (enabled){
     enabled = 'false';
@@ -124,20 +123,6 @@ function toggleSetting(setting){
     enabled = 'true';
   }
   localStorage.setItem(setting, enabled);
-  var count = 0;
-  localStorage.setItem(setting, enabled);
-//Samsung fix for not getting storage to work...
-  while (count < 10 && (enabled == newEnabled)){
-    localStorage.setItem(setting, enabled);
-    var newEnabled = getSetting(setting);
-    count++;
-  }
-  if (enabled == newEnabled){
-    alert("Failed to change setting after " + count +" attempts");
-  }else if (count != 0){
-    alert("Successfully changed setting after " + count +" attempts");
-  }
-  
   return getSetting(setting);
 }
 function getSetting(setting){
