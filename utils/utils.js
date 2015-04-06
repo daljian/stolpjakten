@@ -252,7 +252,7 @@ var utils = (function() {
   },
 
   logDebug: function(msg){
-    console.log(msg);
+    //console.log(msg);
   },
 
 
