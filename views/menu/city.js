@@ -59,7 +59,9 @@ App.Views.Menu.City = App.Views.Base.extend({
                  '<div class="menu">'+
                  '<div class="menu-title">'+I18n.t('views.menu.citypicklabel')+'</div>'+
                  '<div class="menu-body">'+
+                 '<div style="z-index:99; overflow-y: auto height:100%;">'+
                  optionsString +
+                 '</div>'+
                  '</div>'+
                  '</div>';
     return source;

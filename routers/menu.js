@@ -62,7 +62,7 @@ App.Routers.Menu = Backbone.Router.extend({
     } else if (where === 'logout') {
       this.logout();
     } else {
-      var data = '<div class="option">Data saknas</div>';
+      var data = '<div class="option needsclick">Data saknas</div>';
     }
 
     App.main( new App.Views.Menu.Show({data: data, title: title}) );
@@ -70,9 +70,9 @@ App.Routers.Menu = Backbone.Router.extend({
   
   getSettings: function() {
     // inställningar för appen
-    return '<div class="option">'+
-           // '<div class="option"> <a href="#/menu/select" style="text-decoration:none; color:#FFF">'+I18n.t('views.menu.choosecity')+'</a></div>'+
-            '<div class="option"><p><label>'+I18n.t('views.menu.mapsettings')+'</label></p></div>'+
+    return '<div class="option needsclick">'+
+           // '<div class="option needsclick"> <a href="#/menu/select" style="text-decoration:none; color:#FFF">'+I18n.t('views.menu.choosecity')+'</a></div>'+
+            '<div class="option needsclick"><p><label>'+I18n.t('views.menu.mapsettings')+'</label></p></div>'+
             
            this.createMarkerClusterHtml()+
            this.createFilterHtml()+
@@ -82,31 +82,31 @@ App.Routers.Menu = Backbone.Router.extend({
   },
   createMarkerClusterHtml: function() {
     if (getMarkerCluster()){
-      return '<div class="option" <p><input id="toggleMarkerCluster" type="checkbox" onchange="toggleMarkerCluster()" checked/> <label for="toggleMarkerCluster" style="font-weight:normal">'+I18n.t('views.menu.groupstickslabel')+'</p></label></div>';
+      return '<div class="option needsclick" <p><input id="toggleMarkerCluster" type="checkbox" onchange="toggleMarkerCluster()" checked/> <label for="toggleMarkerCluster" style="font-weight:normal">'+I18n.t('views.menu.groupstickslabel')+'</p></label></div>';
     }else{
-      return '<div class="option" <p><input id="toggleMarkerCluster" type="checkbox" onchange="toggleMarkerCluster()"/> <label for="toggleMarkerCluster" style="font-weight:normal">'+I18n.t('views.menu.groupstickslabel')+'</p></label></div>';
+      return '<div class="option needsclick" <p><input id="toggleMarkerCluster" type="checkbox" onchange="toggleMarkerCluster()"/> <label for="toggleMarkerCluster" style="font-weight:normal">'+I18n.t('views.menu.groupstickslabel')+'</p></label></div>';
     }
   },
   createFilterHtml: function() {
     if (getFilter()){
-      return '<div class="option"<p><input id="toggleFilter" type="checkbox" onchange="toggleFilter()" checked/> <label for="toggleFilter" style="font-weight:normal">'+I18n.t('views.menu.hidetakenstickslabel')+'</p></label></div>';
+      return '<div class="option needsclick"<p><input id="toggleFilter" type="checkbox" onchange="toggleFilter()" checked/> <label for="toggleFilter" style="font-weight:normal">'+I18n.t('views.menu.hidetakenstickslabel')+'</p></label></div>';
     }else{
-      return '<div class="option"<p><input id="toggleFilter" type="checkbox" onchange="toggleFilter()"/> <label for="toggleFilter" style="font-weight:normal">'+I18n.t('views.menu.hidetakenstickslabel')+'</p></label></div>';
+      return '<div class="option needsclick"<p><input id="toggleFilter" type="checkbox" onchange="toggleFilter()"/> <label for="toggleFilter" style="font-weight:normal">'+I18n.t('views.menu.hidetakenstickslabel')+'</p></label></div>';
     }
   },
   
   createOLMapHtml: function() {
     if (getOLMap()){
-      return '<div class="option"<p><input id="toggleOLMap" type="checkbox" onchange="toggleOLMap()" checked/> <label for="toggleOLMap" style="font-weight:normal">'+I18n.t('views.menu.viewolmap')+'</p></label></div>';
+      return '<div class="option needsclick"<p><input id="toggleOLMap" type="checkbox" onchange="toggleOLMap()" checked/> <label for="toggleOLMap" style="font-weight:normal">'+I18n.t('views.menu.viewolmap')+'</p></label></div>';
     }else{
-      return '<div class="option"<p><input id="toggleOLMap" type="checkbox" onchange="toggleOLMap()"/> <label for="toggleOLMap" style="font-weight:normal">'+I18n.t('views.menu.viewolmap')+'</p></label></div>';
+      return '<div class="option needsclick"<p><input id="toggleOLMap" type="checkbox" onchange="toggleOLMap()"/> <label for="toggleOLMap" style="font-weight:normal">'+I18n.t('views.menu.viewolmap')+'</p></label></div>';
     }
   },
   createGPSHtml: function() {
     if (getGPS()){
-      return '<div class="option" <p><input id="toggleGPS" type="checkbox" onchange="toggleGPS()" checked/> <label for="toggleGPS" style="font-weight:normal">'+I18n.t('views.menu.gpslabel')+'</p></label></div>';
+      return '<div class="option needsclick" <p><input id="toggleGPS" type="checkbox" onchange="toggleGPS()" checked/> <label for="toggleGPS" style="font-weight:normal">'+I18n.t('views.menu.gpslabel')+'</p></label></div>';
     }else{
-      return '<div class="option" <p><input id="toggleGPS" type="checkbox" onchange="toggleGPS()"/> <label for="toggleGPS" style="font-weight:normal">'+I18n.t('views.menu.gpslabel')+'</p></label></div>';
+      return '<div class="option needsclick" <p><input id="toggleGPS" type="checkbox" onchange="toggleGPS()"/> <label for="toggleGPS" style="font-weight:normal">'+I18n.t('views.menu.gpslabel')+'</p></label></div>';
     }
     return '';
   },
@@ -128,7 +128,7 @@ App.Routers.Menu = Backbone.Router.extend({
         numberOfTakenSticks++;
       }
       
-      htmlFragment += '<div class="option"><span class="level'+sticks[i].difficulty+' stick_info" style="color:#FFF">';
+      htmlFragment += '<div class="option needsclick"><span class="level'+sticks[i].difficulty+' stick_info" style="color:#FFF">';
       if (sticks[i].taken == true){htmlFragment += '<s>';}
       htmlFragment += sticks[i].number;
       if (sticks[i].taken == true){htmlFragment += '</s>';}
@@ -140,12 +140,12 @@ App.Routers.Menu = Backbone.Router.extend({
       htmlFragment +='</a></span></div>';
     }
     html += htmlFragment + '</div>'
-    return '<div style="z-index:99; -webkit-overflow-scrolling: touch;-webkit-transform: translate3d(0px, 0px, 0px)"><div class="option"><span class="stick_info">'+numberOfTakenSticks + '/' +sticks.length+'</span><span>'+I18n.t('views.menu.takenstickslabel')+'</span></div>' + html;
+    return '<div style="z-index:99; -webkit-overflow-scrolling: touch;-webkit-transform: translate3d(0px, 0px, 0px)"><div class="option needsclick"><span class="stick_info">'+numberOfTakenSticks + '/' +sticks.length+'</span><span>'+I18n.t('views.menu.takenstickslabel')+'</span></div>' + html;
   },
   
   getAccount: function() {
     // som registreringsformuläret
-    return '<div class="option">'+I18n.t('views.menu.accountsettingslabel')+'</div>';
+    return '<div class="option needsclick">'+I18n.t('views.menu.accountsettingslabel')+'</div>';
   },
   
   getInfo: function() {
@@ -174,9 +174,9 @@ App.Routers.Menu = Backbone.Router.extend({
     //console.log(JSON.stringify(result));
     if (result.success){
       var friends = toArray(result.result.res.rr);
-      var html= "" //TODO, add myself in list? '<div class="option"><span style="float: right;margin-right: 10px;">'+friends[i].r+'</span><span>'+I18n.t('views.menu.melabel')+'</span></div>';
+      var html= "" //TODO, add myself in list? '<div class="option needsclick"><span style="float: right;margin-right: 10px;">'+friends[i].r+'</span><span>'+I18n.t('views.menu.melabel')+'</span></div>';
       for (var i = 0; i < friends.length; i++){
-        html += '<div class="option"><span style="float: right;margin-right: 10px;">'+friends[i].r+'</span><span>'+friends[i].n+'</span></div>'
+        html += '<div class="option needsclick"><span style="float: right;margin-right: 10px;">'+friends[i].r+'</span><span>'+friends[i].n+'</span></div>'
       }
     }else{
       utils.warning(I18n.t('views.menu.friendsresultserror'));
@@ -195,7 +195,7 @@ App.Routers.Menu = Backbone.Router.extend({
           var items = toArray(result.result.res.rr);
           var html = "";
           for (var i = 0; i < items.length; i++){
-            html += '<div class="option"><span style="float: right;margin-right: 10px;">'+items[i].r+'</span><span>'+(i+1)+'. '+items[i].n+'</span></div>';
+            html += '<div class="option needsclick"><span style="float: right;margin-right: 10px;">'+items[i].r+'</span><span>'+(i+1)+'. '+items[i].n+'</span></div>';
           }
         }else{
           utils.warning(I18n.t('views.menu.toplisterror'));
