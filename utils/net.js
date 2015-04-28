@@ -171,7 +171,7 @@ var net = (function() {
   //Declare your private members and functions here
 
 
-  var SERVER_URL= "http://app.stolpjakten.se/restservice/friskaservice.ashx?";
+  var SERVER_URL= "https://app.stolpjakten.se/restservice/friskaservice.ashx?";
   var NET_OPERATION_GET_USER="GetUser";
   var NET_OPERATION_GET_MAP="GetMap";
   var NET_OPERATION_CREATE_USER="CreateUser";

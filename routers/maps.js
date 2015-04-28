@@ -59,7 +59,7 @@ App.Routers.Maps = Backbone.Router.extend({
               if (current.simg.indexOf('http') == 0){
                 sponsor.image = current.simg;
               }else{
-                sponsor.image = result.result.map.url + '/img/sponsors/' + current.simg;
+                sponsor.image = result.result.map.url + 'Images/Repo/' + current.simg;
               }
             }
             sponsor.link = current.slnk;
@@ -72,7 +72,7 @@ App.Routers.Maps = Backbone.Router.extend({
               if (current.cimg.indexOf('http') == 0){
                 culture.image = current.cimg;
               }else{
-                culture.image = result.result.map.url + '/img/culture/' + current.cimg;
+                culture.image = result.result.map.url + 'Images/Repo/' + current.cimg;
               }
             }
             culture.link = current.clnk;
