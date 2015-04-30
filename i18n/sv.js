@@ -40,11 +40,11 @@ I18n.Translations.sv = {
         phone: "Telefon",
         password: "Lösenord",
         sex: "Kön",
-        in_list: "Visa i lista",
-        news: "Nyheter",
+        in_list: "Visa i statistiken",
+        news: "Nyhetsbrev",
         birth_year: "Födelseår",
         premium: "Premiumkod",
-        map: "Karta",
+        map: "Standard arrangemang",
         male: "Man",
         female: "Kvinna"
 
