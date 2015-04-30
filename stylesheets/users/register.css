@@ -1,10 +1,10 @@
 body {
-  background-color: #468ee5 !important;
+  background-color: #69a225 !important;
   border: 0;
 }
 
 div.users-register {
-  background-color: #468ee5;
+  background-color: #69a225;
   color: white;
   width: 100%;
   height: 100%;
@@ -49,24 +49,40 @@ div.users-register div.register-form input, div.users-register div.register-form
   margin-bottom: 10px;
  /* border-bottom: 1px solid #468ee5 !important;*/
   border:none;
-  background-color: #2f5f99;
-  color: whitesmoke;
+  background-color: #4e791c;
+  color: #d8f0bd;
   -webkit-appearance:none;  
   -webkit-border-radius:0px;
 }
 
 input[type="checkbox"], div.users-register div.register-form input[type="checkbox"] {
-  margin: 0 10px -5px 10px;
+  /*margin: 0 10px -5px 10px;
   background-color: darkred;
   border: 3px solid rgba(0, 0, 0, 0.5);
   float: none;
   height: 25px;
   width: 25px;
-  border-radius: 5px;
+  border-radius: 999px;
+  padding: 0;*/
+  margin: 0 10px;
+  float: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 999px;
   padding: 0;
 }
 input[type="checkbox"]:checked, div.users-register div.register-form input[type="checkbox"]:checked {
-  background-color: #71af28;
+  background-color: #ec008b;
+}
+
+input[type="checkbox"]:before, div.users-register div.register-form input[type="checkbox"]:before {
+  border: 3px solid #ec008b;
+  content: "";
+  height: 30px;
+  width: 30px;
+  display: block;
+  border-radius: 999px;
+  margin: -5px;
 }
 
 
@@ -95,7 +111,7 @@ div.users-register div.register-form label {
 }
 
 div.users-register div.register-form div.submit-button {
-  background-color: #007575;
+  background-color: #ec008b;
   color: white;
   height: 50px;
   line-height: 50px;

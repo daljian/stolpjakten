@@ -5,8 +5,11 @@ input {
 }
 
 div.users-login {
-  background-color: #468ee5;
-  color: black;
+  background-color: #69a225;
+  /*background: url(../../img/bg.png) #76b72a;
+  background-size: cover;
+  background-position: center top;*/
+  color: white;
   width: 100%;
   height: 100%;
 }
@@ -56,8 +59,8 @@ div.users-login div.login-form input {
   padding: 10px;
  /* border-bottom: 1px solid #468ee5 !important;*/
   border:none;
-  background-color: #2f5f99;
-  color: whitesmoke;
+  background-color: #4e791c;
+  color: #d8f0bd;
 }
 
 
@@ -66,7 +69,7 @@ div.users-login div.login-form p {
 }
 
 div.users-login div.submit-button {
-  background-color: #007575;
+  background-color: #ec008b;
   color: white;
   height: 50px;
   line-height: 50px;
