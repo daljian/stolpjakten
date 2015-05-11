@@ -95,36 +95,6 @@ var utils = (function() {
       //allow multiple langues in errors.
       return CACHE_KEY_NULL_EXCEPTION;
     },
-    sendToServer: function(operation, xml, redirectUrl) {
-
-        var xmlHttp = null;
-        var url = createURL(operation, xml);
-        
-
-        xmlHttp = new XMLHttpRequest();
-        var parent = this;
-             
-        xmlHttp.onreadystatechange = function()
-        {
-            
-            
-            //console.log(xmlHttp);
-            if (xmlHttp.readyState==4 && xmlHttp.status==200)
-            {
-                var msg = xmlHttp.responseText;
-                //console.log("Raw Request:\n" + url +"\n\nXml Request:\n"+xml+"\n\nXml response:\n"+window.atob(msg));
-                if (window.atob(msg).indexOf('Ogiltiga inloggningsuppgifter') == -1){
-                  window.location = redirectUrl;
-                }else{
-                  alert("incorrect login");
-                }
-            }
-        }
-        //We use synchronous call
-        xmlHttp.open( "GET", url, false );
-        xmlHttp.send( null );
-        return xmlHttp.responseText;
-    },
 
 // -- Sticks operations --
 // Class to represent a row in the stick  grid
@@ -250,10 +220,14 @@ var utils = (function() {
              }
            }]});
   },
-  success: function(msg){
+  success: function(msg, href){
 //        navigator.notification.confirm(msg, null, ":)", "OK");
     return noty({layout: 'center', type: 'notification', text: msg,buttons: [
-           {addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+           {addClass: 'btn btn-primary', text: 'Kulturinfo', onClick: function($noty) {
+               $noty.close();
+               window.location.href=href;
+             }
+           },{addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
                $noty.close();
              }
            }]});;
@@ -411,7 +385,8 @@ var utils = (function() {
                     attempedRegistration.success = true;
                     localStorage.setItem(key, JSON.stringify(attempedRegistration));
                     self.updateStorageAfterRegistration(attempedRegistration);
-                    self.success(I18n.t('views.map.marker.registersuccess'));
+                    
+                    self.success(I18n.t('views.map.marker.registersuccess'), "#/maps/"+getCurrentMapId() + "/" + sticks[i].number);
                     break;
                 }
             }
