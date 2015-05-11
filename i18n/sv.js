@@ -16,7 +16,9 @@ I18n.Translations.sv = {
         password: "Lösenord",
         email: "Epost",
         logininternalerror: "Det gick fel! Notera tiden och rapportera felet till app@stolpjakten.se",
-        loginrejected: "Ej godkänd inloggning, kontrollera stavning och versaler"
+        loginrejected: "Ej godkänd inloggning, kontrollera stavning och versaler",
+        unknownemail: "Okänd epost",
+        unknownerror: "Något gick fel. Felmeddelande: "
       },
       register: {
         registrationfailed: "Registrering misslyckades, prova att registrera dig på webben: stolpjakten.se",

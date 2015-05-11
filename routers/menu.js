@@ -60,7 +60,7 @@ App.Routers.Menu = Backbone.Router.extend({
       this.sync();
       return;
     } else if (where === 'logout') {
-      this.logout();
+      utils.logout();
     } else {
       var data = '<div class="option needsclick">Data saknas</div>';
     }
@@ -234,24 +234,6 @@ App.Routers.Menu = Backbone.Router.extend({
     }
 
     
-  },
-  logout: function(){
-    //Save some data that can be handy to keep until next login session
-    var currentMap = getCurrentMap();
-    var language = localStorage.getItem(getLanguageKey());
-    var filter = getFilter()
-    var cluster = getMarkerCluster();
-    localStorage.clear(); //For security reasons (stored passwords) we really log user out.
-    try{
-      localStorage.setItem(getLanguageKey(), language);
-      localStorage.setItem(getCurrentMapKey(), JSON.stringify(currentMap));
-      localStorage.setItem(getFilterOnKey(), filter);
-      localStorage.setItem(getMarkerClusterOnKey(), cluster);
-    }catch(err){
-      console.log(err);
-    }finally{
-      window.location.href='#user/login';
-    }
   }
   
 });

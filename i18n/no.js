@@ -16,7 +16,9 @@ I18n.Translations.no = {
         password: "Passord",
         email: "Epost",
         logininternalerror: "Det feilet! Notere tiden og rapporter feilet til app@stolpjakten.se",
-        loginrejected: "Ikke godkjent innlogging, kontroller stavelse og versaler"
+        loginrejected: "Ikke godkjent innlogging, kontroller stavelse og versaler",
+        unknownemail: "Ukjent e-post",
+        unknownerror: "Noe gikk galt. Melding fra serveren: "
       },
       register: {
         registrationfailed: "Mislykket registrering. Gå til websiden for å gjennomføre registreringen: stolpjakten.se",

@@ -235,16 +235,28 @@ var utils = (function() {
   },
   warning: function(msg){
 //        navigator.notification.alert(msg, null, ":(", "OK");
-    return noty({layout: 'center', type: 'warning', text: msg, closeWith: ["button", "click"]});
+    return noty({layout: 'center', type: 'warning', text: msg, closeWith: ["button", "click"],buttons: [
+           {addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+               $noty.close();
+             }
+           }]});
     //toastr.warning(msg);
   },
   error: function(msg){
 //        navigator.notification.alert(msg, null, ";(", "OK");
-    return noty({layout: 'center', type: 'error', text: msg, closeWith: ["button", "click"]});
+    return noty({layout: 'center', type: 'error', text: msg, closeWith: ["button", "click"],buttons: [
+           {addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+               $noty.close();
+             }
+           }]});
   },
   success: function(msg){
 //        navigator.notification.confirm(msg, null, ":)", "OK");
-    return noty({layout: 'center', type: 'notification', text: msg});
+    return noty({layout: 'center', type: 'notification', text: msg,buttons: [
+           {addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+               $noty.close();
+             }
+           }]});;
     //toastr.success(msg);
   },
   serverSpinner: function(msg, show){
@@ -254,6 +266,25 @@ var utils = (function() {
   logDebug: function(msg){
     //console.log(msg);
   },
+  logout: function(){
+    //Save some data that can be handy to keep until next login session
+    var currentMap = getCurrentMap();
+    var language = localStorage.getItem(getLanguageKey());
+    var filter = getFilter()
+    var cluster = getMarkerCluster();
+    localStorage.clear(); //For security reasons (stored passwords) we really log user out.
+    try{
+      localStorage.setItem(getLanguageKey(), language);
+      localStorage.setItem(getCurrentMapKey(), JSON.stringify(currentMap));
+      localStorage.setItem(getFilterOnKey(), filter);
+      localStorage.setItem(getMarkerClusterOnKey(), cluster);
+    }catch(err){
+      console.log(err);
+    }finally{
+      window.location.href='#user/login';
+    }
+  },
+
 
 
   getPendingSticks: function(){

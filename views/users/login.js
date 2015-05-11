@@ -68,9 +68,6 @@ App.Views.Users.Login = App.Views.Base.extend({
         }else{
           window.location.href = '#menu/select';
         }
-      } else {
-        //console.log('inloggning misslyckades!!!!');
-        utils.warning(I18n.t('views.users.login.loginrejected'));
       }
     }
     

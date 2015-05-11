@@ -16,7 +16,9 @@ I18n.Translations.en = {
         password: "Password",
         email: "E-mail",
         logininternalerror: "Something went wrong! Record time and report the error to app@stolpjakten.se",
-        loginrejected: "Login not correct, check spelling and capitals"
+        loginrejected: "Login not correct, check spelling and capitals",
+        unknownemail: "Unknown email",
+        unknownerror: "Something went wrong. Message from server: "
       },
       register: {
         registrationfailed: "Registration failed. Please go to the web page to complete the registration: stolpjakten.se",

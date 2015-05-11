@@ -179,6 +179,9 @@ var net = (function() {
   var NET_OPERATION_ADD_CONTROL="AddControls";
   var NET_OPERATION_GET_MAPS_ARRAY="GetMaps";
   var NET_OPERATION_GET_SERVER_STATUS="GetStatus";
+  var NET_MSG_WRONG_EMAIL="E-postaddressen finns inte registrerad";
+  var NET_MSG_WRONG_PASS="Felaktigt lösenord";
+
 
   var NET_OPERATION_GET_ALL_RESULTS= "GetAllResults";
   var NET_OPERATION_GET_MY_RESULTS= "GetMyResults";
@@ -271,6 +274,21 @@ var net = (function() {
     }
   }
 
+  function logoutOnError(text){
+    if (typeof text != "undefined"){
+      if (text.indexOf(NET_MSG_WRONG_EMAIL) > -1){
+        utils.warning(I18n.t('views.users.login.unknownemail'));
+        utils.logout();
+      }else if(text.indexOf(NET_MSG_WRONG_PASS) > -1){
+        utils.warning(I18n.t('views.users.login.loginrejected'));
+        utils.logout();
+      }else{
+        utils.warning(I18n.t('views.users.login.unknownerror') + "\n" + text);
+        utils.logout();
+      }
+    }
+  }
+
   function sendToServer(operation, xml)
   {
         if (!getOnlineStatus()){
@@ -308,9 +326,13 @@ var net = (function() {
                 var msg = window.atob(xmlHttp.responseText);
                 msg = toISO(msg);
                 result = $.xml2json(msg);
+                utils.logDebug("result: " + result + msg.substring(0,"<err>".length));
+                if (typeof result != "undefined" && msg.substring(0,"<err>".length) == "<err>"){
+                  logoutOnError(result);
+                }
                 result.timestamp = Date.now();
                 cache(url, result);
-                //utils.logDebug("\n\nXml response:\n"+msg);
+                utils.logDebug("\n\nXml response:\n"+msg);
             }
         }
         result = getFromCache(url);
@@ -548,7 +570,7 @@ var net = (function() {
         localStorage.setItem(getSticksKey(), JSON.stringify(cachedSticks));
       }
 
-        return jsonResult;
+      return jsonResult;
     },
     getMap: function(netCredentials) {
       this.netCredentials = netCredentials;
