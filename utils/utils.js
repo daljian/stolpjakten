@@ -220,8 +220,14 @@ var utils = (function() {
              }
            }]});
   },
-  success: function(msg, href){
-//        navigator.notification.confirm(msg, null, ":)", "OK");
+  success: function(msg){
+    return noty({layout: 'center', type: 'notification', text: msg,buttons: [
+           {addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+               $noty.close();
+             }
+           }]});;
+  },
+  successHref: function(msg, href){
     return noty({layout: 'center', type: 'notification', text: msg,buttons: [
            {addClass: 'btn btn-primary', text: 'Kulturinfo', onClick: function($noty) {
                $noty.close();
@@ -231,7 +237,6 @@ var utils = (function() {
                $noty.close();
              }
            }]});;
-    //toastr.success(msg);
   },
   serverSpinner: function(msg, show){
     return noty({killer: 'true', layout: 'center', type: 'warning', text: msg, callback:{onShow:show}});
@@ -385,8 +390,11 @@ var utils = (function() {
                     attempedRegistration.success = true;
                     localStorage.setItem(key, JSON.stringify(attempedRegistration));
                     self.updateStorageAfterRegistration(attempedRegistration);
-                    
-                    self.success(I18n.t('views.map.marker.registersuccess'), "#/maps/"+getCurrentMapId() + "/" + sticks[i].number);
+                    if (typeof sticks[i].culture != "undefined"){
+                        self.successHref(I18n.t('views.map.marker.registersuccess'), "#/maps/"+getCurrentMapId() + "/" + sticks[i].number);
+                    }else{
+                      self.success(I18n.t('views.map.marker.registersuccess'));
+                    }
                     break;
                 }
             }
