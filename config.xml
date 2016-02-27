@@ -9,7 +9,7 @@
     <author email="info@friskakarlstad.se" href="http://oktyr.se">
         Stolpjakten - OK Tyr, Friska Karlstad
     </author>
-    <preference name="phonegap-version" value="5.2.0" />
+    <preference name="phonegap-version" value="cli-5.2.0" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     <gap:plugin name="com.phonegap.plugin.statusbar"/> 
