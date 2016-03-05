@@ -171,11 +171,12 @@ var net = (function() {
   //Declare your private members and functions here
 
 
-  var SERVER_URL= "https://app.stolpjakten.se/restservice/friskaservice.ashx?";
+  var SERVER_URL= "http://demo.stolpjakten.se/restservice/friskaservice.ashx?";
   var NET_OPERATION_GET_USER="GetUser";
   var NET_OPERATION_GET_MAP="GetMap";
   var NET_OPERATION_CREATE_USER="CreateUser";
   var NET_OPERATION_UPDATE_USER="UpdateUser";
+  var NET_OPERATION_GET_MAP_COURSES="GetMapCourses";
   var NET_OPERATION_ADD_CONTROL="AddControls";
   var NET_OPERATION_GET_MAPS_ARRAY="GetMaps";
   var NET_OPERATION_GET_SERVER_STATUS="GetStatus";
@@ -517,7 +518,8 @@ var net = (function() {
       var jsonResult = new NetResult(false, null); 
       try{
         var serverResult = sendToServer(NET_OPERATION_GET_MAPS_ARRAY,"");
-        utils.assertDefined(serverResult.maps.map.length);
+        utils.assertDefined(serverResult.maps.map);
+        serverResult.maps.map = toArray(serverResult.maps.map);
         jsonResult.success = true;
         jsonResult.result = serverResult;
       }catch(err){console.log(err);}
@@ -636,7 +638,23 @@ var net = (function() {
       }catch(err){console.log(err);}
 
         return jsonResult;
-    }
+    }/*,
+    getMapCourses: function(netCredentials)  {
+      var jsonResult = new NetResult(false, null);
+      try{
+        var xmlData ="<rd>" + netCredentials.toXML()"</rd>";
+        var serverResult = sendToServer(NET_OPERATION_GET_MAP_COURSES,xmlData);
+        utils.assertDefined(serverResult);
+        utils.logDebug("["+serverResult+"]");
+        //if (serverResult == "user updated"){
+          jsonResult.success = true;
+          jsonResult.result = serverResult;
+        //}
+
+      }catch(err){console.log(err);}
+
+        return jsonResult;
+    }*/
 
   };
 })();

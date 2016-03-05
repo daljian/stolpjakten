@@ -11,7 +11,7 @@ var utils = (function() {
   
   // map ID, statically assigned or??
   var MAP_ID = '12';
-  var SERVER_URL= "http://demo.friskanorden.com/RESTService/FriskaService.ashx?";
+  var SERVER_URL= "http://demo.stolpjaktens.se/RESTService/FriskaService.ashx?";
   var NET_OPERATION_GET_USER_DATA="GetUserData";
 
   var notTakenSticks;
@@ -243,7 +243,7 @@ var utils = (function() {
   },
 
   logDebug: function(msg){
-    //console.log(msg);
+    console.log(msg);
   },
   logout: function(){
     //Save some data that can be handy to keep until next login session

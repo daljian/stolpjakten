@@ -38,7 +38,7 @@ App.Routers.Users = Backbone.Router.extend({
     } else {
       maps = [12, 'Friska Norden Demo'];
     }
-    
+    utils.logDebug("maps: " + JSON.stringify(maps));
     // maps to view from api
     App.main( new App.Views.Users.Register({maps: maps}) );
   }

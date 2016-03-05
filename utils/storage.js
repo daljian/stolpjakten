@@ -163,7 +163,9 @@ function getCurrentMapId(){
   try{
     result = getCurrentMap().mid;
   }catch(err){
-    //we didn't get from cache so let's use ID 1
+  }
+  if (typeof myObject == "undefined"){
+    result = -1;
   }
   return result;
 }
