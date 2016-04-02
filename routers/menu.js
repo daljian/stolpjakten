@@ -222,7 +222,8 @@ App.Routers.Menu = Backbone.Router.extend({
         localStorage.setItem(getCredentialsKey(), JSON.stringify(creds));
         localStorage.setItem(getUserKey(), JSON.stringify(result.result));
         localStorage.setItem(getLanguageKey(), language);
-        localStorage.setItem(getCurrentMapKey(), JSON.stringify(currentMap));
+        setCurrentMap(currentMap);
+//        localStorage.setItem(getCurrentMapKey(), JSON.stringify(currentMap));
         localStorage.setItem(getFilterOnKey(), filter);
         localStorage.setItem(getMarkerClusterOnKey(), cluster);
       }

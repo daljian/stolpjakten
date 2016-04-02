@@ -149,8 +149,18 @@ function getSelectedMarker(){
   return JSON.parse(localStorage.getItem(getSelectedMarkerKey()));
 }
 
+function setCurrentMap(map){
+  localStorage.setItem(getCurrentMapKey(), JSON.stringify(map));
+}
 function getCurrentMap(){
   return JSON.parse(localStorage.getItem(getCurrentMapKey()));
+}
+function getCurrentApi(){
+  var result = JSON.parse(localStorage.getItem(getCurrentMapKey())).api;
+  if (typeof result == "undefined"){
+    result = "";
+  }
+  return result;
 }
 
 function getNetCredentials(){

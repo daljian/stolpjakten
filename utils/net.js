@@ -170,8 +170,8 @@ var net = (function() {
   //private interface
   //Declare your private members and functions here
 
-
-  var SERVER_URL= "http://demo.stolpjakten.se/restservice/friskaservice.ashx?";
+  var API_TOKEN="%API%";
+  var SERVER_URL= "http://demo"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
   var NET_OPERATION_GET_USER="GetUser";
   var NET_OPERATION_GET_MAP="GetMap";
   var NET_OPERATION_CREATE_USER="CreateUser";
@@ -263,7 +263,7 @@ var net = (function() {
   function createURL(operation, xml)
   {
     utils.logDebug("XML:\n" + xml);
-    return SERVER_URL + operation + "=" + window.btoa(xml);
+    return SERVER_URL.replace(API_TOKEN, getCurrentApi()) + operation + "=" + window.btoa(xml);
   }
   function credentialsXml(credentials) {
        
