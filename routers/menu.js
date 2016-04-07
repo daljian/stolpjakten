@@ -26,7 +26,7 @@ App.Routers.Menu = Backbone.Router.extend({
       var returnedMapInfos = result.result.maps.map;
       for (var i = 0 ; i < returnedMapInfos.length; i++){
         var current = returnedMapInfos[i];
-        maps.push( [current.mid, current.mn] );
+        maps.push( [current.mid, current.mn, current.api] );
       }
     } else {
       maps = [12, 'Friska Norden Demo'];
@@ -223,7 +223,6 @@ App.Routers.Menu = Backbone.Router.extend({
         localStorage.setItem(getUserKey(), JSON.stringify(result.result));
         localStorage.setItem(getLanguageKey(), language);
         setCurrentMap(currentMap);
-//        localStorage.setItem(getCurrentMapKey(), JSON.stringify(currentMap));
         localStorage.setItem(getFilterOnKey(), filter);
         localStorage.setItem(getMarkerClusterOnKey(), cluster);
       }

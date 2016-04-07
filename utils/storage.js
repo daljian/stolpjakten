@@ -156,9 +156,11 @@ function getCurrentMap(){
   return JSON.parse(localStorage.getItem(getCurrentMapKey()));
 }
 function getCurrentApi(){
-  var result = JSON.parse(localStorage.getItem(getCurrentMapKey())).api;
-  if (typeof result == "undefined"){
-    result = "";
+  var stored = JSON.parse(localStorage.getItem(getCurrentMapKey()));
+  var result = "";
+  if (stored != null
+    && typeof stored.api != "undefined"){
+    result = stored.api;
   }
   return result;
 }

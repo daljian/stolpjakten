@@ -20,9 +20,6 @@ App.Routers.Maps = Backbone.Router.extend({
     if (result.success){
       var returnedSticks = result.result.sticks.stick;
 
-      // Spara vilken vald karta är
-      //localStorage.setItem(getCurrentMapKey(), JSON.stringify({mid: result.result.map.mid, mn: result.result.map.mn}));
-      setCurrentMap(result.result.map);
       // Spara stads information till localStorage
       if( returnedSticks ) { //ct är information om en stolpe, inte staden..
         try{

@@ -172,6 +172,7 @@ var net = (function() {
 
   var API_TOKEN="%API%";
   var SERVER_URL= "http://demo"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
+//  var SERVER_URL= "http://app"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
   var NET_OPERATION_GET_USER="GetUser";
   var NET_OPERATION_GET_MAP="GetMap";
   var NET_OPERATION_CREATE_USER="CreateUser";
@@ -263,7 +264,11 @@ var net = (function() {
   function createURL(operation, xml)
   {
     utils.logDebug("XML:\n" + xml);
-    return SERVER_URL.replace(API_TOKEN, getCurrentApi()) + operation + "=" + window.btoa(xml);
+    if (operation == NET_OPERATION_GET_MAPS_ARRAY){
+      return SERVER_URL.replace(API_TOKEN, "") + operation + "=" + window.btoa(xml);
+    }else{
+      return SERVER_URL.replace(API_TOKEN, getCurrentApi()) + operation + "=" + window.btoa(xml);
+    }
   }
   function credentialsXml(credentials) {
        

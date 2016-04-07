@@ -48,7 +48,7 @@ App.Views.Users.Login = App.Views.Base.extend({
       var mapId = getCurrentMapId();
       var showMap = true;
       if (mapId == -1){
-        mapId = 2; //We need a valid map id to login
+        mapId = 7; //We need a valid map id to login, 5 app.stolp... 7 demo.stolp..
         showMap = false;
       }
       try{

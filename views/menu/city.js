@@ -40,7 +40,10 @@ App.Views.Menu.City = App.Views.Base.extend({
   
   mapSelect: function(event) {
     var target = $(event.target);
-    var mapView = target.attr('value');
+    var mapView = target.attr('id');
+    var name = target.attr('name');
+    var api = target.attr('api');
+    setCurrentMap({mid: mapView, mn: name, api: api});
     var credentials = getNetCredentials();
     credentials.mid = mapView;
     
@@ -53,7 +56,7 @@ App.Views.Menu.City = App.Views.Base.extend({
   //  <span class="glyphicon glyphicon-qrcode"></span>
   createHtml: function(maps) {
     var optionsString = ""
-    $.each(maps, function(key, value) { optionsString += '<div class="option" value="'+value[0]+'">'+value[1]+'</div>'; });
+    $.each(maps, function(key, value) { optionsString += '<div class="option" api="'+value[2]+'" name="'+value[1]+'" id="'+value[0]+'">'+value[1]+'</div>'; });
     var source = '<div class="navigation map'+getCurrentMapId()+'"><div class="top"><a class="icon{{mapCss}} back"><span class="glyphicon glyphicon-remove-circle" style="float:left"></span></a>'+
                  '<span class="title">{{menuTitle}}</span></div></div>'+
                  '<div class="menu">'+
