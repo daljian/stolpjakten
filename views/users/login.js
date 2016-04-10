@@ -46,11 +46,7 @@ App.Views.Users.Login = App.Views.Base.extend({
       var email = utils.encodeHTML($('input[name="email"]').val());
       var password = utils.encodeHTML($('input[name="pwd"]').val());
       var mapId = getCurrentMapId();
-      var showMap = true;
-      if (mapId == -1){
-        mapId = 7; //We need a valid map id to login, 5 app.stolp... 7 demo.stolp..
-        showMap = false;
-      }
+      var showMap = false; //will show implicitly chosen map if set to true, First map in getMaps
       try{
         var result = net.getUser(new NetCredentials(email, password, mapId));
       }catch(err){

@@ -171,6 +171,7 @@ var net = (function() {
   //Declare your private members and functions here
 
   var API_TOKEN="%API%";
+  //var SERVER_URL= "http://demo.stolpjakten.se/restservice/friskaservice.ashx?";
   var SERVER_URL= "http://demo"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
 //  var SERVER_URL= "http://app"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
   var NET_OPERATION_GET_USER="GetUser";
@@ -527,6 +528,9 @@ var net = (function() {
         serverResult.maps.map = toArray(serverResult.maps.map);
         jsonResult.success = true;
         jsonResult.result = serverResult;
+        if (getCurrentMapId() == -1){
+            setCurrentMap(serverResult.maps.map[0]);
+        }
       }catch(err){console.log(err);}
 
       utils.logDebug("getMaps json result: " + JSON.stringify(jsonResult));

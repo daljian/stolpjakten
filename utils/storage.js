@@ -95,6 +95,7 @@ function getMarkerClusterOnKey() {
   return 'stolpjakten.cluster';
 }
 function toggleMarkerCluster(){
+
   toggleSetting(getMarkerClusterOnKey());
 }
 function getMarkerCluster(){
@@ -175,9 +176,6 @@ function getCurrentMapId(){
   try{
     result = getCurrentMap().mid;
   }catch(err){
-  }
-  if (typeof result == "undefined"){
-    result = -1;
   }
   return result;
 }

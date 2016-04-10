@@ -147,6 +147,10 @@
 <script type="text/javascript">
   $(function() {
     App.initialize();
+    var isMarkerClusterset = localStorage.getItem(getMarkerClusterOnKey());
+    if (isMarkerClusterset == null){
+      toggleMarkerCluster();//unset means flag is true, but we want default false so toggle.
+    }
     var isGPSset = localStorage.getItem(getGPSOnKey());
     if (isGPSset == null){
       toggleGPS();//unset means flag is true, but we want default false so toggle.
