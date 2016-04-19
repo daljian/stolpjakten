@@ -144,17 +144,20 @@ App.Views.Maps.Show = App.Views.Base.extend({
             popupAnchor:  [0, 0]
         }
     });
-    var startIcon = new LeafIcon({iconUrl: 'img/ringar/gron.svg'});
+    var startIcon = new LeafIcon({iconUrl: 'img/ringar/start.svg'});
     var controlIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
-    var goalIcon = new LeafIcon({iconUrl: 'img/ringar/rod.svg'});
+    var goalIcon = new LeafIcon({iconUrl: 'img/ringar/goal.svg'});
     var courseData = net.getMapCourse(getNetCredentials(), new CourseIdentifier(getCurrentCourse()));
     var allSticks = JSON.parse(localStorage.getItem(getSticksKey()));
     var courseSticks = [];
-    for (var i = 0 ; i < allSticks.length; i++){
-        $.each(courseData.result.rd.course.ctrls.ctrl, function(key, value) {
+    //TODO, It's not opimal to have the bigger array in inner loop, but want to
+    //preserver order we get in outer array. Improve this later...
+    $.each(courseData.result.rd.course.ctrls.ctrl, function(key, value) {
+        for (var i = 0 ; i < allSticks.length; i++){
 //          alert ("key: " + key + " value: " + JSON.stringify(value));
             if (allSticks[i].number == value.co){
                 courseSticks.push(allSticks[i]);
+                allSticks[i].available = true;
                 if (value.is == 1){
                   allSticks[i]["icon"] = startIcon;
                 }else if (value.ig == 1){
@@ -162,32 +165,21 @@ App.Views.Maps.Show = App.Views.Base.extend({
                 }else{
                   allSticks[i]["icon"] = controlIcon;
                 }
+                break;
             }
-        });
-    }
+        }
+    });
+
+    localStorage.setItem(getSticksKey(), JSON.stringify(courseSticks));
 
 
 
-    alert(JSON.stringify(courseSticks));
+
     this.drawMap(courseSticks);
   },
   // Ritar ut kartan
   drawMap: function(sticks) {
     //var result = $("#myDiv").height();
-    var iconRadius = 25;
-    var LeafIcon = L.Icon.extend({
-        
-        options: {
-            iconSize:     [2*iconRadius, 2*iconRadius],
-            iconAnchor:   [iconRadius, iconRadius],
-            popupAnchor:  [0, 0]
-        }
-    });
-    var greenIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
-    var redIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
-    var blackIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
-    var blueIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
-    var takenIcon = new LeafIcon({iconUrl: 'img/ringar/2/reggad.svg'});
 
 
 
@@ -276,20 +268,48 @@ App.Views.Maps.Show = App.Views.Base.extend({
 
     }
     
-//Päjsta här
-//Admin features
-//L.control.mousePosition().addTo(map);
-//Right click on the map activated
-map.on('contextmenu', function(e) {
-    window.prompt("Copy to clipboard: Ctrl+C, Enter", e.latlng.lat +","+e.latlng.lng);
-});
+    //Päjsta här
+    //Admin features
+    //L.control.mousePosition().addTo(map);
+    //Right click on the map activated
+    map.on('contextmenu', function(e) {
+        window.prompt("Copy to clipboard: Ctrl+C, Enter", e.latlng.lat +","+e.latlng.lng);
+    });
     L.control.scale().addTo(map);
 //    L.control.compass().addTo(map);
+    if (getCourseMode()){
+        this.drawCourseMarkers(sticks, map);
+    }else{
+        this.drawMarkers(sticks, map);
+    }
+  },
+  drawCourseMarkers: function(sticks, map){
+    $.each(sticks, function(key, stick) {
+        var marker = L.marker([stick.latitude, stick.longitude], {icon: stick.icon}).addTo(map)
+        marker.bindPopup(' <div class="markers level'+stick.difficulty+'"> <span class="marker" markerId="'+stick.number+'" style="color:grey"><div class="stick-number" markerId="'+stick.number+'">'+I18n.t('views.map.stick')+' '+stick.number+'.</div>'+stick.description+'</div></span><span class="marker" markerId="'+stick.number+'"><div class="markerbtn map'+getCurrentMapId()+'" markerId="'+stick.number+'">Info</div></span>');
+        if (stick.number == this.openPopup){
+          this.markerToOpen = marker;
+        }
+    });
+    for (var i = 1 ; i < sticks.length; i++){
+        this.drawLine(sticks[i-1], sticks[i], map);
+    }
+  },
+  drawMarkers: function(sticks, map){
+    var iconRadius = 25;
+    var LeafIcon = L.Icon.extend({
 
-
-
-    
-
+        options: {
+            iconSize:     [2*iconRadius, 2*iconRadius],
+            iconAnchor:   [iconRadius, iconRadius],
+            popupAnchor:  [0, 0]
+        }
+    });
+    var greenIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
+    var redIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
+    var blackIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
+    var blueIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
+    var takenIcon = new LeafIcon({iconUrl: 'img/ringar/2/reggad.svg'});
     var markers = new L.MarkerClusterGroup();
     var filter = getFilter();
 
@@ -319,12 +339,12 @@ map.on('contextmenu', function(e) {
             continue;
         }
         var markerIcon = new Object();
-                     
+
         //console.log("stick.difficulty: " + stick.difficulty);
         switch(stick.difficulty)
         {
             case "1":
-              
+
               markerIcon = greenIcon;
               break;
             case "2":
@@ -355,7 +375,7 @@ map.on('contextmenu', function(e) {
         this.markerToOpen = marker;
       }
 
-    
+
     }
    if (getMarkerCluster()){
      map.addLayer(markers);
@@ -365,15 +385,28 @@ map.on('contextmenu', function(e) {
    }
     //push sticks back after updating available flag
     localStorage.setItem(getSticksKey(), JSON.stringify(sticks));
-
-
-
-    
   },
-  drawCourseMarkers: function(sticks, map){
+  drawLine: function(fromStick, toStick, map){
+    var pointA = new L.LatLng(fromStick.latitude, fromStick.longitude);
+    var pointB = new L.LatLng(toStick.latitude, toStick.longitude);
+    var pointList = [pointA, pointB];
 
-  },
-  drawMarkers: function(sticks, map){
+    var line = new L.Polyline(pointList, {
+    color: '#E6007E',
+    weight: 2,
+    opacity: 1,
+    smoothFactor: 1
+
+    });
+    line.addTo(map)
+    /*
+    var decorator = L.polylineDecorator(line, {
+        patterns: [
+            // defines a pattern of 10px-wide dashes, repeated every 20px on the line
+            {offset: 20, endOffset: 20, repeat: 2, symbol: L.Symbol.dash({pixelSize: 1})}
+        ]
+    }).addTo(map);
+    */
 
   },
   disableLocationTracking: function(map){
@@ -494,7 +527,11 @@ map.on('contextmenu', function(e) {
   },
   doScan: function(){
     this.disableLocationTracking(this.map);
-    utils.scan(this);
+    if (getCourseMode()){
+      utils.scanCourse(this);
+    }else{
+      utils.scan(this);
+    }
     this.render();
   },
   doFindMe: function(){
