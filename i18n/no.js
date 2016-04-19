@@ -73,6 +73,8 @@ I18n.Translations.no = {
       loginlabel: "Innlogget som",
       stickslabel: "Stolper",
       settingslabel: "Innstillinger",
+      courseselectionlabel: "Velg bane",
+      allstickslabel: "Alle stolper",
       accountlabel: "Min konto",
       infolabel: "Informasjon",
       resultslabel: "Overvåkninger",

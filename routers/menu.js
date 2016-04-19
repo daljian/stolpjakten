@@ -8,12 +8,15 @@ App.Routers.Menu = Backbone.Router.extend({
     'menu/index/:where':    'show',
     'menu/select':          'select'
   },
-  
+  // DOM events in the view that we are interested in
   /*
    * The menu.
    */
   index: function() {
     App.main( new App.Views.Menu.Index({}));
+  },
+  test: function(event) {
+    alert('bosse');
   },
   
   /*
@@ -39,6 +42,9 @@ App.Routers.Menu = Backbone.Router.extend({
     if (where === 'settings') {
       var data = this.getSettings();
       var title = I18n.t('views.menu.settingslabel');
+    } else if (where === 'courseselection') {
+      var data = this.getCourseSelection();
+      var title = I18n.t('views.menu.courseselectionlabel');
     } else if (where === 'marker') {
       var data = this.getMarkers();
       var title = I18n.t('views.menu.stickslabel');
@@ -79,6 +85,25 @@ App.Routers.Menu = Backbone.Router.extend({
            this.createOLMapHtml()+
            this.createGPSHtml()+
            '</div>';
+  },
+  getCourseSelection: function() {
+    var optionsString = '<div class="option" >'+
+                       '<span class="stick_info" style="color:#FFF"><b>Stolpar</b></span>'+
+                       '<span style="color:#FF"><b>Bana</b></span>'+
+                       '</div>';
+    var courses = net.getMapCourses(getNetCredentials());
+    optionsString += '<div class="option needsclick" >'+
+                       '<span class="level1 stick_info" style="color:#FFF">??</span>'+
+                       '<span style="color:#FF"><a style="color:#FFF" href="#maps/'+getCurrentMapId()+'/show" onclick="setCourseMode('+false+')">'+I18n.t('views.menu.allstickslabel')+'</a></span>'+
+                       '</div>';
+    $.each(courses.result.rd.courses.course, function(key, course) {
+    optionsString += '<div class="option needsclick" >'+
+                       '<span class="level'+course.dif+' stick_info" style="color:#FFF">??</span>'+
+                       '<span style="color:#FF"><a style="color:#FFF" href="#maps/'+getCurrentMapId()+'/show" onclick="setCurrentCourse('+course.ci+')">'+course.cn+'</a></span>'+
+                       '</div>';
+    });
+
+    return optionsString;
   },
   createMarkerClusterHtml: function() {
     if (getMarkerCluster()){

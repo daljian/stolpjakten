@@ -132,7 +132,7 @@ App.Views.Users.Register = App.Views.Base.extend({
         selectedMap.mid = mapId;
         selectedMap.mn=""; //TODO, fix... 
         //console.log("Trying to store " + JSON.stringify(selectedMap));
-        localStorage.setItem(getCurrentMapKey(), JSON.stringify(selectedMap));
+        setCurrentMap(selectedMap);
         var test = getCurrentMap();
         //console.log("Stored " + JSON.stringify(test) + " and id is " + getCurrentMapId());
 

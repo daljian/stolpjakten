@@ -72,6 +72,8 @@ I18n.Translations.en = {
       loginlabel: "Logged in as",
       stickslabel: "Posts",
       settingslabel: "Settings",
+      courseselectionlabel: "Select course",
+      allstickslabel: "All posts",
       accountlabel: "My account",
       infolabel: "Information",
       resultslabel: "Friends results",

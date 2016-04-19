@@ -61,6 +61,24 @@ var utils = (function() {
         }
         return retVal;
     },
+    setLastknownPosition(map){
+        try{
+            var lat = e.latlng.lat,
+            lng = e.latlng.lng;
+            var lastKnownZoomPosition = new Object();
+            lastKnownZoomPosition.latitude = map.getCenter().lat;
+            lastKnownZoomPosition.longitude = map.getCenter().lng;
+
+            lastKnownZoomPosition.zoom = map.getZoom();
+            localStorage.setItem(getZoomPositionKey(), JSON.stringify(lastKnownZoomPosition));
+        }catch(err){
+            //Not a big deal
+        }
+        return JSON.parse(localStorage.getItem(getZoomPositionKey()));
+
+
+
+    },
     getCredentialsXml: function(){
       
       return "<cre><cid>" + this.getCallerId() + "</cid><un>" + cache.get(cache.KEY_USERNAME) + "</un><pwd>" + cache.get(cache.KEY_PASSWORD) + "</pwd><mid>" + this.getMapId()+"</mid></cre>";

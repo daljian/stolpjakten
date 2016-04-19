@@ -46,6 +46,10 @@ function getCurrentMapKey(){
   return 'stolpjakten.currentmap';
 }
 
+function getCurrentCourseKey(){
+  return 'stolpjakten.'+getCurrentMapId()+'.currentcourse';
+}
+
 function getUserKey(){
   return 'stolpjakten.user';
 }
@@ -78,6 +82,22 @@ function getOLMapOnKey() {
 }
 function toggleOLMap(){
   toggleSetting(getOLMapOnKey());
+}
+function getOLMap(){
+  return getSetting(getOLMapOnKey());
+}
+function getCourseModeOnKey() {
+  return 'stolpjakten.coursemode';
+}
+function setCourseMode(enabled){
+  if (enabled == true || enabled == false){
+      localStorage.setItem(getCourseModeOnKey(), enabled);
+  }else {
+    throw "Invalid argument, only boolean is allowed";
+  }
+}
+function getCourseMode(){
+  return getSetting(getCourseModeOnKey());
 }
 function getOLMap(){
   return getSetting(getOLMapOnKey());
@@ -151,11 +171,26 @@ function getSelectedMarker(){
 }
 
 function setCurrentMap(map){
+  if (typeof map.api == "undefined"
+      || map.api == null
+      || map.api == "undefined"){
+    map.api="";
+  }
   localStorage.setItem(getCurrentMapKey(), JSON.stringify(map));
 }
 function getCurrentMap(){
   return JSON.parse(localStorage.getItem(getCurrentMapKey()));
 }
+
+function getCurrentCourse(){
+  return JSON.parse(localStorage.getItem(getCurrentCourseKey()));
+}
+
+function setCurrentCourse(course){
+  setCourseMode(true);
+  localStorage.setItem(getCurrentCourseKey(), JSON.stringify(course));
+}
+
 function getCurrentApi(){
   var stored = JSON.parse(localStorage.getItem(getCurrentMapKey()));
   var result = "";

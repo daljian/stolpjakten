@@ -122,7 +122,11 @@ App.Views.Maps.Show = App.Views.Base.extend({
     this.$el.html(result);
     
     setTimeout(function () {
-      myself.drawMap();
+      if (getCourseMode()){
+          myself.drawCourseMap();
+      }else{
+          myself.drawMap();
+      }
     }, 10);
     
 
@@ -130,7 +134,45 @@ App.Views.Maps.Show = App.Views.Base.extend({
 
     
   // Ritar ut kartan
-  drawMap: function() {
+  drawCourseMap: function() {
+    var iconRadius = 25;
+    var LeafIcon = L.Icon.extend({
+
+        options: {
+            iconSize:     [2*iconRadius, 2*iconRadius],
+            iconAnchor:   [iconRadius, iconRadius],
+            popupAnchor:  [0, 0]
+        }
+    });
+    var startIcon = new LeafIcon({iconUrl: 'img/ringar/gron.svg'});
+    var controlIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
+    var goalIcon = new LeafIcon({iconUrl: 'img/ringar/rod.svg'});
+    var courseData = net.getMapCourse(getNetCredentials(), new CourseIdentifier(getCurrentCourse()));
+    var allSticks = JSON.parse(localStorage.getItem(getSticksKey()));
+    var courseSticks = [];
+    for (var i = 0 ; i < allSticks.length; i++){
+        $.each(courseData.result.rd.course.ctrls.ctrl, function(key, value) {
+//          alert ("key: " + key + " value: " + JSON.stringify(value));
+            if (allSticks[i].number == value.co){
+                courseSticks.push(allSticks[i]);
+                if (value.is == 1){
+                  allSticks[i]["icon"] = startIcon;
+                }else if (value.ig == 1){
+                  allSticks[i]["icon"] = goalIcon;
+                }else{
+                  allSticks[i]["icon"] = controlIcon;
+                }
+            }
+        });
+    }
+
+
+
+    alert(JSON.stringify(courseSticks));
+    this.drawMap(courseSticks);
+  },
+  // Ritar ut kartan
+  drawMap: function(sticks) {
     //var result = $("#myDiv").height();
     var iconRadius = 25;
     var LeafIcon = L.Icon.extend({
@@ -154,8 +196,10 @@ App.Views.Maps.Show = App.Views.Base.extend({
     this.id = id;
     //console.log("we have: " + JSON.stringify(id))
     
-    var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
-    
+    if (typeof sticks == "undefined"){
+        sticks = JSON.parse(localStorage.getItem(getSticksKey()));
+    }
+
     
     if (sticks.length == 0){
         utils.warning(I18n.t('views.map.areaNotOpen'));
@@ -176,24 +220,8 @@ App.Views.Maps.Show = App.Views.Base.extend({
     
     map.saveMapPosition = this.saveMapPosition;
     var self = this;
-    map.on('click', function(e){
-    try{
-        var lat = e.latlng.lat,
-        lng = e.latlng.lng;
-        var lastKnownZoomPosition = new Object();
-        lastKnownZoomPosition.latitude = self.map.getCenter().lat;
-        lastKnownZoomPosition.longitude = self.map.getCenter().lng;
-        
-        lastKnownZoomPosition.zoom = self.map.getZoom();//JSON.parse(localStorage.getItem(getZoomPositionKey())).zoom;
-        localStorage.setItem(getZoomPositionKey(), JSON.stringify(lastKnownZoomPosition));
-        //console.log("new position");
-    }catch(err){
-        //Not a big deal
-    }
-    //toggleOLMap();
-    //self.render();
 
-    });
+    map.on('click', self.saveMapPosition());
 
 
    
@@ -342,50 +370,10 @@ map.on('contextmenu', function(e) {
 
     
   },
-  olddisableLocationTracking: function(map){
-    var myself = this;
-    if (myself.marker != null){
-      map.removeLayer(myself.marker)
-    }
-    var oldId = localStorage.getItem(getGPSWatchKey());
-    if (typeof oldId != "undefined"){
-      navigator.geolocation.clearWatch(oldId);
-    }
+  drawCourseMarkers: function(sticks, map){
+
   },
-  oldenableLocationTracking: function(map){
- var myself = this;
-    if (navigator.geolocation){
-    var id = navigator.geolocation.watchPosition(function (e) {
-              var gpsPos = new Object()
-              gpsPos.latitude = e.coords.latitude;
-              gpsPos.longitude = e.coords.longitude;
-              var radius = e.accuracy / 2;
-              //utils.logDebug("found location radius: " + radius + "\nlat: " + gpsPos.latitude + " lng: " + gpsPos.longitude);
-              //utils.success("radius: " + radius + "\nlat: " + gpsPos.latitude + " lng: " + gpsPos.longitude);
-              radius = 12.5; //hard coded, pixelvalue to match other markers on map.
-            
-              
-              
-              gpsPos.radius = radius;
-              localStorage.setItem(getGPSPositionKey(), JSON.stringify(gpsPos));
-              
-              
-              if (myself.marker != null){
-                map.removeLayer(myself.marker)
-              }
-              myself.marker = L.circleMarker(L.latLng(e.coords.latitude, e.coords.longitude), {"radius":radius});
-              myself.marker.addTo(map);
-      }, function (e) {console.log("Failed to track GPS")},{
-            maximumAge: 0, 
-            enableHighAccuracy: true
-        });
-      var oldId = localStorage.getItem(getGPSWatchKey());
-      if (typeof oldId != "undefined" && oldId != id){
-        navigator.geolocation.clearWatch(oldId);
-      }
-      localStorage.setItem(getGPSWatchKey(), id);
-      utils.logDebug("id: " + id); //TODO, store this in localstorage to survive cross views and clear it properly.
-    }
+  drawMarkers: function(sticks, map){
 
   },
   disableLocationTracking: function(map){
@@ -539,13 +527,16 @@ map.on('contextmenu', function(e) {
     
   },
   saveMapPosition: function(){
-    var lat = this.map.getCenter().lat,
-        lng = this.map.getCenter().lng;
-    var lastKnownZoomPosition = new Object();
-    lastKnownZoomPosition.latitude = lat;
-    lastKnownZoomPosition.longitude = lng;
-    lastKnownZoomPosition.zoom = this.map.getZoom();
-    localStorage.setItem(getZoomPositionKey(), JSON.stringify(lastKnownZoomPosition));
+      try{
+        var lat = this.map.getCenter().lat,
+            lng = this.map.getCenter().lng;
+        var lastKnownZoomPosition = new Object();
+        lastKnownZoomPosition.latitude = lat;
+        lastKnownZoomPosition.longitude = lng;
+        lastKnownZoomPosition.zoom = this.map.getZoom();
+        localStorage.setItem(getZoomPositionKey(), JSON.stringify(lastKnownZoomPosition));
+      }catch(err){
+      }
   },
   getMapHeight: function(){
     //var windowHeight = window.innerHeight - 55;

@@ -38,7 +38,8 @@ App.Views.Menu.Show = App.Views.Base.extend({
     //window.history.back();
   },
   
-  toMap: function() {
+  toMap: function(event) {
+    utils.logDebug("menu/show.js " + event);
     
     //var newUrl = document.URL.substring(0, document.URL.indexOf("#")) + '#maps/'+getCurrentMapId()+'/show';
     //window.location.replace(newUrl); Replace doesn't seem to work in phonegap.. 

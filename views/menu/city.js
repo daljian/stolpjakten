@@ -44,6 +44,7 @@ App.Views.Menu.City = App.Views.Base.extend({
     var name = target.attr('name');
     var api = target.attr('api');
     setCurrentMap({mid: mapView, mn: name, api: api});
+    setCourseMode(false); //default to
     var credentials = getNetCredentials();
     credentials.mid = mapView;
     

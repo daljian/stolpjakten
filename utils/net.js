@@ -163,6 +163,14 @@ function ControlRegistration(id, cc){
   }
 }
 
+function CourseIdentifier(ci){
+  var self = this;
+  self.ci = ci;
+  self.toXML = function(){
+    return '<course><ci>'+self.ci+'</ci></course>';
+  }
+}
+
 
 //javascript module pattern
 var net = (function() {
@@ -172,13 +180,16 @@ var net = (function() {
 
   var API_TOKEN="%API%";
   //var SERVER_URL= "http://demo.stolpjakten.se/restservice/friskaservice.ashx?";
-  var SERVER_URL= "http://demo"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
-//  var SERVER_URL= "http://app"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
+  //var SERVER_URL= "http://demo"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
+  var SERVER_URL= "http://app"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
   var NET_OPERATION_GET_USER="GetUser";
   var NET_OPERATION_GET_MAP="GetMap";
   var NET_OPERATION_CREATE_USER="CreateUser";
   var NET_OPERATION_UPDATE_USER="UpdateUser";
   var NET_OPERATION_GET_MAP_COURSES="GetMapCourses";
+  var NET_OPERATION_GET_MAP_COURSE="GetMapCourse";
+  var NET_OPERATION_GET_MAP_COURSE_RESULTS="GetMapCourseResults";
+  var NET_OPERATION_ADD_COURSE_CONTROL="AddCourseControl";
   var NET_OPERATION_ADD_CONTROL="AddControls";
   var NET_OPERATION_GET_MAPS_ARRAY="GetMaps";
   var NET_OPERATION_GET_SERVER_STATUS="GetStatus";
@@ -196,6 +207,11 @@ var net = (function() {
   var SERVER_GET_GRACE_TIME_MS = 60000; //one minute before we proactively update cache
   var previousOnlineStatus = true;
   var netCredentials;
+
+  var DUMMY_RESPONSES = new Object();
+  DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSES]='{  "rd": {    "courses": {      "course": [        {          "ci": "1",          "mi": "2",          "cn": "Gröna banan",          "oc": "1",          "dif": "1"        },        {          "ci": "2",          "mi": "2",          "cn": "Blå bananen",          "oc": "1",          "dif": "2"        }      ]    }  }}';
+  DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSE]='{  "rd": {    "course": {      "ci": "1",      "mi": "2",      "cn": "Gröna banan",      "oc": "1",      "dif": "1",      "ctrls": {        "ctrl": [          {            "mi": "2",            "co": "1",            "is": "1",            "ig": "0"          },          {            "mi": "3",            "co": "2",            "is": "0",            "ig": "0"          },          {            "mi": "4",            "co": "3",            "is": "0",            "ig": "0"          },          {            "mi": "5",            "co": "4",            "is": "1",            "ig": "1"          }        ]      }    }  }}';
+
   
 
   function createStorageKey(url){
@@ -647,23 +663,72 @@ var net = (function() {
       }catch(err){console.log(err);}
 
         return jsonResult;
-    }/*,
+    },
     getMapCourses: function(netCredentials)  {
       var jsonResult = new NetResult(false, null);
       try{
-        var xmlData ="<rd>" + netCredentials.toXML()"</rd>";
-        var serverResult = sendToServer(NET_OPERATION_GET_MAP_COURSES,xmlData);
+        var xmlData ="<rd>" + netCredentials.toXML() + "</rd>";
+        var serverResult; // = sendToServer(NET_OPERATION_GET_MAP_COURSES,xmlData);
+        if (true){
+          serverResult = JSON.parse(DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSES]);
+        }
         utils.assertDefined(serverResult);
         utils.logDebug("["+serverResult+"]");
-        //if (serverResult == "user updated"){
-          jsonResult.success = true;
-          jsonResult.result = serverResult;
-        //}
+        jsonResult.success = true;
+        jsonResult.result = serverResult;
 
       }catch(err){console.log(err);}
 
         return jsonResult;
-    }*/
+    },
+    getMapCourse: function(netCredentials, courseIdentifier)  {
+      var jsonResult = new NetResult(false, null);
+      try{
+        var xmlData ="<rd>" + netCredentials.toXML() + courseIdentifier.toXML() + "</rd>";
+        var serverResult; // = JSON.parse(NET_OPERATION_GET_MAP_COURSE,xmlData);
+        if (true){
+          serverResult = JSON.parse(DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSE]);
+        }
+        utils.assertDefined(serverResult);
+        utils.logDebug("****["+serverResult+"]");
+        jsonResult.success = true;
+        jsonResult.result = serverResult;
+
+      }catch(err){console.log('**** ' + err);}
+
+        return jsonResult;
+    },
+    getMapCourseResults: function(netCredentials)  {
+      var jsonResult = new NetResult(false, null);
+      try{
+        var xmlData ="<rd>" + netCredentials.toXML() + "</rd>";
+        var serverResult = sendToServer(NET_OPERATION_GET_MAP_COURSE_RESULTS,xmlData);
+        utils.assertDefined(serverResult);
+        utils.logDebug("["+serverResult+"]");
+        jsonResult.success = true;
+        jsonResult.result = serverResult;
+
+      }catch(err){console.log(err);}
+
+        return jsonResult;
+    },
+    addCourseControl: function(netCredentials, courseControlRegistration)  {
+      var jsonResult = new NetResult(false, null);
+      try{
+        var xmlData ="<rd>" + netCredentials.toXML() + controlRegistration.toXML() + "</rd>";
+        var serverResult = sendToServer(NET_OPERATION_ADD_COURSE_CONTROL,xmlData);
+        utils.assertDefined(serverResult);
+        utils.logDebug("["+serverResult+"]");
+        jsonResult.success = true;
+        jsonResult.result = serverResult;
+
+      }catch(err){console.log(err);}
+
+        return jsonResult;
+    }
+
+
+
 
   };
 })();

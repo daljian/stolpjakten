@@ -73,6 +73,8 @@ I18n.Translations.sv = {
       loginlabel: "Inloggad som",
       stickslabel: "Stolpar",
       settingslabel: "Inställningar",
+      courseselectionlabel: "Välj bana",
+      allstickslabel: "Alla stolpar",
       accountlabel: "Mitt konto",
       infolabel: "Information",
       resultslabel: "Bevakningar",
