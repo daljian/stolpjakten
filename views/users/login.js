@@ -14,9 +14,11 @@ App.Views.Users.Login = App.Views.Base.extend({
 
   // The model passed into the view can be any `App.Models.User`.
   initialize: function() {
+  /*
     setTimeout(function () {
       net.getMaps();
     }, 1);
+    */
     this.render();
   },
 
@@ -44,6 +46,7 @@ App.Views.Users.Login = App.Views.Base.extend({
       }
     });
     if (validReg){
+      net.getMaps():
       var email = utils.encodeHTML($('input[name="email"]').val());
       var password = utils.encodeHTML($('input[name="pwd"]').val());
       utils.logDebug("email: " + email);
