@@ -152,7 +152,9 @@ App.Views.Maps.Show = App.Views.Base.extend({
     var courseSticks = [];
     //TODO, It's not opimal to have the bigger array in inner loop, but want to
     //preserver order we get in outer array. Improve this later...
+
     $.each(courseData.result.rd.course.ctrls.ctrl, function(key, value) {
+
         for (var i = 0 ; i < allSticks.length; i++){
 //          alert ("key: " + key + " value: " + JSON.stringify(value));
             if (allSticks[i].number == value.co){
@@ -164,6 +166,10 @@ App.Views.Maps.Show = App.Views.Base.extend({
                   allSticks[i]["icon"] = goalIcon;
                 }else{
                   allSticks[i]["icon"] = controlIcon;
+                  if ( courseSticks.length == 2){
+//                    alert("Bearing to first is " + new L.LatLng(courseSticks[0].latitude, courseSticks[0].longitude).bearingWordTo(new L.LatLng(courseSticks[1].latitude, courseSticks[1].longitude)));
+                    courseSticks[0].iconRotation = new L.LatLng(courseSticks[0].latitude, courseSticks[0].longitude).bearingTo(new L.LatLng(courseSticks[1].latitude, courseSticks[1].longitude));
+                  }
                 }
                 break;
             }
@@ -250,7 +256,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     }
     
         // initialize the filesystem where we store cached tiles. when this is ready, proceed with the map
-    //console.log("tileArray: " + JSON.stringify(this.tileArray));
+    console.log("tileArray: " + JSON.stringify(this.tileArray));
     for (var i = 0; i < this.tileArray.length && getOLMap(); i++){
         
         var current = L.tileLayer(this.tileArray[i]+'/{z}/{x}/{y}.png', {
@@ -285,8 +291,12 @@ App.Views.Maps.Show = App.Views.Base.extend({
   },
   drawCourseMarkers: function(sticks, map){
     $.each(sticks, function(key, stick) {
-        var marker = L.marker([stick.latitude, stick.longitude], {icon: stick.icon}).addTo(map)
+        var marker = L.marker([stick.latitude, stick.longitude], {icon: stick.icon});
+        if (typeof stick.iconRotation != "undefined"){
+            marker.setRotationAngle(stick.iconRotation);
+        }
         marker.bindPopup(' <div class="markers level'+stick.difficulty+'"> <span class="marker" markerId="'+stick.number+'" style="color:grey"><div class="stick-number" markerId="'+stick.number+'">'+I18n.t('views.map.stick')+' '+stick.number+'.</div>'+stick.description+'</div></span><span class="marker" markerId="'+stick.number+'"><div class="markerbtn map'+getCurrentMapId()+'" markerId="'+stick.number+'">Info</div></span>');
+        marker.addTo(map);
         if (stick.number == this.openPopup){
           this.markerToOpen = marker;
         }
@@ -294,6 +304,10 @@ App.Views.Maps.Show = App.Views.Base.extend({
     for (var i = 1 ; i < sticks.length; i++){
         this.drawLine(sticks[i-1], sticks[i], map);
     }
+    var gpx = 'https://connect.garmin.com/modern/proxy/activity-service-1.1/gpx/activity/1142638320?full=true'; // URL to your GPX file or the GPX itself
+    new L.GPX(gpx, {async: true}).on('loaded', function(e) {
+      map.fitBounds(e.target.getBounds());
+    }).addTo(map);
   },
   drawMarkers: function(sticks, map){
     var iconRadius = 25;
@@ -310,7 +324,10 @@ App.Views.Maps.Show = App.Views.Base.extend({
     var blackIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
     var blueIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
     var takenIcon = new LeafIcon({iconUrl: 'img/ringar/2/reggad.svg'});
-    var markers = new L.MarkerClusterGroup();
+    var markers;
+    if (getMarkerCluster()){
+        markers = new L.MarkerClusterGroup();
+    }
     var filter = getFilter();
 
     //Go through the sticks in the cache and create markers
