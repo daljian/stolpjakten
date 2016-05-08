@@ -262,7 +262,8 @@ App.Views.Maps.Show = App.Views.Base.extend({
         var current = L.tileLayer(this.tileArray[i]+'/{z}/{x}/{y}.png', {
             attribution: '© <a href="http://stolpjakten.se">Stolpjaktens</a> arrangörsklubbar',
             maxZoom: 18,
-            tms: false
+            tms: false,
+            errorTileUrl: 'img/trans.png'
         });
         //TODO, below is showing how to override the getTileUrl
         //in order to enable offline caching of tiles.
@@ -278,9 +279,11 @@ App.Views.Maps.Show = App.Views.Base.extend({
     //Admin features
     //L.control.mousePosition().addTo(map);
     //Right click on the map activated
-    map.on('contextmenu', function(e) {
+/*    map.on('contextmenu', function(e) {
         window.prompt("Copy to clipboard: Ctrl+C, Enter", e.latlng.lat +","+e.latlng.lng);
     });
+    */
+
     L.control.scale().addTo(map);
 //    L.control.compass().addTo(map);
     if (getCourseMode()){
@@ -611,6 +614,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
 * purpose of caching the tiles we are using.
 *
 */
+/*
 	getTileUrl: function(tilePoint) {
     //TODO
     //If tile that is requested is available offline, create 
@@ -640,7 +644,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
 
     return url;
     
-	},
+	}, */
 
    
 });
