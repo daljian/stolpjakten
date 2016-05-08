@@ -33,6 +33,7 @@ App.Views.Users.Login = App.Views.Base.extend({
   },
   
   onSubmit: function() {
+  utils.logDebug("Will attempt login");
   var validReg = true;
     $('input').each( function(key, value){
       if ( !($(this).val()) ) {
@@ -45,7 +46,10 @@ App.Views.Users.Login = App.Views.Base.extend({
     if (validReg){
       var email = utils.encodeHTML($('input[name="email"]').val());
       var password = utils.encodeHTML($('input[name="pwd"]').val());
+      utils.logDebug("email: " + email);
+      utils.logDebug("password: " + password);
       var mapId = getCurrentMapId();
+      utils.logDebug("mapId: " + mapId);
       var showMap = false; //will show implicitly chosen map if set to true, First map in getMaps
       try{
         var result = net.getUser(new NetCredentials(email, password, mapId));

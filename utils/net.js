@@ -328,7 +328,7 @@ var net = (function() {
             return cached;
           }
         }
-        //console.time('sendToServer');
+        console.time('sendToServer');
         utils.logDebug("request: " + xml);
         xml = toUTF(xml);
         utils.logDebug("converted request: " + xml);
@@ -382,7 +382,7 @@ var net = (function() {
            }
           }
         }
-        //console.timeEnd('sendToServer');
+        console.timeEnd('sendToServer');
 
         return result;
 
