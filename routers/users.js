@@ -28,6 +28,8 @@ App.Routers.Users = Backbone.Router.extend({
    */
   register: function() {
     var maps = []
+    console.log("getMaps 3");
+
     var result = net.getMaps();
     if (result.success){
       var returnedMapInfos = result.result.maps.map;

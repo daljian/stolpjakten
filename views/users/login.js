@@ -44,6 +44,8 @@ App.Views.Users.Login = App.Views.Base.extend({
       }
     });
     if (validReg){
+        console.log("getMaps 2");
+
       net.getMaps();
       var email = utils.encodeHTML($('input[name="email"]').val());
       var password = utils.encodeHTML($('input[name="pwd"]').val());

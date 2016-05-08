@@ -24,6 +24,7 @@ App.Routers.Menu = Backbone.Router.extend({
    */
   select: function() {
     var maps = []
+    console.log("getMaps 1");
     var result = net.getMaps();
     if (result.success){
       var returnedMapInfos = result.result.maps.map;
