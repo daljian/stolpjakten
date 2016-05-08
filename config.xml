@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="se.friskakarlstad.phonegap.client" version="2.1.1" versionCode="502" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="se.friskakarlstad.phonegap.client" version="2.1.1" versionCode="503" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Stolpjakten</name>
     <description>
         Official application for Stolpjakten
@@ -9,7 +9,7 @@
     <author email="info@friskakarlstad.se" href="http://oktyr.se">
         Stolpjakten - OK Tyr, Friska Karlstad
     </author>
-    <preference name="phonegap-version" value="cli-5.2.0" />
+    <preference name="phonegap-version" value="cli-6.1.0" />
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     <gap:plugin name="com.phonegap.plugin.statusbar"/> 
