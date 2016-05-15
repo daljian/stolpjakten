@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="se.friskakarlstad.phonegap.client" version="2.1.1" versionCode="503" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="se.friskakarlstad.phonegap.client" version="2.1.2" versionCode="504" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Stolpjakten</name>
     <description>
         Official application for Stolpjakten
@@ -57,5 +57,4 @@
     <!-- retina iPad -->
     <gap:splash src="splash/ios/ipad-landscape.png" gap:platform="ios" width="2048" height="1496" />
     <gap:splash src="splash/ios/ipad-portrait.png"  gap:platform="ios" width="1536" height="2008" />
-    <access origin="*" subdomains="true"/>
 </widget>
