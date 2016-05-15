@@ -14,6 +14,7 @@
     <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     <gap:plugin name="com.phonegap.plugin.statusbar"/>
     <gap:plugin name="com.indigoway.cordova.whitelist.whitelistplugin" source="pgb" />
+    <allow-navigation href="*" />
     <!-- <gap:plugin name="org.apache.cordova.device-orientation" /> -->
     <gap:config-file platform="ios" parent="UIStatusBarHidden">
         <true/>
