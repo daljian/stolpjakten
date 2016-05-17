@@ -321,7 +321,7 @@ var net = (function() {
             //so we return offline to client.
             var cached =  getFromCache(createURL(operation, xml));
             if (typeof cached == "undefined" || cached == null){
-              utils.logDebug("We missed in cache, operation: " + operation);
+              utils.logDebug("We missed in cache, operation: " + createURL(operation, xml));
               cached = new NetResult();
               cached.success = false;
             }
