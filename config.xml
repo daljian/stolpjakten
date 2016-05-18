@@ -16,7 +16,7 @@
     <!--
     <gap:plugin name="com.indigoway.cordova.whitelist.whitelistplugin" source="pgb" />
     -->
-    <gap:plugin name="cordova-plugin-whitelist" source="pgb" />
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <allow-navigation href="http://*/*" />
     <allow-intent href="https://*/*" />
     <access origin="*"/>
