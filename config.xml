@@ -15,7 +15,8 @@
     <gap:plugin name="com.phonegap.plugin.statusbar"/>
     <gap:plugin name="com.indigoway.cordova.whitelist.whitelistplugin" source="pgb" />
     <allow-navigation href="http://*/*" />
-    <allow-intent href="https://*/*" />    <!-- <gap:plugin name="org.apache.cordova.device-orientation" /> -->
+    <allow-intent href="https://*/*" />
+    <access origin="*">
     <gap:config-file platform="ios" parent="UIStatusBarHidden">
         <true/>
     </gap:config-file>
