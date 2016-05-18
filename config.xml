@@ -16,7 +16,7 @@
     <gap:plugin name="com.indigoway.cordova.whitelist.whitelistplugin" source="pgb" />
     <allow-navigation href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <access origin="*">
+    <access origin="*"/>
     <gap:config-file platform="ios" parent="UIStatusBarHidden">
         <true/>
     </gap:config-file>
