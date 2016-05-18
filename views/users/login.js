@@ -33,7 +33,8 @@ App.Views.Users.Login = App.Views.Base.extend({
   },
   
   onSubmit: function() {
-  utils.logDebug("Will attempt login");
+  //utils.logDebug("Will attempt login");
+  console.log();
   var validReg = true;
     $('input').each( function(key, value){
       if ( !($(this).val()) ) {

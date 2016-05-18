@@ -61,7 +61,7 @@ var utils = (function() {
         }
         return retVal;
     },
-    setLastknownPosition(map){
+    setLastknownPosition: function(map){
         try{
             var lat = e.latlng.lat,
             lng = e.latlng.lng;
