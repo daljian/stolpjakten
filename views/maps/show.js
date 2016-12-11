@@ -153,11 +153,11 @@ App.Views.Maps.Show = App.Views.Base.extend({
     //TODO, It's not opimal to have the bigger array in inner loop, but want to
     //preserver order we get in outer array. Improve this later...
 
-    $.each(courseData.result.rd.course.ctrls.ctrl, function(key, value) {
+    $.each(courseData.result.course.ctrls.ctrl, function(key, value) {
 
         for (var i = 0 ; i < allSticks.length; i++){
-//          alert ("key: " + key + " value: " + JSON.stringify(value));
             if (allSticks[i].number == value.co){
+                //alert ("key: " + key + " value: " + JSON.stringify(value));
                 courseSticks.push(allSticks[i]);
                 allSticks[i].available = true;
                 if (value.is == 1){
@@ -167,7 +167,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
                 }else{
                   allSticks[i]["icon"] = controlIcon;
                   if ( courseSticks.length == 2){
-//                    alert("Bearing to first is " + new L.LatLng(courseSticks[0].latitude, courseSticks[0].longitude).bearingWordTo(new L.LatLng(courseSticks[1].latitude, courseSticks[1].longitude)));
+                    //alert("Bearing to first is " + new L.LatLng(courseSticks[0].latitude, courseSticks[0].longitude).bearingWordTo(new L.LatLng(courseSticks[1].latitude, courseSticks[1].longitude)));
                     courseSticks[0].iconRotation = new L.LatLng(courseSticks[0].latitude, courseSticks[0].longitude).bearingTo(new L.LatLng(courseSticks[1].latitude, courseSticks[1].longitude));
                   }
                 }
@@ -277,12 +277,12 @@ App.Views.Maps.Show = App.Views.Base.extend({
     
     //Päjsta här
     //Admin features
-    //L.control.mousePosition().addTo(map);
+    L.control.mousePosition().addTo(map);
     //Right click on the map activated
-/*    map.on('contextmenu', function(e) {
+    map.on('contextmenu', function(e) {
         window.prompt("Copy to clipboard: Ctrl+C, Enter", e.latlng.lat +","+e.latlng.lng);
     });
-    */
+
 
     L.control.scale().addTo(map);
 //    L.control.compass().addTo(map);

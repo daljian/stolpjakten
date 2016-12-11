@@ -37,8 +37,10 @@ function NetResult(success, result) {
 */
 function NetCredentials(em, pwd, mid, res){
   var self = this;
-  self.cid = "7daa046f-0b15-4343-8715-b9bbd76a0231";
+  //self.cid = "7daa046f-0b15-4343-8715-b9bbd76a0231";
+  self.cid = "38c2b433-54bf-485e-908d-bc8fc87903af";
   self.em = em;
+  self.un = em;
   self.pwd = pwd;
   self.mid = mid;
   self.res = res;
@@ -52,7 +54,7 @@ function NetCredentials(em, pwd, mid, res){
     if (typeof self.res != "undefined"){
       resultIndex = "<res><si>"+self.res.si+"</si><nr>"+self.res.nr+"</nr></res>";
     }
-    return "<cre><cid>" + self.cid + "</cid><em>" + self.em + "</em><pwd>" + self.pwd + "</pwd><mid>" + self.mid+"</mid>"+resultIndex+"</cre>";
+    return "<cre><cid>" + self.cid + "</cid><em>" + self.em + "</em><un>" + self.em + "</un><pwd>" + self.pwd + "</pwd><mid>" + self.mid+"</mid>"+resultIndex+"</cre>";
   }
 }
 function toISO(what){
@@ -82,6 +84,7 @@ function UserData(em,fn,ln,dn,sa,zip,ci,ph,ge,pw,sil,nl,ag,pc, emmcs){
   var self = this;
   
   self.em = em;
+  self.un = em;
   self.fn = fn;
   self.ln = ln;
   self.dn = dn;
@@ -130,6 +133,7 @@ function UserData(em,fn,ln,dn,sa,zip,ci,ph,ge,pw,sil,nl,ag,pc, emmcs){
         extraMapCodes += "</emmcs>";
         return  "<ud>"+
                 "<em>"+self.em + "</em>"+
+                "<un>"+self.un + "</un>"+
                 "<fn>" + self.fn + "</fn>"+
                 "<ln>" + self.ln + "</ln>"+
                 "<dn>" + self.dn+"</dn>"+
@@ -181,7 +185,8 @@ var net = (function() {
   var API_TOKEN="%API%";
   //var SERVER_URL= "http://demo.stolpjakten.se/restservice/friskaservice.ashx?";
   //var SERVER_URL= "http://demo"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
-  var SERVER_URL= "http://app"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
+  // REAL ADDRESS var SERVER_URL= "http://app"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
+  var SERVER_URL= "http://test.stolpjakten.se/Service/OLService.ashx?";
   var NET_OPERATION_GET_USER="GetUser";
   var NET_OPERATION_GET_MAP="GetMap";
   var NET_OPERATION_CREATE_USER="CreateUser";
@@ -211,6 +216,7 @@ var net = (function() {
   var DUMMY_RESPONSES = new Object();
   DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSES]='{  "rd": {    "courses": {      "course": [        {          "ci": "1",          "mi": "2",          "cn": "Gröna banan",          "oc": "1",          "dif": "1"        },        {          "ci": "2",          "mi": "2",          "cn": "Blå bananen",          "oc": "1",          "dif": "2"        }      ]    }  }}';
   DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSE]='{  "rd": {    "course": {      "ci": "1",      "mi": "2",      "cn": "Gröna banan",      "oc": "1",      "dif": "1",      "ctrls": {        "ctrl": [         {            "mi": "2",            "co": "8",            "is": "1",            "ig": "0"          },{            "mi": "2",            "co": "7",            "is": "0",            "ig": "0"          },{            "mi": "2",            "co": "11",            "is": "0",            "ig": "0"          },{            "mi": "2",            "co": "30",            "is": "0",            "ig": "0"          },{            "mi": "2",            "co": "28",            "is": "0",            "ig": "0"          },{            "mi": "2",            "co": "10",            "is": "0",            "ig": "0"          },{            "mi": "2",            "co": "4",            "is": "0",            "ig": "0"          },{            "mi": "2",            "co": "27",            "is": "0",            "ig": "1"          }         ]      }    }  }}';
+  DUMMY_RESPONSES[NET_OPERATION_GET_MAP]='{"rd":{"maps":{"map":{"mid":"1","mn":"Centrum","tp":"http://localhost/","em":{"emid":"12","mn":"Extra 1","api":"2","mc":"Stan16"}}}}}';
   //DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSE]='{  "rd": {    "course": {      "ci": "1",      "mi": "2",      "cn": "Gröna banan",      "oc": "1",      "dif": "1",      "ctrls": {        "ctrl": [          {            "mi": "2",            "co": "1",            "is": "1",            "ig": "0"          },          {            "mi": "3",            "co": "2",            "is": "0",            "ig": "0"          },          {            "mi": "4",            "co": "3",            "is": "0",            "ig": "0"          },          {            "mi": "5",            "co": "4",            "is": "0",            "ig": "1"          }        ]      }    }  }}';
 
   
@@ -550,7 +556,6 @@ var net = (function() {
         }
       }catch(err){console.log(err);}
 
-      utils.logDebug("getMaps json result: " + JSON.stringify(jsonResult));
       return jsonResult;
     },
 /**
@@ -669,27 +674,23 @@ var net = (function() {
       var jsonResult = new NetResult(false, null);
       try{
         var xmlData ="<rd>" + netCredentials.toXML() + "</rd>";
-        var serverResult; // = sendToServer(NET_OPERATION_GET_MAP_COURSES,xmlData);
-        if (true){
-          serverResult = JSON.parse(DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSES]);
-        }
+        console.log("Dummy JSON:" + DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSES]);
+        var serverResult = sendToServer(NET_OPERATION_GET_MAP_COURSES,xmlData);
         utils.assertDefined(serverResult);
         utils.logDebug("["+serverResult+"]");
         jsonResult.success = true;
         jsonResult.result = serverResult;
 
       }catch(err){console.log(err);}
+      utils.logDebug("getMapCourses json result: " + JSON.stringify(jsonResult));
 
-        return jsonResult;
+       return jsonResult;
     },
     getMapCourse: function(netCredentials, courseIdentifier)  {
       var jsonResult = new NetResult(false, null);
       try{
         var xmlData ="<rd>" + netCredentials.toXML() + courseIdentifier.toXML() + "</rd>";
-        var serverResult; // = JSON.parse(NET_OPERATION_GET_MAP_COURSE,xmlData);
-        if (true){
-          serverResult = JSON.parse(DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSE]);
-        }
+        var serverResult = sendToServer(NET_OPERATION_GET_MAP_COURSE,xmlData);
         utils.assertDefined(serverResult);
         utils.logDebug("****["+serverResult+"]");
         jsonResult.success = true;

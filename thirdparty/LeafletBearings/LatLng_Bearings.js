@@ -24,7 +24,7 @@ L.LatLng.prototype.bearingTo = function(other) {
     var brng = Math.atan2(y, x);
     brng = parseInt( brng * r2d );
     brng = (brng + 360) % 360;
-    alert("d2r: " + d2r + "\nr2d:" + r2d + "\nlat1:" + lat1 + "\nlat2:" + lat2 + "\ndLon:" + dLon + "\ny:" + y + "\nx:"+x + "\nbrng:" + brng);
+    //alert("d2r: " + d2r + "\nr2d:" + r2d + "\nlat1:" + lat1 + "\nlat2:" + lat2 + "\ndLon:" + dLon + "\ny:" + y + "\nx:"+x + "\nbrng:" + brng);
     return brng;
 };
 

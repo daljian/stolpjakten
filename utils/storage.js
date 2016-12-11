@@ -97,7 +97,7 @@ function setCourseMode(enabled){
   }
 }
 function getCourseMode(){
-  return false; //getSetting(getCourseModeOnKey());
+  return getSetting(getCourseModeOnKey());
 }
 function getOLMap(){
   return getSetting(getOLMapOnKey());
