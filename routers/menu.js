@@ -238,7 +238,7 @@ App.Routers.Menu = Backbone.Router.extend({
         var credentials = getNetCredentials();
         //Alt. assign it to existing credentials object:
         credentials.res = resultIndex;
-        var result = net.getMapCourseResults(credentials);
+        var result = net.getMapCourseResults(credentials, new CourseIdentifier(getCurrentCourse()));
         //console.log(JSON.stringify(result));
         if (result.success){
           var items = toArray(result.result.results.result);

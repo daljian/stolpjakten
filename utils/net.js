@@ -699,10 +699,10 @@ var net = (function() {
 
         return jsonResult;
     },
-    getMapCourseResults: function(netCredentials)  {
+    getMapCourseResults: function(netCredentials, courseIdentifier)  {
       var jsonResult = new NetResult(false, null);
       try{
-        var xmlData ="<rd>" + netCredentials.toXML() + "</rd>";
+        var xmlData ="<rd>" + netCredentials.toXML() + courseIdentifier.toXML() + "</rd>";
         var serverResult = sendToServer(NET_OPERATION_GET_MAP_COURSE_RESULTS,xmlData);
         utils.assertDefined(serverResult);
         utils.logDebug("["+serverResult+"]");
