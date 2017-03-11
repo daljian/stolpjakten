@@ -10,7 +10,7 @@ App.Views.Maps.Marker = App.Views.Base.extend({
   performRegistration: function(code) {
     var credentials = JSON.parse(localStorage.getItem(getCredentialsKey()));
     
-    var netCredentials = new NetCredentials(credentials.email, credentials.password, this.id);
+    var netCredentials = new NetCredentials(credentials.username, credentials.password, this.id);
     //console.log("stickinfo: " + JSON.stringify(this.selectedStick));
     var attempedRegistration = new ControlRegistration(this.selectedStick.id, code);
     var result = net.addControl(netCredentials, attempedRegistration);

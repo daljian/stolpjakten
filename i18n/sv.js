@@ -14,7 +14,7 @@ I18n.Translations.sv = {
       login: {
         login: "Logga in",
         password: "Lösenord",
-        email: "Epost",
+        username: "Användarnamn",
         logininternalerror: "Det gick fel! Notera tiden och rapportera felet till app@stolpjakten.se",
         loginrejected: "Ej godkänd inloggning, kontrollera stavning och versaler",
         unknownemail: "Okänd epost",
@@ -35,7 +35,7 @@ I18n.Translations.sv = {
         email: "Epost",
         first_name: "Förnamn",
         last_name: "Efternamn",
-        display_name: "Visningsnamn",
+        username: "Användarnamn",
         street: "Gatuadress",
         zip: "Postnummer",
         city: "Stad",

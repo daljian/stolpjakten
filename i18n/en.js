@@ -14,7 +14,7 @@ I18n.Translations.en = {
       login: {
         login: "Login",
         password: "Password",
-        email: "E-mail",
+        username: "Username",
         logininternalerror: "Something went wrong! Record time and report the error to app@stolpjakten.se",
         loginrejected: "Login not correct, check spelling and capitals",
         unknownemail: "Unknown email",
@@ -35,7 +35,7 @@ I18n.Translations.en = {
         email: "E-mail",
         first_name: "First name",
         last_name: "Surname",
-        display_name: "Display name",
+        username: "Username",
         street: "Street address",
         zip: "Zip",
         city: "City",

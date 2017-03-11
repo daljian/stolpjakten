@@ -157,6 +157,10 @@
 <script type="text/javascript">
   $(function() {
     App.initialize();
+    var isCourseModeSet = localStorage.getItem(getCourseModeOnKey());
+    if (isMarkerClusterset == null){
+      toggleCourseMode();//unset means flag is true, but we want default false so toggle.
+    }
     var isMarkerClusterset = localStorage.getItem(getMarkerClusterOnKey());
     if (isMarkerClusterset == null){
       toggleMarkerCluster();//unset means flag is true, but we want default false so toggle.

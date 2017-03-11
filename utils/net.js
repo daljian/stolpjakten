@@ -35,18 +35,17 @@ function NetResult(success, result) {
 * @param res (optional) is of type ResultIndex, @see ResultIndex
 * 
 */
-function NetCredentials(em, pwd, mid, res){
+function NetCredentials(un, pwd, mid, res){
   var self = this;
   //self.cid = "7daa046f-0b15-4343-8715-b9bbd76a0231";
   self.cid = "38c2b433-54bf-485e-908d-bc8fc87903af";
-  self.em = em;
-  self.un = em;
+  self.un = un;
   self.pwd = pwd;
   self.mid = mid;
   self.res = res;
 
   self.fromCredentials = function(creds){
-    return new NetCredentials(creds.em, creds.pw, creds.mid, creds.res);
+    return new NetCredentials(creds.un, creds.pw, creds.mid, creds.res);
   }
   
   self.toXML = function(){
@@ -54,7 +53,7 @@ function NetCredentials(em, pwd, mid, res){
     if (typeof self.res != "undefined"){
       resultIndex = "<res><si>"+self.res.si+"</si><nr>"+self.res.nr+"</nr></res>";
     }
-    return "<cre><cid>" + self.cid + "</cid><em>" + self.em + "</em><un>" + self.em + "</un><pwd>" + self.pwd + "</pwd><mid>" + self.mid+"</mid>"+resultIndex+"</cre>";
+    return "<cre><cid>" + self.cid + "</cid><un>" + self.un + "</un><pwd>" + self.pwd + "</pwd><mid>" + self.mid+"</mid>"+resultIndex+"</cre>";
   }
 }
 function toISO(what){
@@ -84,7 +83,7 @@ function UserData(em,fn,ln,dn,sa,zip,ci,ph,ge,pw,sil,nl,ag,pc, emmcs){
   var self = this;
   
   self.em = em;
-  self.un = em;
+  self.un = dn;
   self.fn = fn;
   self.ln = ln;
   self.dn = dn;
@@ -728,9 +727,5 @@ var net = (function() {
 
         return jsonResult;
     }
-
-
-
-
   };
 })();

@@ -61,6 +61,9 @@ App.Routers.Menu = Backbone.Router.extend({
     } else if (where === 'toplist') {
       var data = this.getToplist();
       var title = I18n.t('views.menu.toplistlabel');
+    } else if (where === 'coursetoplist') {
+      var data = this.getCourseToplist();
+      var title = I18n.t('views.menu.toplistlabel');
     } else if (where === 'choosecity') {
       window.location.href="#/menu/select";
     } else if (where === 'sync') {
@@ -98,8 +101,9 @@ App.Routers.Menu = Backbone.Router.extend({
                        '<span style="color:#FF"><a style="color:#FFF" href="#maps/'+getCurrentMapId()+'/show" onclick="setCourseMode('+false+')">'+I18n.t('views.menu.allstickslabel')+'</a></span>'+
                        '</div>';
     $.each(courses.result.courses.course, function(key, course) {
+    setCourse(course.ci, course);
     optionsString += '<div class="option needsclick" >'+
-                       '<span class="level'+course.dif+' stick_info" style="color:#FFF">??</span>'+
+                       '<span class="level'+course.dif+' stick_info" style="color:#FFF">'+course.numsticks+'</span>'+
                        '<span style="color:#FF"><a style="color:#FFF" href="#maps/'+getCurrentMapId()+'/show" onclick="setCurrentCourse('+course.ci+')">'+course.cn+'</a></span>'+
                        '</div>';
     });
@@ -229,6 +233,24 @@ App.Routers.Menu = Backbone.Router.extend({
     return html;
   },
   
+  getCourseToplist: function() {
+    var resultIndex = new ResultIndex(0,100); //statically pull top 100
+        var credentials = getNetCredentials();
+        //Alt. assign it to existing credentials object:
+        credentials.res = resultIndex;
+        var result = net.getMapCourseResults(credentials);
+        //console.log(JSON.stringify(result));
+        if (result.success){
+          var items = toArray(result.result.results.result);
+          var html = "";
+          for (var i = 0; i < items.length; i++){
+            html += '<div class="option needsclick"><span style="float: right;margin-right: 10px;">'+items[i].name+'</span><span>'+(i+1)+'. '+items[i].startdate+'</span></div>';
+          }
+        }else{
+          utils.warning(I18n.t('views.menu.toplisterror'));
+        }
+    return html;
+  },
   sync: function(){
     //Save some data that can be handy to keep until next login session
     var currentMap = getCurrentMap();

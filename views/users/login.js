@@ -48,22 +48,22 @@ App.Views.Users.Login = App.Views.Base.extend({
         console.log("getMaps 2");
 
       net.getMaps();
-      var email = utils.encodeHTML($('input[name="email"]').val());
+      var username = utils.encodeHTML($('input[name="username"]').val());
       var password = utils.encodeHTML($('input[name="pwd"]').val());
-      utils.logDebug("email: " + email);
+      utils.logDebug("username: " + username);
       utils.logDebug("password: " + password);
       var mapId = getCurrentMapId();
       utils.logDebug("mapId: " + mapId);
       var showMap = false; //will show implicitly chosen map if set to true, First map in getMaps
       try{
-        var result = net.getUser(new NetCredentials(email, password, mapId));
+        var result = net.getUser(new NetCredentials(username, password, mapId));
       }catch(err){
         console.log(err);
         utils.error(I18n.t('views.users.login.logininternalerror'));
       }
       if(result.success) {
         var creds = new Object();
-        creds.email = email;
+        creds.username = username;
         creds.password = password;
         localStorage.setItem(getCredentialsKey(), JSON.stringify(creds));
         localStorage.setItem(getUserKey(), JSON.stringify(result.result));
@@ -81,7 +81,7 @@ App.Views.Users.Login = App.Views.Base.extend({
     var source = '<div class="navigation"><div class="top"><a class="icon{{mapCss}}" style="font-size: 20px" href="#user/information"><span class="glyphicon glyphicon-remove-circle" style:float:left;></span></a></div>'+
                  '<div class="title">{{menuTitle}}</div></div>' +
                  '<div class="login-form">' +
-                 '<p><input name="email" placeholder="{{email}}" type="email"/></p>' + 
+                 '<p><input name="username" placeholder="{{username}}" type="text"/></p>' +
                  '<p><input name="pwd" placeholder="{{password}}" type="password"/></p>' +
                  '<p><div class="submit-button">{{menuTitle}}</div></p>'+
                  '</div>';
@@ -89,7 +89,7 @@ App.Views.Users.Login = App.Views.Base.extend({
   },
   
   createData: function() {
-    var data = { "menuTitle": I18n.t('views.users.login.login'), "password": I18n.t('views.users.login.password'), "email": I18n.t('views.users.login.email'), "mapCss" : getCurrentMapId()};
+    var data = { "menuTitle": I18n.t('views.users.login.login'), "password": I18n.t('views.users.login.password'), "username": I18n.t('views.users.login.username'), "mapCss" : getCurrentMapId()};
     return data;  
   }
    

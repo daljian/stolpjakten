@@ -15,7 +15,7 @@ App.Routers.Maps = Backbone.Router.extend({
     var id = id || getCurrentMapId();
     var retrievedObject = JSON.parse(localStorage.getItem(getCredentialsKey()));
     var sticks = [];
-    var result = net.getMap(new NetCredentials(retrievedObject.email, retrievedObject.password, id));
+    var result = net.getMap(new NetCredentials(retrievedObject.username, retrievedObject.password, id));
     
     if (result.success){
       var returnedSticks = result.result.sticks.stick;

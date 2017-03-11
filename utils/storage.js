@@ -14,6 +14,10 @@ function getSticksKey(){
   return 'stolpjakten.'+getCurrentMapId()+'.sticks';
 }
 
+function getAllSticksKey(){
+  return 'stolpjakten.'+getCurrentMapId()+'.allsticks';
+}
+
 function getPendingSticksKey(){
   return 'stolpjakten.'+getCurrentMapId()+'.sticks.pending';
 }
@@ -114,6 +118,9 @@ function getNewMap(){
 function getMarkerClusterOnKey() {
   return 'stolpjakten.cluster';
 }
+function toggleCourseMode(){
+    toggleSetting(getCourseModeOnKey());
+}
 function toggleMarkerCluster(){
 
   toggleSetting(getMarkerClusterOnKey());
@@ -183,12 +190,19 @@ function getCurrentMap(){
 }
 
 function getCurrentCourse(){
-  return JSON.parse(localStorage.getItem(getCurrentCourseKey()));
+  return localStorage.getItem(getCurrentCourseKey());
+}
+function setCourse(id, course){
+  localStorage.setItem(getCurrentMapId() + ".course." + id, JSON.stringify(course));
 }
 
-function setCurrentCourse(course){
+function getCourse(id){
+  return JSON.parse(localStorage.getItem(getCurrentMapId() + ".course." + id));
+
+}
+function setCurrentCourse(id){
   setCourseMode(true);
-  localStorage.setItem(getCurrentCourseKey(), JSON.stringify(course));
+  localStorage.setItem(getCurrentCourseKey(), id);
 }
 
 function getCurrentApi(){
@@ -203,7 +217,7 @@ function getCurrentApi(){
 
 function getNetCredentials(){
   var creds = JSON.parse(localStorage.getItem(getCredentialsKey()));
-  return new NetCredentials(creds.email, creds.password, getCurrentMapId());
+  return new NetCredentials(creds.username, creds.password, getCurrentMapId());
 }
 
 function getCurrentMapId(){

@@ -156,7 +156,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     $.each(courseData.result.course.ctrls.ctrl, function(key, value) {
 
         for (var i = 0 ; i < allSticks.length; i++){
-            if (allSticks[i].number == value.co){
+            if (allSticks[i].id == value.mi){
                 //alert ("key: " + key + " value: " + JSON.stringify(value));
                 courseSticks.push(allSticks[i]);
                 allSticks[i].available = true;
@@ -604,8 +604,11 @@ App.Views.Maps.Show = App.Views.Base.extend({
   },
   
   createData: function() {
-    var storage = getCurrentMap(),
-        menuTitle = storage.mn;
+    var storage = getCurrentMap();
+    var menuTitle = storage.mn;
+    if (getCourseMode()) {
+        menuTitle += " - " + getCourse(getCurrentCourse()).cn;
+    }
     var data = { "menuTitle": menuTitle, mapCss: this.options.map };
     return data;  
   },

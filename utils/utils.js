@@ -363,6 +363,9 @@ var utils = (function() {
 
 
   },
+  scanCourse: function () {
+
+  },
 
 
   scan: function(callback){

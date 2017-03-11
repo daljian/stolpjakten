@@ -118,15 +118,15 @@ App.Views.Users.Register = App.Views.Base.extend({
         '', //skip premium code
         new Array());
       
-      var email = $('input[name="em"]').val(),
+      var username = $('input[name="dn"]').val(),
           pwd = $('input[name="pw"]').val(),
           mapId = $('select[name="mapid"]').val();
-      var credentials = new NetCredentials(email, pwd, mapId);
+      var credentials = new NetCredentials(username, pwd, mapId);
       var result = net.createUser(credentials, userData);
       //console.log(userData);
       if( result.success ) { 
         localStorage.setItem(getUserKey(), JSON.stringify(net.getUser(credentials).result));
-        localStorage.setItem(getCredentialsKey(), JSON.stringify({email: email, password: pwd, mapId: mapId}));
+        localStorage.setItem(getCredentialsKey(), JSON.stringify({username: username, password: pwd, mapId: mapId}));
         //console.log('Registrering lyckades!');
         var selectedMap = new Object();
         selectedMap.mid = mapId;
@@ -153,7 +153,7 @@ App.Views.Users.Register = App.Views.Base.extend({
   // Om man vill ha ett annat startår än 1980 så är det bara att byta i if-satsen
   createHtml: function(maps) {
     var year = '';
-    for(i = 1920; i < 2014; i++) {
+    for(i = 1920; i < 2016; i++) {
       if(!(i == 1980)) {
         year += '<option value="'+i+'">'+i+'</option>';
       } else {
@@ -167,15 +167,15 @@ App.Views.Users.Register = App.Views.Base.extend({
     var source = '<div class="navigation"><div class="top"><a href="#user/information" style="float:left;"><span class="glyphicon glyphicon-remove-circle"></span></a>'+
     '{{menuTitle}}</div></div>' +
     '<div class="register-form">' +
-    '<p><!-- <label>{{email}}:</label> --> <input name="em" type="email" placeholder="{{email}}"></p>' + 
+    '<p><!-- <label>{{username}}:</label> --> <input name="dn" placeholder="{{username}}"></p>' +
+    '<p><!-- <label>{{password}}:</label> --> <input name="pw" type="password" placeholder="{{password}}"></p>' +
+    '<p><!-- <label>{{email}}:</label> --> <input name="em" type="email" placeholder="{{email}}"></p>' +
     '<p><!-- <label>{{fname}}:</label> --> <input name="fn" placeholder="{{fname}}"></p>' + 
     '<p><!-- <label>{{lname}}:</label> --> <input name="ln" placeholder="{{lname}}"></p>' + 
-    '<p><!-- <label>{{alias}}:</label> --> <input name="dn" placeholder="{{alias}}"></p>' + 
-    '<p><!-- <label>{{street}}:</label> --> <input name="sa" placeholder="{{street}}"></p>' + 
+    '<p><!-- <label>{{street}}:</label> --> <input name="sa" placeholder="{{street}}"></p>' +
     '<p><!-- <label>{{zip}}:</label> --> <input name="zip" type="number" placeholder="{{zip}}"></p>' + 
     '<p><!-- <label>{{city}}:</label> --> <input name="ci" placeholder="{{city}}"></p>' + 
     '<p><!-- <label>{{phone}}:</label> --> <input name="ph" type="number" placeholder="{{phone}}"></p>' + 
-    '<p><!-- <label>{{password}}:</label> --> <input name="pw" type="password" placeholder="{{password}}"></p>' + 
     '<p><label>{{map}}:</label><div class="dropdown"><select name="mapid">'+optionsString+'</select></div></p>'+
     '<p><label>{{sex}}:</label><div class="dropdown"><select name="ge"><option value="0">{{female}}</option><option value="1">{{male}}</option></select></div></p>'+
     '<p><label>{{birth}}:</label><div class="dropdown"><select name="ag">'+year+'</select></div></p>'+
@@ -192,7 +192,7 @@ App.Views.Users.Register = App.Views.Base.extend({
   
   createData: function() {
     var data = { "menuTitle": I18n.t('views.users.register.register'), "email": I18n.t('views.users.register.email'), "fname": I18n.t('views.users.register.first_name'), 
-                 "lname": I18n.t('views.users.register.last_name'), "alias": I18n.t('views.users.register.display_name'), "street": I18n.t('views.users.register.street'),
+                 "lname": I18n.t('views.users.register.last_name'), "username": I18n.t('views.users.register.username'), "street": I18n.t('views.users.register.street'),
                  "zip": I18n.t('views.users.register.zip'), "city": I18n.t('views.users.register.city'), "phone": I18n.t('views.users.register.phone'), 
                  "password": I18n.t('views.users.register.password'), "sex": I18n.t('views.users.register.sex'), "inlist": I18n.t('views.users.register.in_list'), "news": I18n.t('views.users.register.news'),
                  "birth":  I18n.t('views.users.register.birth_year'), "premium": I18n.t('views.users.register.premium'), "map": I18n.t('views.users.register.map'), "regButton": I18n.t('views.users.register.register'),

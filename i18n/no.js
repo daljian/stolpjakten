@@ -14,7 +14,7 @@ I18n.Translations.no = {
       login: {
         login: "Logg inn",
         password: "Passord",
-        email: "Epost",
+        username: "Brukernavn",
         logininternalerror: "Det feilet! Notere tiden og rapporter feilet til app@stolpjakten.se",
         loginrejected: "Ikke godkjent innlogging, kontroller stavelse og versaler",
         unknownemail: "Ukjent e-post",
@@ -35,7 +35,7 @@ I18n.Translations.no = {
         email: "Epost",
         first_name: "Fornavn",
         last_name: "Etternavn",
-        display_name: "Visningsnavn",
+        username: "Brukernavn",
         street: "Gateadresse",
         zip: "Postnummer",
         city: "Sted",

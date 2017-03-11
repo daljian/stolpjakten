@@ -46,24 +46,43 @@ App.Views.Menu.Index = App.Views.Base.extend({
   // html som ska visas. {{xxx}} - kommer från variabel i createData()
   //  <span class="glyphicon glyphicon-qrcode"></span>
   createHtml: function() {
-    var source = '<div class="navigation map{{mapCss}}"><div class="top"><a class="icon{{mapCss}} toMap" style="float:left;"><span class="glyphicon glyphicon-align-justify"></span></a>{{menuTitle}}</div></div>'+
-                 '<div class="menu">'+
-                 '<div class="menu-title"><span class="display-title">{{login}}</span><br/>'+
-                 
-                 '<span class="display-name">{{firstName}} {{lastName}}</span></div>'+
-                 '<div class="menu-body">'+
-                 '<div class="option" data-action="marker">'+I18n.t('views.menu.stickslabel')+'</div>'+
-                 //'<div class="option" data-action="account">'+I18n.t('views.menu.accountlabel')+'</div>'+
-                 //'<div class="option" data-action="info">'+I18n.t('views.menu.infolabel')+'</div>'+
-                 '<div class="option" data-action="result">'+I18n.t('views.menu.resultslabel')+'</div>'+
-                 '<div class="option" data-action="toplist">'+I18n.t('views.menu.toplistlabel')+'</div>'+
-                 '<div class="option" data-action="choosecity">'+I18n.t('views.menu.choosecity')+'</div>'+
-                 '<div class="option" data-action="courseselection">'+I18n.t('views.menu.courseselectionlabel')+'</div>'+
-                 '<div class="option" data-action="settings">'+I18n.t('views.menu.settingslabel')+'</div>'+
-                 '<div class="option" data-action="sync">'+I18n.t('views.menu.synclabel')+'</div>'+
-                 '<div class="option" data-action="logout">'+I18n.t('views.menu.logoutlabel')+'</div>'+
-                 '</div>'+
-                 '</div>';
+    var courseMode = getCourseMode();
+    var courseName = '';
+    if (courseMode) {
+     courseName = getCourse(getCurrentCourse()).cn;
+    }
+    var source;
+    if (courseMode) {
+    source = '<div class="navigation map{{mapCss}}"><div class="top"><a class="icon{{mapCss}} toMap" style="float:left;"><span class="glyphicon glyphicon-align-justify"></span></a>{{menuTitle}} - '+courseName+'</div></div>'+
+                     '<div class="menu">'+
+                     '<div class="menu-title"><span class="display-title">{{login}}</span><br/>'+
+
+                     '<span class="display-name">{{firstName}} {{lastName}}</span></div>'+
+                     '<div class="menu-body">'+
+                     '<div class="option" data-action="coursetoplist">'+I18n.t('views.menu.toplistlabel')+'</div>'+
+                     '<div class="option" data-action="courseselection">'+I18n.t('views.menu.courseselectionlabel')+'</div>'+
+                     '</div>'+
+                     '</div>';
+    } else {
+    source = '<div class="navigation map{{mapCss}}"><div class="top"><a class="icon{{mapCss}} toMap" style="float:left;"><span class="glyphicon glyphicon-align-justify"></span></a>{{menuTitle}}</div></div>'+
+                     '<div class="menu">'+
+                     '<div class="menu-title"><span class="display-title">{{login}}</span><br/>'+
+
+                     '<span class="display-name">{{firstName}} {{lastName}}</span></div>'+
+                     '<div class="menu-body">'+
+                     '<div class="option" data-action="marker">'+I18n.t('views.menu.stickslabel')+'</div>'+
+                     //'<div class="option" data-action="account">'+I18n.t('views.menu.accountlabel')+'</div>'+
+                     //'<div class="option" data-action="info">'+I18n.t('views.menu.infolabel')+'</div>'+
+                     '<div class="option" data-action="result">'+I18n.t('views.menu.resultslabel')+'</div>'+
+                     '<div class="option" data-action="toplist">'+I18n.t('views.menu.toplistlabel')+'</div>'+
+                     '<div class="option" data-action="choosecity">'+I18n.t('views.menu.choosecity')+'</div>'+
+                     '<div class="option" data-action="courseselection">'+I18n.t('views.menu.courseselectionlabel')+'</div>'+
+                     '<div class="option" data-action="settings">'+I18n.t('views.menu.settingslabel')+'</div>'+
+                     '<div class="option" data-action="sync">'+I18n.t('views.menu.synclabel')+'</div>'+
+                     '<div class="option" data-action="logout">'+I18n.t('views.menu.logoutlabel')+'</div>'+
+                     '</div>'+
+                     '</div>';
+    }
     return source;
   },
   
@@ -77,7 +96,7 @@ App.Views.Menu.Index = App.Views.Base.extend({
         var retrievedObject = JSON.parse(localStorage.getItem(getUserKey())),
         firstName = retrievedObject.ud.fn,
         lastName = retrievedObject.ud.ln;
-        data = { "firstName": firstName, "lastName": lastName, "menuTitle": menuTitle, "login": I18n.t('views.menu.loginlabel'), mapCss: mapView};
+        data = {"firstName": firstName, "lastName": lastName, "menuTitle": menuTitle, "login": I18n.t('views.menu.loginlabel'), mapCss: mapView};
     }catch(err){
       console.log("Tried to retrive using key " + getUserKey());
       var retrievedObject = net.getUser(getNetCredentials());
