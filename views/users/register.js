@@ -36,6 +36,7 @@ App.Views.Users.Register = App.Views.Base.extend({
   
   onSubmit: function() {
     var validReg = true;
+    setCourseMode(false);
 
     $('input').each( function(key, value){
       //Validate pwd
