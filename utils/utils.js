@@ -372,7 +372,8 @@ var utils = (function() {
     if ( typeof cordova == "undefined" || typeof cordova.require == "undefined" ) {
       return;
     }
-    var scanner = cordova.require("com.phonegap.plugins.barcodescanner.BarcodeScanner");
+    //var scanner = cordova.require("com.phonegap.plugins.barcodescanner.BarcodeScanner");
+    var scanner = cordova.require("cordova.plugins.barcodeScanner.scan");
     var self=this;
     self.callback = callback;
 
