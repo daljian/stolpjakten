@@ -160,10 +160,13 @@ App.Views.Maps.Show = App.Views.Base.extend({
                 //alert ("key: " + key + " value: " + JSON.stringify(value));
                 courseSticks.push(allSticks[i]);
                 allSticks[i].available = true;
+                allSticks[i].courseControlId = value.co;
                 if (value.is == 1){
                   allSticks[i]["icon"] = startIcon;
+                  allSticks[i].start=true;
                 }else if (value.ig == 1){
                   allSticks[i]["icon"] = goalIcon;
+                  allSticks[i].goal=true;
                 }else{
                   allSticks[i]["icon"] = controlIcon;
                   if ( courseSticks.length == 2){

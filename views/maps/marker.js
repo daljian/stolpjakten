@@ -12,6 +12,8 @@ App.Views.Maps.Marker = App.Views.Base.extend({
     
     var netCredentials = new NetCredentials(credentials.username, credentials.password, this.id);
     //console.log("stickinfo: " + JSON.stringify(this.selectedStick));
+
+    //net.addCourseControl()
     var attempedRegistration = new ControlRegistration(this.selectedStick.id, code);
     var result = net.addControl(netCredentials, attempedRegistration);
     var key = getLastAttemptedRegistrationKey();
@@ -165,7 +167,7 @@ App.Views.Maps.Marker = App.Views.Base.extend({
   },
   createRegistrationHtml: function() {
     var registrationHtml = null;
-    if (!this.selectedStick.taken){
+    if (!this.selectedStick.taken || getCourseMode()){
       registrationHtml = '<div class="normal"><input class="markerCode" name="markerCode"> <div class="button map'+getCurrentMapId()+'" data-action="register">'+I18n.t('views.map.marker.register')+'</div></div>';
       if ( typeof cordova == "undefined" || typeof cordova.require == "undefined" ) {
         //We can't scan so do not display scan button

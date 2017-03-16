@@ -173,6 +173,8 @@ function CourseIdentifier(ci){
     return '<course><ci>'+self.ci+'</ci></course>';
   }
 }
+function CourseControlRegistration (){
+}
 
 
 //javascript module pattern
