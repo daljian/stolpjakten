@@ -373,6 +373,8 @@ var utils = (function() {
 
   },
   scanCourse: function () {
+  alert("here?");
+  }
     var self=this;
     self.callback = callback;
 
