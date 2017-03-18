@@ -304,6 +304,15 @@ var utils = (function() {
         return pendingSticks;
 
   },
+  formatDate: function(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var seconds = date.getSeconds();
+    seconds = seconds < 10 ? '0'+seconds : seconds;
+    var strTime = hours + ':' + minutes + ':' + seconds;
+    return date.getFullYear() + '-' + date.getMonth()+1 + '-' + date.getDate() + ' ' + strTime;
+  },
 // -- QR scan operations --
   QRData: function(id, code){
     this.id = id;
@@ -364,7 +373,65 @@ var utils = (function() {
 
   },
   scanCourse: function () {
+    var self=this;
+    self.callback = callback;
 
+    cordova.plugins.barcodeScanner.scan( function (result) {
+
+        if (result.cancelled){
+          // Scanning was cancelled, do nothing.
+        }else{
+          var data = self.decodeQRText(result.text);
+          var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
+          var foundScannedStick = false;
+          for (var i = 0; i < sticks.length; i++){
+            if (sticks[i].number == data.id){
+                foundScannedStick = true;
+                var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), sticks[i].id);
+                var result = net.addCourseControl(getNetCredentials(), attempedRegistration);
+                alert(result);
+
+                if (!result.success){
+                    if (result.alreadyTaken == true){
+                      self.warning(I18n.t('views.map.marker.registerduplicate'));
+                    }else{
+                      if (net.isOnline() == false){
+                        attempedRegistration.success = false;
+                        localStorage.setItem(key, JSON.stringify(attempedRegistration));
+                        self.updateStorageAfterRegistration(attempedRegistration);
+                        self.warning(I18n.t('views.map.marker.registerfailoffline'));
+                      }else{
+                        self.error(I18n.t('views.map.marker.registerfail'));
+                      }
+                    }
+                }else{
+                    sticks[i].taken = true;
+                    localStorage.setItem(getSelectedMarkerKey(), JSON.stringify(sticks[i]));
+                    localStorage.setItem(getSticksKey(), JSON.stringify(sticks));
+                    attempedRegistration.success = true;
+                    localStorage.setItem(key, JSON.stringify(attempedRegistration));
+                    self.updateStorageAfterRegistration(attempedRegistration);
+                    if (typeof sticks[i].culture != "undefined"){
+                        self.successHref(I18n.t('views.map.marker.registersuccess'), "#/maps/"+getCurrentMapId() + "/" + sticks[i].number);
+                    }else{
+                      self.success(I18n.t('views.map.marker.registersuccess'));
+                    }
+                    break;
+                }
+            }
+          }
+          if (foundScannedStick == false){
+            self.error(I18n.t('views.map.marker.registerfail'));
+          }
+          if (self.callback != null){
+            self.callback.render();
+          }
+        }
+
+
+    }, function (error) {
+        //console.log("Scanning failed: ", error);
+    } );
   },
 
 

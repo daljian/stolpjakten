@@ -173,7 +173,17 @@ function CourseIdentifier(ci){
     return '<course><ci>'+self.ci+'</ci></course>';
   }
 }
-function CourseControlRegistration (){
+function CourseControlRegistration (courseId, controlId){
+  var self = this;
+  self.courseid = courseId;
+  self.controlid = controlId;
+  self.registrationdate = formatDate(new Date());
+  self.toXML = function(){
+    return   '<course><courseid>'
+      +self.courseid+'</courseid><controlid>'
+      +self.controlid+'</controlid><registrationdate>'
+      +self.registrationdate+'</registrationdate></course>';
+  }
 }
 
 
