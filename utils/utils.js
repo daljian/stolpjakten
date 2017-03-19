@@ -376,19 +376,15 @@ var utils = (function() {
   scanCourse: function (callback) {
     alert("scanCourse");
 
-    var self=this;
-    self.callback = callback;
-    var attempedRegistration = new CourseControlRegistration(1, 1);
-    var result = net.addCourseControl(getNetCredentials(), attempedRegistration);
-    alert(result);
 
     cordova.plugins.barcodeScanner.scan( function (result) {
 
         if (result.cancelled){
           // Scanning was cancelled, do nothing.
         }else{
-          var data = self.decodeQRText(result.text);
-          alert("Data: " + JSON.stringify(data) + " Text: " + result.text);
+          var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
+          var result = net.addCourseControl(getNetCredentials(), attempedRegistration);
+          alert(result);
 
           var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
           var foundScannedStick = false;
@@ -400,22 +396,9 @@ var utils = (function() {
                     if (result.alreadyTaken == true){
                       self.warning(I18n.t('views.map.marker.registerduplicate'));
                     }else{
-                      if (net.isOnline() == false){
-                        attempedRegistration.success = false;
-                        localStorage.setItem(key, JSON.stringify(attempedRegistration));
-                        self.updateStorageAfterRegistration(attempedRegistration);
-                        self.warning(I18n.t('views.map.marker.registerfailoffline'));
-                      }else{
-                        self.error(I18n.t('views.map.marker.registerfail'));
-                      }
+                      self.error(I18n.t('views.map.marker.registerfail'));
                     }
                 }else{
-                    sticks[i].taken = true;
-                    localStorage.setItem(getSelectedMarkerKey(), JSON.stringify(sticks[i]));
-                    localStorage.setItem(getSticksKey(), JSON.stringify(sticks));
-                    attempedRegistration.success = true;
-                    localStorage.setItem(key, JSON.stringify(attempedRegistration));
-                    self.updateStorageAfterRegistration(attempedRegistration);
                     if (typeof sticks[i].culture != "undefined"){
                         self.successHref(I18n.t('views.map.marker.registersuccess'), "#/maps/"+getCurrentMapId() + "/" + sticks[i].number);
                     }else{
@@ -432,8 +415,6 @@ var utils = (function() {
             self.callback.render();
           }
         }
-
-
     }, function (error) {
         //console.log("Scanning failed: ", error);
     } );
@@ -441,7 +422,6 @@ var utils = (function() {
 
 
   scan: function(callback){
-    alert("scan");
     var self=this;
     self.callback = callback;
 
@@ -451,7 +431,6 @@ var utils = (function() {
           // Scanning was cancelled, do nothing.
         }else{
           var data = self.decodeQRText(result.text);
-          alert("Data: " + JSON.stringify(data) + " Text: " + result.text);
           var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
           var foundScannedStick = false;
           for (var i = 0; i < sticks.length; i++){
