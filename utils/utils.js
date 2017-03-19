@@ -388,7 +388,7 @@ var utils = (function() {
           // Scanning was cancelled, do nothing.
         }else{
           var data = self.decodeQRText(result.text);
-          alert("Data: " + JSON.stringify(data));
+          alert("Data: " + JSON.stringify(data) + " Text: " + result.text);
 
           var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
           var foundScannedStick = false;
@@ -451,7 +451,7 @@ var utils = (function() {
           // Scanning was cancelled, do nothing.
         }else{
           var data = self.decodeQRText(result.text);
-          alert("Data: " + JSON.stringify(data));
+          alert("Data: " + JSON.stringify(data) + " Text: " + result.text);
           var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
           var foundScannedStick = false;
           for (var i = 0; i < sticks.length; i++){
