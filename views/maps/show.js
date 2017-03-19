@@ -108,6 +108,24 @@ App.Views.Maps.Show = App.Views.Base.extend({
     return valid;
   },
 
+  createHtml: function() {
+    var source = '<div class="navigation map{{mapCss}}">'+
+                 '<div class="top"><a class="icon{{mapCss}} tomenu" style="float:left;"><span class="glyphicon glyphicon-align-justify"></span></a>{{menuTitle}}'+
+                 //'<span class="filter"><a href="#"><span class="glyphicon glyphicon-filter"></span></a></span>'+
+                 this.createFilterIconHtml() +
+                 this.createMarkerClusterIconHtml()+
+                 this.createScanIconHtml()+
+                 this.createGPSIconHtml()+
+
+
+                 //'<span class="filter"><a href="javascript:void(0);" onclick="javascript:myself.seedLayerByIndex(0)"><span class="glyphicon glyphicon-download-alt"></span></a></span>'+
+                 '</div></div>'+
+                 '<div id="map-wrapper">' +
+                 '<div id="map" style="height: '+this.getMapHeight()+';"></div>'+
+                 '</div>';
+
+    return source;
+  },
 
   /**
    * Renders the view using the `views/users/edit.hbs` template.
@@ -215,8 +233,9 @@ App.Views.Maps.Show = App.Views.Base.extend({
             maxLng = Math.max(maxLng,sticks[i].longitude.replace(",","."));
             minLng = Math.min(minLng,sticks[i].longitude.replace(",","."));
     }
-    var map = getNewMap();//L.map('map', {maxZoom: 18, attributionControl: false});
-    
+    var map;
+    map = getNewMap();//L.map('map', {maxZoom: 18, attributionControl: false});
+
     this.map = map;
     
     map.saveMapPosition = this.saveMapPosition;
@@ -486,26 +505,6 @@ App.Views.Maps.Show = App.Views.Base.extend({
         }
     }
     window.location.href = '#maps/'+getCurrentMapId()+'/'+marker;
-  },
-  
-
-  createHtml: function() {
-    var source = '<div class="navigation map{{mapCss}}">'+
-                 '<div class="top"><a class="icon{{mapCss}} tomenu" style="float:left;"><span class="glyphicon glyphicon-align-justify"></span></a>{{menuTitle}}'+
-                 //'<span class="filter"><a href="#"><span class="glyphicon glyphicon-filter"></span></a></span>'+
-                 this.createFilterIconHtml() +
-                 this.createMarkerClusterIconHtml()+
-                 this.createScanIconHtml()+
-                 this.createGPSIconHtml()+
-                
-
-                 //'<span class="filter"><a href="javascript:void(0);" onclick="javascript:myself.seedLayerByIndex(0)"><span class="glyphicon glyphicon-download-alt"></span></a></span>'+
-                 '</div></div>'+
-                 '<div id="map-wrapper">' +
-                 '<div id="map" style="height: '+this.getMapHeight()+';"></div>'+ 
-                 '</div>';
-    
-    return source;
   },
   createGPSIconHtml: function() {
     if (getGPS()){

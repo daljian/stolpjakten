@@ -257,6 +257,7 @@ App.Routers.Menu = Backbone.Router.extend({
     var language = localStorage.getItem(getLanguageKey());
     var filter = getFilter()
     var cluster = getMarkerCluster();
+    var courseMode = getCourseMode();
     var netCreds = getNetCredentials();
     localStorage.clear();
     
@@ -265,7 +266,7 @@ App.Routers.Menu = Backbone.Router.extend({
       var result = net.getUser(netCreds);
       if(result.success) {
         var creds = new Object();
-        creds.email = netCreds.em;
+        creds.username = netCreds.un;
         creds.password = netCreds.pwd;
         localStorage.setItem(getCredentialsKey(), JSON.stringify(creds));
         localStorage.setItem(getUserKey(), JSON.stringify(result.result));
@@ -273,6 +274,7 @@ App.Routers.Menu = Backbone.Router.extend({
         setCurrentMap(currentMap);
         localStorage.setItem(getFilterOnKey(), filter);
         localStorage.setItem(getMarkerClusterOnKey(), cluster);
+        setCourseMode(courseMode);
       }
     }catch(err){
       console.log(err);
