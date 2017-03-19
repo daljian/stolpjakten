@@ -176,7 +176,7 @@
     }
     try{
       var credentials = JSON.parse(localStorage.getItem(getCredentialsKey()));
-      if (credentials != null && typeof credentials.email != "undefined"){
+      if (credentials != null && typeof credentials.username != "undefined"){
         var user = localStorage.getItem(getUserKey());
         if (typeof user != "undefined"){
          var mapId = getCurrentMapId();
