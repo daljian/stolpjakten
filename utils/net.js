@@ -177,7 +177,7 @@ function CourseControlRegistration (courseId, controlId){
   var self = this;
   self.courseid = courseId;
   self.controlid = controlId;
-  self.registrationdate = formatDate(new Date());
+  self.registrationdate = utils.formatDate(new Date());
   self.toXML = function(){
     return   '<course><courseid>'
       +self.courseid+'</courseid><controlid>'
@@ -526,10 +526,10 @@ var net = (function() {
         
         utils.logDebug("["+serverResult+"]");
         utils.assertDefined(serverResult);
-        if (serverResult == "1 stolpe registrerad"){
+        if (serverResult.nreg == "1"){
           jsonResult.success = true;
           jsonResult.result = serverResult;
-        }else if (serverResult == "0 stolpar registrerade. 1 stolpar redan registrerade"){
+        }else if (serverResult.oreg == "1"){
           console.log("ok, so already taken...");
           jsonResult.result = serverResult;
           jsonResult.alreadyTaken = true;
@@ -728,7 +728,7 @@ var net = (function() {
     addCourseControl: function(netCredentials, courseControlRegistration)  {
       var jsonResult = new NetResult(false, null);
       try{
-        var xmlData ="<rd>" + netCredentials.toXML() + controlRegistration.toXML() + "</rd>";
+        var xmlData ="<rd>" + netCredentials.toXML() + courseControlRegistration.toXML() + "</rd>";
         var serverResult = sendToServer(NET_OPERATION_ADD_COURSE_CONTROL,xmlData);
         utils.assertDefined(serverResult);
         utils.logDebug("["+serverResult+"]");

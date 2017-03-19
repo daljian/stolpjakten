@@ -311,7 +311,8 @@ var utils = (function() {
     var seconds = date.getSeconds();
     seconds = seconds < 10 ? '0'+seconds : seconds;
     var strTime = hours + ':' + minutes + ':' + seconds;
-    return date.getFullYear() + '-' + date.getMonth()+1 + '-' + date.getDate() + ' ' + strTime;
+    var month = parseInt(date.getMonth()) + 1;
+    return date.getFullYear() + '-' + month + '-' + date.getDate() + ' ' + strTime;
   },
 // -- QR scan operations --
   QRData: function(id, code){
@@ -372,9 +373,12 @@ var utils = (function() {
 
 
   },
-  scanCourse: function () {
+  scanCourse: function (callback) {
     var self=this;
     self.callback = callback;
+                var attempedRegistration = new CourseControlRegistration(1, 1);
+                var result = net.addCourseControl(getNetCredentials(), attempedRegistration);
+                alert(result);
 
     cordova.plugins.barcodeScanner.scan( function (result) {
 
@@ -387,9 +391,6 @@ var utils = (function() {
           for (var i = 0; i < sticks.length; i++){
             if (sticks[i].number == data.id){
                 foundScannedStick = true;
-                var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), sticks[i].id);
-                var result = net.addCourseControl(getNetCredentials(), attempedRegistration);
-                alert(result);
 
                 if (!result.success){
                     if (result.alreadyTaken == true){
