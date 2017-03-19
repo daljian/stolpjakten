@@ -374,11 +374,13 @@ var utils = (function() {
 
   },
   scanCourse: function (callback) {
+    alert("scanCourse");
+
     var self=this;
     self.callback = callback;
-                var attempedRegistration = new CourseControlRegistration(1, 1);
-                var result = net.addCourseControl(getNetCredentials(), attempedRegistration);
-                alert(result);
+    var attempedRegistration = new CourseControlRegistration(1, 1);
+    var result = net.addCourseControl(getNetCredentials(), attempedRegistration);
+    alert(result);
 
     cordova.plugins.barcodeScanner.scan( function (result) {
 
@@ -386,6 +388,8 @@ var utils = (function() {
           // Scanning was cancelled, do nothing.
         }else{
           var data = self.decodeQRText(result.text);
+          alert("Data: " + JSON.stringify(data));
+
           var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
           var foundScannedStick = false;
           for (var i = 0; i < sticks.length; i++){
@@ -437,6 +441,7 @@ var utils = (function() {
 
 
   scan: function(callback){
+    alert("scan");
     var self=this;
     self.callback = callback;
 
@@ -446,6 +451,7 @@ var utils = (function() {
           // Scanning was cancelled, do nothing.
         }else{
           var data = self.decodeQRText(result.text);
+          alert("Data: " + JSON.stringify(data));
           var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
           var foundScannedStick = false;
           for (var i = 0; i < sticks.length; i++){
