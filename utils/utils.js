@@ -374,17 +374,14 @@ var utils = (function() {
 
   },
   scanCourse: function (callback) {
-    alert("scanCourse");
-
-
     cordova.plugins.barcodeScanner.scan( function (result) {
 
         if (result.cancelled){
           // Scanning was cancelled, do nothing.
         }else{
           var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
-          var result = net.addCourseControl(getNetCredentials(), attempedRegistration);
-          alert(result);
+          var netResult = net.addCourseControl(getNetCredentials(), attempedRegistration);
+          alert(netResult);
 
           var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
           var foundScannedStick = false;
