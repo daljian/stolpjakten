@@ -21,7 +21,7 @@ CACHE MANIFEST
 ./thirdparty/leaflet/leaflet.css
 ./thirdparty/leaflet/leaflet.js
 ./thirdparty/leaflet/leaflet-src.js
-./thirdparty/handlebars/handlebars-v1.3.0.js
+./thirdparty/handlebars-v4.0.5.js
 ./thirdparty/.DS_Store
 ./thirdparty/fastclick/fastclick.js
 ./thirdparty/backbone/backbone-min.js

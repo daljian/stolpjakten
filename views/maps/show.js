@@ -234,7 +234,14 @@ App.Views.Maps.Show = App.Views.Base.extend({
             minLng = Math.min(minLng,sticks[i].longitude.replace(",","."));
     }
     var map;
-    map = getNewMap();//L.map('map', {maxZoom: 18, attributionControl: false});
+    try {
+      map = getNewMap();//L.map('map', {maxZoom: 18, attributionControl: false});
+    } catch (err) {
+      //Hackish workaround
+      //window.location.href = '#menu/index/tomap';
+      window.location.href = '#/maps/'+getCurrentMapId()+'/show';
+      return;
+    }
 
     this.map = map;
     

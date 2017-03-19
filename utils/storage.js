@@ -216,8 +216,12 @@ function getCurrentApi(){
 }
 
 function getNetCredentials(){
-  var creds = JSON.parse(localStorage.getItem(getCredentialsKey()));
-  return new NetCredentials(creds.username, creds.password, getCurrentMapId());
+  try {
+    var creds = JSON.parse(localStorage.getItem(getCredentialsKey()));
+    return new NetCredentials(creds.username, creds.password, getCurrentMapId());
+  } catch (err) {
+    return null;
+  }
 }
 
 function getCurrentMapId(){
