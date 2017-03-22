@@ -416,8 +416,15 @@ var utils = (function() {
                     // Scanning was cancelled, do nothing.
                 } else {
                     alert('here 2?');
-                    var data = self.decodeQRText(result.text);
-                    var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
+                        var data = "";
+                        var attempedRegistration = "";
+
+                    try {
+                        var data = self.decodeQRText(result.text);
+                        var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
+                    } catch (err) {
+                      alert(err);
+                    }
 
                     alert('here 3?');
                     var netResult = net.addCourseControl(getNetCredentials(), attempedRegistration);
