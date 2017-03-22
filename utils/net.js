@@ -174,6 +174,8 @@ function CourseIdentifier(ci){
   }
 }
 function CourseControlRegistration (courseId, controlId){
+  alert ("courseId: " + courseId);
+  alert ("controlId: " + controlId);
   var self = this;
   self.courseid = courseId;
   self.controlid = controlId;

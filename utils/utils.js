@@ -306,12 +306,17 @@ var utils = (function() {
   },
   formatDate: function(date) {
     var hours = date.getHours();
+    alert("hours: " + hours);
     var minutes = date.getMinutes();
     minutes = minutes < 10 ? '0'+minutes : minutes;
+    alert("minutes: " + minutes);
     var seconds = date.getSeconds();
     seconds = seconds < 10 ? '0'+seconds : seconds;
+    alert("seconds: " + seconds);
     var strTime = hours + ':' + minutes + ':' + seconds;
+    alert("strTime: " + strTime);
     var month = parseInt(date.getMonth()) + 1;
+    alert("month: " + month);
     return date.getFullYear() + '-' + month + '-' + date.getDate() + ' ' + strTime;
   },
 // -- QR scan operations --
@@ -382,7 +387,13 @@ var utils = (function() {
           // Scanning was cancelled, do nothing.
         }else{
         alert('here 2?');
-          var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
+        var attempedRegistration = "etet";
+        try {
+          attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
+        } catch (err) {
+          alert("err: " + err);
+        }
+
         alert('here 3?');
           var netResult = net.addCourseControl(getNetCredentials(), attempedRegistration);
           alert(netResult);
