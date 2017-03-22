@@ -408,6 +408,8 @@ var utils = (function() {
 
         },
         scanCourse: function(callback) {
+            var self = this;
+            self.callback = callback;
             cordova.plugins.barcodeScanner.scan(function(result) {
                 alert('here?');
 
