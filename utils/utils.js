@@ -375,11 +375,15 @@ var utils = (function() {
   },
   scanCourse: function (callback) {
     cordova.plugins.barcodeScanner.scan( function (result) {
+        alert('here?');
+
 
         if (result.cancelled){
           // Scanning was cancelled, do nothing.
         }else{
+        alert('here 2?');
           var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
+        alert('here 3?');
           var netResult = net.addCourseControl(getNetCredentials(), attempedRegistration);
           alert(netResult);
 
