@@ -729,7 +729,10 @@ var net = (function() {
       var jsonResult = new NetResult(false, null);
       try{
         var xmlData ="<rd>" + netCredentials.toXML() + courseControlRegistration.toXML() + "</rd>";
+        alert("NET_OPERATION_ADD_COURSE_CONTROL: " + NET_OPERATION_ADD_COURSE_CONTROL);
+        alert("xmlData: " + xmlData);
         var serverResult = sendToServer(NET_OPERATION_ADD_COURSE_CONTROL,xmlData);
+        alert("serverResult:  " + serverResult);
         utils.assertDefined(serverResult);
         utils.logDebug("["+serverResult+"]");
         jsonResult.success = true;
