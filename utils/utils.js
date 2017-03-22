@@ -335,17 +335,12 @@ var utils = (function() {
         },
         formatDate: function(date) {
             var hours = date.getHours();
-            alert("hours: " + hours);
             var minutes = date.getMinutes();
             minutes = minutes < 10 ? '0' + minutes : minutes;
-            alert("minutes: " + minutes);
             var seconds = date.getSeconds();
             seconds = seconds < 10 ? '0' + seconds : seconds;
-            alert("seconds: " + seconds);
             var strTime = hours + ':' + minutes + ':' + seconds;
-            alert("strTime: " + strTime);
             var month = parseInt(date.getMonth()) + 1;
-            alert("month: " + month);
             return date.getFullYear() + '-' + month + '-' + date.getDate() + ' ' + strTime;
         },
         // -- QR scan operations --
@@ -411,26 +406,14 @@ var utils = (function() {
             var self = this;
             self.callback = callback;
             cordova.plugins.barcodeScanner.scan(function(result) {
-                alert('here?');
-
-
                 if (result.cancelled) {
                     // Scanning was cancelled, do nothing.
                 } else {
-                    alert('here 2?');
-                        var data = "";
-                        var attempedRegistration = "";
+                    var data = self.decodeQRText(result.text);
+                    var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
 
-                    try {
-                        data = self.decodeQRText(result.text);
-                        attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
-                    } catch (err) {
-                      alert(err);
-                    }
-
-                    alert('here 3?');
                     var netResult = net.addCourseControl(getNetCredentials(), attempedRegistration);
-                    alert(netResult);
+                    alert(JSON.stringify(netResult));
 
                     var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
                     var foundScannedStick = false;
