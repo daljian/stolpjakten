@@ -420,8 +420,8 @@ var utils = (function() {
                         var attempedRegistration = "";
 
                     try {
-                        var data = self.decodeQRText(result.text);
-                        var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
+                        data = self.decodeQRText(result.text);
+                        attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
                     } catch (err) {
                       alert(err);
                     }
