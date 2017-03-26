@@ -333,6 +333,14 @@ var utils = (function() {
             return pendingSticks;
 
         },
+        toArray: function(maybeArray) {
+            if (Object.prototype.toString.call(maybeArray) != '[object Array]') {
+                var tmp = new Array();
+                tmp.push(maybeArray);
+                maybeArray = tmp;
+            }
+            return maybeArray;
+        },
         formatDate: function(date) {
             var hours = date.getHours();
             var minutes = date.getMinutes();
@@ -341,6 +349,7 @@ var utils = (function() {
             seconds = seconds < 10 ? '0' + seconds : seconds;
             var strTime = hours + ':' + minutes + ':' + seconds;
             var month = parseInt(date.getMonth()) + 1;
+            month = month < 10 ? '0' + month : month;
             return date.getFullYear() + '-' + month + '-' + date.getDate() + ' ' + strTime;
         },
         // -- QR scan operations --
@@ -413,26 +422,20 @@ var utils = (function() {
                     var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
 
                     var netResult = net.addCourseControl(getNetCredentials(), attempedRegistration);
-                    alert(JSON.stringify(netResult));
+//                    alert(JSON.stringify(netResult));
 
                     var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
                     var foundScannedStick = false;
                     for (var i = 0; i < sticks.length; i++) {
                         if (sticks[i].number == data.id) {
                             foundScannedStick = true;
-
                             if (!result.success) {
-                                if (result.alreadyTaken == true) {
-                                    self.warning(I18n.t('views.map.marker.registerduplicate'));
-                                } else {
-                                    self.error(I18n.t('views.map.marker.registerfail'));
-                                }
+                                self.error(I18n.t('views.map.marker.registerfail'));
+                            } else if (result.courseComplete){
+                                self.success("Banan avklarad, grattis!");
+                                break;
                             } else {
-                                if (typeof sticks[i].culture != "undefined") {
-                                    self.successHref(I18n.t('views.map.marker.registersuccess'), "#/maps/" + getCurrentMapId() + "/" + sticks[i].number);
-                                } else {
-                                    self.success(I18n.t('views.map.marker.registersuccess'));
-                                }
+                                self.success(I18n.t('views.map.marker.registersuccess'));
                                 break;
                             }
                         }

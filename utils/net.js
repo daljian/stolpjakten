@@ -729,12 +729,18 @@ var net = (function() {
       var jsonResult = new NetResult(false, null);
       try{
         var xmlData ="<rd>" + netCredentials.toXML() + courseControlRegistration.toXML() + "</rd>";
-        alert("NET_OPERATION_ADD_COURSE_CONTROL: " + NET_OPERATION_ADD_COURSE_CONTROL);
-        alert("xmlData: " + xmlData);
         var serverResult = sendToServer(NET_OPERATION_ADD_COURSE_CONTROL,xmlData);
-        alert("serverResult:  " + serverResult);
         utils.assertDefined(serverResult);
         utils.logDebug("["+serverResult+"]");
+        jsonResult.msg = toArray(jsonResult.msg);
+        jsonResult.courseComplete = false;
+        for (var msg in jsonResult.msg) {
+            if (msg == "control registered") {
+              jsonResult.success = true;
+            } else if (msg == "course finished") {
+              jsonResult.courseComplete = true;
+            }
+        }
         jsonResult.success = true;
         jsonResult.result = serverResult;
 
