@@ -426,22 +426,14 @@ var utils = (function() {
                     alert("sdr" + netResult.success);
                     var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
                     var foundScannedStick = false;
-                    for (var i = 0; i < sticks.length; i++) {
-                        if (sticks[i].number == data.id) {
-                            foundScannedStick = true;
-                            if (netResult.success == false) {
-                                self.error(I18n.t('views.map.marker.registerfail'));
-                            } else if (netResult.courseComplete){
-                                self.success("Banan avklarad, grattis!");
-                                break;
-                            } else {
-                                self.success(I18n.t('views.map.marker.registersuccess'));
-                                break;
-                            }
-                        }
-                    }
-                    if (foundScannedStick == false) {
+                    if (netResult.success == false) {
                         self.error(I18n.t('views.map.marker.registerfail'));
+                    } else if (netResult.courseComplete){
+                        self.success("Banan avklarad, grattis!");
+                        break;
+                    } else {
+                        self.success(I18n.t('views.map.marker.registersuccess'));
+                        break;
                     }
                     if (self.callback != null) {
                         self.callback.render();
