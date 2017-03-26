@@ -745,10 +745,10 @@ var net = (function() {
         jsonResult.result = serverResult;
 
       }catch(err){
-        console.log(err);
+        console.log("err: " + JSON.stringify(err));
         alert(err);
       }
-        alert(jsonResult);
+        alert("jsonResult " + JSON.stringify(jsonResult));
         return jsonResult;
     }
   };
