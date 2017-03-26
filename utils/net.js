@@ -732,10 +732,12 @@ var net = (function() {
         var serverResult = sendToServer(NET_OPERATION_ADD_COURSE_CONTROL,xmlData);
         utils.assertDefined(serverResult);
         utils.logDebug("["+serverResult+"]");
-        jsonResult.msg = toArray(jsonResult.msg);
-        jsonResult.courseComplete = false;
-        for (var msg in jsonResult.msg) {
+        serverResult.msg = toArray(serverResult.msg);
+        serverResult.courseComplete = false;
+        for (var msg in serverResult.msg) {
             if (msg == "control registered") {
+              jsonResult.success = true;
+            } else if (msg.includes("already registered")) {
               jsonResult.success = true;
             } else if (msg == "course finished") {
               jsonResult.courseComplete = true;

@@ -429,9 +429,9 @@ var utils = (function() {
                     for (var i = 0; i < sticks.length; i++) {
                         if (sticks[i].number == data.id) {
                             foundScannedStick = true;
-                            if (!result.success) {
+                            if (netResult.success == false) {
                                 self.error(I18n.t('views.map.marker.registerfail'));
-                            } else if (result.courseComplete){
+                            } else if (netResult.courseComplete){
                                 self.success("Banan avklarad, grattis!");
                                 break;
                             } else {
