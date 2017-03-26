@@ -744,10 +744,11 @@ var net = (function() {
         jsonResult.success = true;
         jsonResult.result = serverResult;
 
-      }catch(err){console.log(err);}
-        if (jsonresult.success == false) {
-          alert(jsonResult);
-        }
+      }catch(err){
+        console.log(err);
+        alert(err);
+      }
+        alert(jsonResult);
         return jsonResult;
     }
   };
