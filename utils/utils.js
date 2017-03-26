@@ -422,8 +422,8 @@ var utils = (function() {
                     var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
 
                     var netResult = net.addCourseControl(getNetCredentials(), attempedRegistration);
-//                    alert(JSON.stringify(netResult));
-
+                    alert(JSON.stringify(netResult));
+                    alert("sdr" + netResult.success);
                     var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
                     var foundScannedStick = false;
                     for (var i = 0; i < sticks.length; i++) {
