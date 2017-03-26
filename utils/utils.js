@@ -430,10 +430,8 @@ var utils = (function() {
                         self.error(I18n.t('views.map.marker.registerfail'));
                     } else if (netResult.courseComplete){
                         self.success("Banan avklarad, grattis!");
-                        break;
                     } else {
                         self.success(I18n.t('views.map.marker.registersuccess'));
-                        break;
                     }
                     if (self.callback != null) {
                         self.callback.render();
