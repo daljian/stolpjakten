@@ -745,7 +745,9 @@ var net = (function() {
         jsonResult.result = serverResult;
 
       }catch(err){console.log(err);}
-
+        if (jsonresult.success == false) {
+          alert(jsonResult);
+        }
         return jsonResult;
     }
   };
