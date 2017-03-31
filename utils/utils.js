@@ -424,17 +424,18 @@ var utils = (function() {
                     var data = self.decodeQRText(result.text);
                     if (data.id == nextCourseControl.mi) {
 
-                        alert("JomenVisst, det gick ju bra det där");
+                        self.success(I18n.t('views.map.marker.registersuccess'));
                         nextCourseControl.timestamp = formatDate(new Date());
                         var progress = getCourseProgress();
                         progress.takenSticks.add(nextCourseControl);
+                        alert("progress: " + JSON.stringify(progress));
                         setCourseProgress(progress);
                     }else {
-                        alert("Nja, det där får du nog göra om..");
+                        self.error(I18n.t('views.map.marker.registerfail'));
                     }
-                    if (nextCourseControl.is == 1) {
+                    if (nextCourseControl.ig == 1) {
 
-                        alert("Mååååål!");
+                        self.success("Klart!!");
 
                     }
                     var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
@@ -445,11 +446,9 @@ var utils = (function() {
                     var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
                     var foundScannedStick = false;
                     if (netResult.success == false) {
-                        self.error(I18n.t('views.map.marker.registerfail'));
                     } else if (netResult.courseComplete){
                         self.success("Banan avklarad, grattis!");
                     } else {
-                        self.success(I18n.t('views.map.marker.registersuccess'));
                     }
                     if (self.callback != null) {
                         self.callback.render();

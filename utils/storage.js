@@ -230,6 +230,7 @@ function getCourseDetailsKey(id) {
 
 function getNextCourseControl() {
     var numberOfTakenSTicks = getCourseProgress().takenSticks.length;
+    alert("numberOfTakenSTicks is " + numberOfTakenSTicks);
     utils.logDebug("course details: " + JSON.stringify(getCurrentCourseDetails()));
     return getCurrentCourseDetails().ctrls.ctrl[numberOfTakenSTicks];
 }
