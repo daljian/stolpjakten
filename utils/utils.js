@@ -426,7 +426,7 @@ var utils = (function() {
 
                         self.success(I18n.t('views.map.marker.registersuccess'));
                         try {
-                            nextCourseControl.timestamp = formatDate(new Date());
+                            nextCourseControl.timestamp = utils.formatDate(new Date());
                             var progress = getCourseProgress();
                             progress.takenSticks.push(nextCourseControl);
                             alert("progress: " + JSON.stringify(progress));
