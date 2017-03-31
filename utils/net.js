@@ -185,6 +185,22 @@ function CourseControlRegistration (courseId, controlId){
       +self.registrationdate+'</registrationdate></course>';
   }
 }
+function CourseControlsRegistration (controls){
+  var self = this;
+  self.controls = controls;
+  self.xmlHead = '<course><courseid>'+getCurrentCourse()+'</courseid><controls>';
+  self.xmlTail = '</<controls></course>';
+  self.xmlBody = '';
+  for (var i = 0; i < controls.length; i++) {
+    self.xmlBody += '<control>' +
+                    '<controlid>'+controls[i].mi+'</controlid>'
+                     '<registrationdate>'+controls[i].registrationdate+'</registrationdate>' +
+                     '</control>';
+  }
+  self.toXML = function(){
+    return self.xmlHead + self.xmlBody + self.xmlTail;
+  }
+}
 
 
 //javascript module pattern
@@ -206,6 +222,7 @@ var net = (function() {
   var NET_OPERATION_GET_MAP_COURSE="GetMapCourse";
   var NET_OPERATION_GET_MAP_COURSE_RESULTS="GetMapCourseResults";
   var NET_OPERATION_ADD_COURSE_CONTROL="AddCourseControl";
+  var NET_OPERATION_ADD_COURSE_CONTROLS="AddCourseControls";
   var NET_OPERATION_ADD_CONTROL="AddControls";
   var NET_OPERATION_GET_MAPS_ARRAY="GetMaps";
   var NET_OPERATION_GET_SERVER_STATUS="GetStatus";
@@ -743,6 +760,28 @@ var net = (function() {
             } else if (msg == "course finished") {
               jsonResult.courseComplete = true;
             }
+        }
+        jsonResult.success = true;
+        jsonResult.result = serverResult;
+
+      }catch(err){
+        console.log("err: " + JSON.stringify(err));
+        alert(err);
+      }
+        alert("jsonResult " + JSON.stringify(jsonResult));
+        return jsonResult;
+    },
+    addCourseControls: function(netCredentials, courseControlsRegistration)  {
+      var jsonResult = new NetResult(false, null);
+      try{
+        var xmlData ="<rd>" + netCredentials.toXML() + courseControlsRegistration.toXML() + "</rd>";
+        var serverResult = sendToServer(NET_OPERATION_ADD_COURSE_CONTROLS,xmlData);
+        utils.assertDefined(serverResult);
+        utils.logDebug("["+serverResult+"]");
+        serverResult.msgs = toArray(serverResult.msgs);
+        serverResult.courseComplete = false;
+        for (var msg in serverResult.msgs) {
+          alert("msg: " + msg);
         }
         jsonResult.success = true;
         jsonResult.result = serverResult;

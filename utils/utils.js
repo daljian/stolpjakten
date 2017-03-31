@@ -426,7 +426,7 @@ var utils = (function() {
 
                         self.success(I18n.t('views.map.marker.registersuccess'));
                         try {
-                            nextCourseControl.timestamp = utils.formatDate(new Date());
+                            nextCourseControl.registrationdate = utils.formatDate(new Date());
                             var progress = getCourseProgress();
                             progress.takenSticks.push(nextCourseControl);
                             alert("progress: " + JSON.stringify(progress));
@@ -441,20 +441,12 @@ var utils = (function() {
                     }
                     if (nextCourseControl.ig == 1) {
 
-                        self.success("Klart!!");
+                        var attemptedRegistration = new CourseControlsRegistration(getCourseProgress());
 
-                    }
-                    var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
+                        var netResult = net.addCourseControls(getNetCredentials(), attemptedRegistration);
+                        alert(JSON.stringify(netResult));
+                        alert("netResult ok? " + netResult.success);
 
-                    var netResult = net.addCourseControl(getNetCredentials(), attempedRegistration);
-                    alert(JSON.stringify(netResult));
-                    alert("sdr" + netResult.success);
-                    var sticks = JSON.parse(localStorage.getItem(getSticksKey()));
-                    var foundScannedStick = false;
-                    if (netResult.success == false) {
-                    } else if (netResult.courseComplete){
-                        self.success("Banan avklarad, grattis!");
-                    } else {
                     }
                     if (self.callback != null) {
                         self.callback.render();
