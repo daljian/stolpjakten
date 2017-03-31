@@ -428,7 +428,7 @@ var utils = (function() {
                         try {
                             nextCourseControl.timestamp = formatDate(new Date());
                             var progress = getCourseProgress();
-                            progress.takenSticks.add(nextCourseControl);
+                            progress.takenSticks.push(nextCourseControl);
                             alert("progress: " + JSON.stringify(progress));
                             setCourseProgress(progress);
                         } catch (err) {
