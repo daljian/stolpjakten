@@ -425,11 +425,17 @@ var utils = (function() {
                     if (data.id == nextCourseControl.mi) {
 
                         self.success(I18n.t('views.map.marker.registersuccess'));
-                        nextCourseControl.timestamp = formatDate(new Date());
-                        var progress = getCourseProgress();
-                        progress.takenSticks.add(nextCourseControl);
-                        alert("progress: " + JSON.stringify(progress));
-                        setCourseProgress(progress);
+                        try {
+                            nextCourseControl.timestamp = formatDate(new Date());
+                            var progress = getCourseProgress();
+                            progress.takenSticks.add(nextCourseControl);
+                            alert("progress: " + JSON.stringify(progress));
+                            setCourseProgress(progress);
+                        } catch (err) {
+
+                            alert(err);
+
+                        }
                     }else {
                         self.error(I18n.t('views.map.marker.registerfail'));
                     }
