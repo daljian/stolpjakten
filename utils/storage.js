@@ -192,17 +192,50 @@ function getCurrentMap(){
 function getCurrentCourse(){
   return localStorage.getItem(getCurrentCourseKey());
 }
-function setCourse(id, course){
-  localStorage.setItem(getCurrentMapId() + ".course." + id, JSON.stringify(course));
+function setCourseOverview(id, course){
+  localStorage.setItem(getCourseOverviewKey(id), JSON.stringify(course));
 }
 
-function getCourse(id){
-  return JSON.parse(localStorage.getItem(getCurrentMapId() + ".course." + id));
-
+function getCourseOverview(id){
+  return JSON.parse(localStorage.getItem(getCourseOverviewKey(id)));
+}
+function getCourseOverviewKey(id){
+  return getCurrentMapId() + ".course." + id + ".overview";
 }
 function setCurrentCourse(id){
   setCourseMode(true);
   localStorage.setItem(getCurrentCourseKey(), id);
+  clearCourseProgress();
+}
+function clearCourseProgress() {
+  var progress = new Object();
+  progress.takenSticks = [];
+  setCourseProgress(progress);
+}
+function getCourseProgress() {
+  return JSON.parse(localStorage.getItem(getCourseProgressKey(getCurrentCourse())));
+}
+function setCourseProgress(progress) {
+    localStorage.setItem(getCourseProgressKey(getCurrentCourse()), JSON.stringify(progress));
+}
+function setCourseDetails(id, courseDetails) {
+    localStorage.setItem(getCourseDetailsKey(id), JSON.stringify(courseDetails));
+}
+function getCurrentCourseDetails() {
+    return JSON.parse(localStorage.getItem(getCourseDetailsKey(getCurrentCourse())));
+}
+function getCourseDetailsKey(id) {
+    return getCurrentMapId() + ".course." + id + ".details";
+}
+
+function getNextCourseControl() {
+    var numberOfTakenSTicks = getCourseProgress().takenSticks.length;
+    utils.logDebug("course details: " + JSON.stringify(getCurrentCourseDetails()));
+    return getCurrentCourseDetails().ctrls.ctrl[numberOfTakenSTicks];
+}
+
+function getCourseProgressKey(id) {
+    return getCurrentMapId() + ".course." + id + ".progress";
 }
 
 function getCurrentApi(){

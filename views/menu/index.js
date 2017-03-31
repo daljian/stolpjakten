@@ -49,7 +49,7 @@ App.Views.Menu.Index = App.Views.Base.extend({
     var courseMode = getCourseMode();
     var courseName = '';
     if (courseMode) {
-     courseName = getCourse(getCurrentCourse()).cn;
+     courseName = getCourseOverview(getCurrentCourse()).cn;
     }
     var source;
     if (courseMode) {

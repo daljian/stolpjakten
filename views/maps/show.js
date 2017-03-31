@@ -617,7 +617,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     var storage = getCurrentMap();
     var menuTitle = storage.mn;
     if (getCourseMode()) {
-        menuTitle += " - " + getCourse(getCurrentCourse()).cn;
+        menuTitle += " - " + getCourseOverview(getCurrentCourse()).cn;
     }
     var data = { "menuTitle": menuTitle, mapCss: this.options.map };
     return data;  

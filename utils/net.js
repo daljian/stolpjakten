@@ -706,6 +706,7 @@ var net = (function() {
         utils.logDebug("****["+serverResult+"]");
         jsonResult.success = true;
         jsonResult.result = serverResult;
+        setCourseDetails(jsonResult.result.course.ci, jsonResult.result.course);
 
       }catch(err){console.log('**** ' + err);}
 

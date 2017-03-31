@@ -101,7 +101,7 @@ App.Routers.Menu = Backbone.Router.extend({
                        '<span style="color:#FF"><a style="color:#FFF" href="#maps/'+getCurrentMapId()+'/show" onclick="setCourseMode('+false+')">'+I18n.t('views.menu.allstickslabel')+'</a></span>'+
                        '</div>';
     $.each(courses.result.courses.course, function(key, course) {
-    setCourse(course.ci, course);
+    setCourseOverview(course.ci, course);
     optionsString += '<div class="option needsclick" >'+
                        '<span class="level'+course.dif+' stick_info" style="color:#FFF">'+course.numsticks+'</span>'+
                        '<span style="color:#FF"><a style="color:#FFF" href="#maps/'+getCurrentMapId()+'/show" onclick="setCurrentCourse('+course.ci+')">'+course.cn+'</a></span>'+

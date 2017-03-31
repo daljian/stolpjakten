@@ -414,11 +414,29 @@ var utils = (function() {
         scanCourse: function(callback) {
             var self = this;
             self.callback = callback;
+            alert(JSON.stringify(getNextCourseControl()));
             cordova.plugins.barcodeScanner.scan(function(result) {
                 if (result.cancelled) {
                     // Scanning was cancelled, do nothing.
                 } else {
+                    var nextCourseControl = getNextCourseControl();
+
                     var data = self.decodeQRText(result.text);
+                    if (data.id == nextCourseControl.mi) {
+
+                        alert("JomenVisst, det gick ju bra det där");
+                        nextCourseControl.timestamp = formatDate(new Date());
+                        var progress = getCourseProgress();
+                        progress.takenSticks.add(nextCourseControl);
+                        setCourseProgress(progress);
+                    }else {
+                        alert("Nja, det där får du nog göra om..");
+                    }
+                    if (nextCourseControl.is == 1) {
+
+                        alert("Mååååål!");
+
+                    }
                     var attempedRegistration = new CourseControlRegistration(getCurrentCourse(), data.id);
 
                     var netResult = net.addCourseControl(getNetCredentials(), attempedRegistration);
