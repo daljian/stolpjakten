@@ -198,6 +198,7 @@ function CourseControlsRegistration (controls){
                      '</control>';
   }
   self.toXML = function(){
+    alert(self.xmlHead + self.xmlBody + self.xmlTail);
     return self.xmlHead + self.xmlBody + self.xmlTail;
   }
 }
