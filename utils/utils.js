@@ -443,7 +443,7 @@ var utils = (function() {
                     }
                     if (nextCourseControl.ig == 1) {
 
-                        var attemptedRegistration = new CourseControlsRegistration(getCourseProgress());
+                        var attemptedRegistration = new CourseControlsRegistration(getCourseProgress().takenSticks);
 
                         var netResult = net.addCourseControls(getNetCredentials(), attemptedRegistration);
                         alert(JSON.stringify(netResult));
