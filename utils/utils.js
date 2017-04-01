@@ -437,7 +437,9 @@ var utils = (function() {
 
                         }
                     }else {
-                        self.error(I18n.t('views.map.marker.registerfail'));
+                        //self.error(I18n.t('views.map.marker.registerfail'));
+                        self.error("Data: " + JSON.stringify(data) +
+                        "\nnext:" + JSON.stringify(nextCourseControl));
                     }
                     if (nextCourseControl.ig == 1) {
 
