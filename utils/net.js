@@ -193,7 +193,7 @@ function CourseControlsRegistration (controls){
   self.xmlBody = '';
   for (var i = 0; i < controls.length; i++) {
     self.xmlBody += '<control>' +
-                    '<controlid>'+controls[i].mi+'</controlid>'
+                    '<controlid>'+controls[i].mi+'</controlid>' +
                      '<registrationdate>'+controls[i].registrationdate+'</registrationdate>' +
                      '</control>';
   }

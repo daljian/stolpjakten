@@ -429,7 +429,7 @@ var utils = (function() {
                             nextCourseControl.registrationdate = utils.formatDate(new Date());
                             var progress = getCourseProgress();
                             progress.takenSticks.push(nextCourseControl);
-                            alert("progress: " + JSON.stringify(progress));
+//                            alert("progress: " + JSON.stringify(progress));
                             setCourseProgress(progress);
                         } catch (err) {
 
@@ -442,12 +442,9 @@ var utils = (function() {
                         "\nnext:" + JSON.stringify(nextCourseControl));
                     }
                     if (nextCourseControl.ig == 1) {
-
                         var attemptedRegistration = new CourseControlsRegistration(getCourseProgress().takenSticks);
-
                         var netResult = net.addCourseControls(getNetCredentials(), attemptedRegistration);
                         alert(JSON.stringify(netResult));
-                        alert("netResult ok? " + netResult.success);
 
                     }
                     if (self.callback != null) {
