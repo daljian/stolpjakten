@@ -412,13 +412,19 @@ var utils = (function() {
 
         },
         postCourseResult: function () {
+
+          var attemptedRegistration = new CourseControlsRegistration(getCourseProgress().takenSticks);
+          var netResult = net.addCourseControls(getNetCredentials(), attemptedRegistration);
           var done = false;
-          var id = setInterval(doPost, 1000);
+          if (netResult.success && netResult.result.finishedok == 1 ) {
+              done = true;
+          }
+          var id = setInterval(doPost, 5000);
           function doPost() {
             if (done == true) {
               clearInterval(id);
+              clearCourseProgress();
             } else {
-                var attemptedRegistration = new CourseControlsRegistration(getCourseProgress().takenSticks);
                 var netResult = net.addCourseControls(getNetCredentials(), attemptedRegistration);
                 if (netResult.success && netResult.result.finishedok == 1 ) {
                   done = true;
@@ -456,9 +462,8 @@ var utils = (function() {
                             seconds = '0' + seconds;
                         }
                         var timeString = hours + ':' + minutes + ':' + seconds;
-
-                        utils.success(I18n.t('views.map.marker.registercoursegoal') + '\n' + timeString);
                         utils.postCourseResult();
+                        utils.success(I18n.t('views.map.marker.registercoursegoal') + '\n' + timeString);
                     } catch (err) {
                         alert(err)
                     }
