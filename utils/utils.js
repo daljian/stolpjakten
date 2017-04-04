@@ -429,7 +429,7 @@ var utils = (function() {
         },
         scanCourse: function(callback) {
 
-            var debug = true;
+            var debug = false;
             if (debug) {
 
                 var next = getNextCourseControl();
