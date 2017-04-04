@@ -459,7 +459,7 @@ var utils = (function() {
                             self.success(I18n.t('views.map.marker.registercoursestart'));
                         } else if (nextCourseControl.ig == 1) {
                             try {
-                            postCourseResult();
+                              self.postCourseResult();
                             } catch (err) {
                                 alert(err);
                             }
