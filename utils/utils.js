@@ -458,7 +458,11 @@ var utils = (function() {
                         if (nextCourseControl.is == 1) {
                             self.success(I18n.t('views.map.marker.registercoursestart'));
                         } else if (nextCourseControl.ig == 1) {
+                            try {
                             postCourseResult();
+                            } catch (err) {
+                                alert(err);
+                            }
                             self.success(I18n.t('views.map.marker.registercoursegoal'));
                         } else {
                             self.success(I18n.t('views.map.marker.registersuccess'));
