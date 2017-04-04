@@ -433,19 +433,42 @@ var utils = (function() {
             if (debug) {
 
                 var next = getNextCourseControl();
-                next.registrationdate = utils.formatDate(new Date());
+                next.timestamp = Date.now();
+                next.registrationdate = utils.formatDate(new Date(next.timestamp));
                 var progress = getCourseProgress();
                 progress.takenSticks.push(next);
                 setCourseProgress(progress);
                 if (next.ig == 1) {
-                    utils.postCourseResult();
+
+                    try {
+                        var elapsedTime = Date.now() - getCourseProgress().takenSticks[0].timestamp;
+                        var seconds = parseInt((elapsedTime / 1000) % 60);
+                        var minutes = parseInt(((elapsedTime / (1000*60)) % 60));
+                        var hours   = parseInt(((elapsedTime / (1000*60*60)) % 24));
+
+                        if (hours < 9) {
+                            hours = '0' + hours;
+                        }
+                        if (minutes < 9) {
+                            minutes = '0' + minutes;
+                        }
+                        if (seconds < 9) {
+                            seconds = '0' + seconds;
+                        }
+                        var timeString = hours + ':' + minutes + ':' + seconds;
+
+                        utils.success(I18n.t('views.map.marker.registercoursegoal') + '\n' + timeString);
+                        utils.postCourseResult();
+                    } catch (err) {
+                        alert(err)
+                    }
                 }
                 return;
 
             }
             var self = this;
             self.callback = callback;
-            alert(JSON.stringify(getNextCourseControl()));
+            //alert(JSON.stringify(getNextCourseControl()));
             cordova.plugins.barcodeScanner.scan(function(result) {
                 if (result.cancelled) {
                     // Scanning was cancelled, do nothing.
@@ -458,18 +481,30 @@ var utils = (function() {
                         if (nextCourseControl.is == 1) {
                             self.success(I18n.t('views.map.marker.registercoursestart'));
                         } else if (nextCourseControl.ig == 1) {
-                            try {
-                              self.postCourseResult();
-                            } catch (err) {
-                                alert(err);
+                            var elapsedTime = Date.now() - getCourseProgress().takenSticks[0].timestamp;
+                            var seconds = parseInt((elapsedTime / 1000) % 60);
+                            var minutes = parseInt(((elapsedTime / (1000*60)) % 60));
+                            var hours   = parseInt(((elapsedTime / (1000*60*60)) % 24));
+
+                            if (hours < 9) {
+                                hours = '0' + hours;
                             }
-                            self.success(I18n.t('views.map.marker.registercoursegoal'));
+                            if (minutes < 9) {
+                                minutes = '0' + minutes;
+                            }
+                            if (seconds < 9) {
+                                seconds = '0' + seconds;
+                            }
+                            var timeString = hours + ':' + minutes + ':' + seconds;
+                            utils.postCourseResult();
+                            utils.success(I18n.t('views.map.marker.registercoursegoal') + '\n' + timeString);
                         } else {
                             self.success(I18n.t('views.map.marker.registersuccess'));
                         }
 
                         try {
-                            nextCourseControl.registrationdate = utils.formatDate(new Date());
+                            nextCourseControl.timestamp = Date.now();
+                            nextCourseControl.registrationdate = utils.formatDate(new Date(nextCourseControl.timestamp));
                             var progress = getCourseProgress();
                             progress.takenSticks.push(nextCourseControl);
                             setCourseProgress(progress);
