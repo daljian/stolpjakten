@@ -198,7 +198,6 @@ function CourseControlsRegistration (controls){
                      '</control>';
   }
   self.toXML = function(){
-    alert(self.xmlHead + self.xmlBody + self.xmlTail);
     return self.xmlHead + self.xmlBody + self.xmlTail;
   }
 }
@@ -767,9 +766,7 @@ var net = (function() {
 
       }catch(err){
         console.log("err: " + JSON.stringify(err));
-        alert(err);
       }
-        alert("jsonResult " + JSON.stringify(jsonResult));
         return jsonResult;
     },
     addCourseControls: function(netCredentials, courseControlsRegistration)  {
@@ -789,9 +786,7 @@ var net = (function() {
 
       }catch(err){
         console.log("err: " + JSON.stringify(err));
-        alert(err);
       }
-        alert("jsonResult " + JSON.stringify(jsonResult));
         return jsonResult;
     }
   };
