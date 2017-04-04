@@ -57,6 +57,8 @@ I18n.Translations.sv = {
         registerfail: "Registrering misslyckades!",
         registerfailoffline: "Vi verkar tyvärr vara offline för tillfället, vänligen notera koden och försök senare igen!",
         registerduplicate: "Stolpe redan registrerad",
+        registercoursestart: "Bana startad!",
+        registercoursegoal: "Banan avklarad!, Tid: ",
         registersuccess: "Stolpe registrerad",
         stickinfolabel: "Stolpinformation",
         cultureinfolabel: "Information om platsen",

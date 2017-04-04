@@ -57,6 +57,8 @@ I18n.Translations.no = {
         registerfail: "Registrering mislykket!",
         registerfailoffline: "Vi virker dessverre å være offline for øyeblikket, vennligst noter koden og forsøk senere igjen!",
         registerduplicate: "Stolpe allerede registrert",
+        registercoursestart: "Bane startet!",
+        registercoursegoal: "Bane ferdig!, Tid: ",
         registersuccess: "Stolpe registrert",
         stickinfolabel: "Stolpeinformasjon",
         cultureinfolabel: "Informasjon om plassen",

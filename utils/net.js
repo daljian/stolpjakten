@@ -189,7 +189,7 @@ function CourseControlsRegistration (controls){
   var self = this;
   self.controls = controls;
   self.xmlHead = '<course><courseid>'+getCurrentCourse()+'</courseid><controls>';
-  self.xmlTail = '</<controls></course>';
+  self.xmlTail = '</controls></course>';
   self.xmlBody = '';
   for (var i = 0; i < controls.length; i++) {
     self.xmlBody += '<control>' +

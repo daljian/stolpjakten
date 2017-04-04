@@ -411,7 +411,39 @@ var utils = (function() {
 
 
         },
+        postCourseResult: function () {
+          var done = false;
+          var id = setInterval(doPost, 1000);
+          function doPost() {
+            if (done == true) {
+
+              clearInterval(id);
+            } else {
+                var attemptedRegistration = new CourseControlsRegistration(getCourseProgress().takenSticks);
+                var netResult = net.addCourseControls(getNetCredentials(), attemptedRegistration);
+                if (netResult.success && netResult.result.finishedok == 1 ) {
+                  done = true;
+                  clearCourseProgress();
+                }
+            }
+          }
+        },
         scanCourse: function(callback) {
+
+            var debug = false;
+            if (debug) {
+
+                var next = getNextCourseControl();
+                next.registrationdate = utils.formatDate(new Date());
+                var progress = getCourseProgress();
+                progress.takenSticks.push(next);
+                setCourseProgress(progress);
+                if (next.ig == 1) {
+                    utils.postCourseResult();
+                }
+                return;
+
+            }
             var self = this;
             self.callback = callback;
             alert(JSON.stringify(getNextCourseControl()));
@@ -424,7 +456,14 @@ var utils = (function() {
                     var data = self.decodeQRText(result.text);
                     if (data.id == nextCourseControl.mi) {
 
-                        self.success(I18n.t('views.map.marker.registersuccess'));
+                        if (nextCourseControl.is == 1) {
+                            self.success(I18n.t('views.map.marker.registercoursestart'));
+                        } else if (nextCourseControl.ig == 1) {
+                            self.success(I18n.t('views.map.marker.registercoursegoal'));
+                        } else {
+                            self.success(I18n.t('views.map.marker.registersuccess'));
+                        }
+
                         try {
                             nextCourseControl.registrationdate = utils.formatDate(new Date());
                             var progress = getCourseProgress();
@@ -437,15 +476,10 @@ var utils = (function() {
 
                         }
                     }else {
-                        //self.error(I18n.t('views.map.marker.registerfail'));
-                        self.error("Data: " + JSON.stringify(data) +
-                        "\nnext:" + JSON.stringify(nextCourseControl));
+                        self.error(I18n.t('views.map.marker.registerfail'));
                     }
                     if (nextCourseControl.ig == 1) {
-                        var attemptedRegistration = new CourseControlsRegistration(getCourseProgress().takenSticks);
-                        var netResult = net.addCourseControls(getNetCredentials(), attemptedRegistration);
-                        alert(JSON.stringify(netResult));
-
+                        postCourseResult();
                     }
                     if (self.callback != null) {
                         self.callback.render();
@@ -455,8 +489,6 @@ var utils = (function() {
                 //console.log("Scanning failed: ", error);
             });
         },
-
-
         scan: function(callback) {
             var self = this;
             self.callback = callback;

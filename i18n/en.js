@@ -55,6 +55,8 @@ I18n.Translations.en = {
       marker: {
         registerfail: "Register failed!",
         registerfailoffline: "We seems to be offline at the moment, please note your code and try again later!",
+        registercoursestart: "Course started!",
+        registercoursegoal: "Course finished!, Time: ",
         registersuccess: "Post registered",
         registerduplicate: "Post already registered",
         stickinfolabel: "Post information",
