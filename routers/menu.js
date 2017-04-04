@@ -46,6 +46,10 @@ App.Routers.Menu = Backbone.Router.extend({
     } else if (where === 'courseselection') {
       var data = this.getCourseSelection();
       var title = I18n.t('views.menu.courseselectionlabel');
+    } else if (where === 'abortcourseselection') {
+      setCourseMode(false);
+      clearCourseProgress();
+      window.location.href = '#maps/'+getCurrentMapId()+'/show';
     } else if (where === 'marker') {
       var data = this.getMarkers();
       var title = I18n.t('views.menu.stickslabel');
@@ -91,15 +95,15 @@ App.Routers.Menu = Backbone.Router.extend({
            '</div>';
   },
   getCourseSelection: function() {
-    var optionsString = '<div class="option" >'+
+    var optionsString = '<div class="option needsclick" >'+
+                       '<span class="stick_info" style="color:#FFF"></span>'+
+                       '<span style="color:#FF"><a style="color:#FFF" href="#maps/'+getCurrentMapId()+'/show" onclick="setCourseMode('+false+')">'+I18n.t('views.menu.allstickslabel')+'</a></span>'+
+                       '</div>';
+    optionsString += '<div class="option" >'+
                        '<span class="stick_info" style="color:#FFF"><b>Stolpar</b></span>'+
                        '<span style="color:#FF"><b>Bana</b></span>'+
                        '</div>';
     var courses = net.getMapCourses(getNetCredentials());
-    optionsString += '<div class="option needsclick" >'+
-                       '<span class="level1 stick_info" style="color:#FFF">??</span>'+
-                       '<span style="color:#FF"><a style="color:#FFF" href="#maps/'+getCurrentMapId()+'/show" onclick="setCourseMode('+false+')">'+I18n.t('views.menu.allstickslabel')+'</a></span>'+
-                       '</div>';
     $.each(courses.result.courses.course, function(key, course) {
     setCourseOverview(course.ci, course);
     optionsString += '<div class="option needsclick" >'+

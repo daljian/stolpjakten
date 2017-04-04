@@ -416,7 +416,6 @@ var utils = (function() {
           var id = setInterval(doPost, 1000);
           function doPost() {
             if (done == true) {
-
               clearInterval(id);
             } else {
                 var attemptedRegistration = new CourseControlsRegistration(getCourseProgress().takenSticks);
@@ -430,7 +429,7 @@ var utils = (function() {
         },
         scanCourse: function(callback) {
 
-            var debug = false;
+            var debug = true;
             if (debug) {
 
                 var next = getNextCourseControl();
@@ -459,6 +458,7 @@ var utils = (function() {
                         if (nextCourseControl.is == 1) {
                             self.success(I18n.t('views.map.marker.registercoursestart'));
                         } else if (nextCourseControl.ig == 1) {
+                            postCourseResult();
                             self.success(I18n.t('views.map.marker.registercoursegoal'));
                         } else {
                             self.success(I18n.t('views.map.marker.registersuccess'));
@@ -468,18 +468,12 @@ var utils = (function() {
                             nextCourseControl.registrationdate = utils.formatDate(new Date());
                             var progress = getCourseProgress();
                             progress.takenSticks.push(nextCourseControl);
-//                            alert("progress: " + JSON.stringify(progress));
                             setCourseProgress(progress);
                         } catch (err) {
-
-                            alert(err);
-
+                            self.error(I18n.t('views.map.marker.registerfail'));
                         }
                     }else {
                         self.error(I18n.t('views.map.marker.registerfail'));
-                    }
-                    if (nextCourseControl.ig == 1) {
-                        postCourseResult();
                     }
                     if (self.callback != null) {
                         self.callback.render();

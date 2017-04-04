@@ -61,6 +61,7 @@ App.Views.Menu.Index = App.Views.Base.extend({
                      '<div class="menu-body">'+
                      '<div class="option" data-action="coursetoplist">'+I18n.t('views.menu.toplistlabel')+'</div>'+
                      '<div class="option" data-action="courseselection">'+I18n.t('views.menu.courseselectionlabel')+'</div>'+
+                     '<div class="option" data-action="abortcourseselection">'+I18n.t('views.menu.allstickslabel')+'</div>'+
                      '</div>'+
                      '</div>';
     } else {
