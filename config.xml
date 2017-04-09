@@ -11,8 +11,7 @@
     </author>
     <preference name="phonegap-version" value="cli-6.5.0" />
     <plugin name="cordova-plugin-inappbrowser" />
-    <!--plugin name="phonegap-plugin-barcodescanner" /-->
-    <plugin name="cordova-plugin-qrscanner" />
+    <plugin name="phonegap-plugin-barcodescanner" />
     <plugin name="cordova-plugin-statusbar"/>
     <!--
     <gap:plugin name="com.indigoway.cordova.whitelist.whitelistplugin" source="pgb" />
@@ -45,7 +44,7 @@
     <preference name="show-splash-screen-spinner" value="true" />
     <preference name="auto-hide-splash-screen" value="true" />
     <preference name="disable-cursor" value="false" />
-    <preference name="android-minSdkVersion" value="9" />
+    <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
     <preference name="exit-on-suspend" value="true" />
     <preference name="BackupWebStorage" value="none" />
