@@ -477,6 +477,7 @@ var utils = (function() {
             cordova.plugins.barcodeScanner.scan(function(result) {
                 if (result.cancelled) {
                     // Scanning was cancelled, do nothing.
+                    alert("cancelled: " + result);
                 } else {
                     var nextCourseControl = getNextCourseControl();
 
@@ -524,7 +525,7 @@ var utils = (function() {
                     }
                 }
             }, function(error) {
-                //console.log("Scanning failed: ", error);
+                alert("error" + error);//console.log("Scanning failed: ", error);
             });
         },
         scan: function(callback) {
@@ -585,7 +586,7 @@ var utils = (function() {
 
 
             }, function(error) {
-                //console.log("Scanning failed: ", error); 
+                alert("error2 " + error);//console.log("Scanning failed: ", error);
             });
         }
 
