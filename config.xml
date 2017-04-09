@@ -11,7 +11,7 @@
     </author>
     <preference name="phonegap-version" value="cli-6.5.0" />
     <plugin name="cordova-plugin-inappbrowser" />
-    <plugin name="cordova-plugin-barcodescanner" />
+    <plugin name="phonegap-plugin-barcodescanner" />
     <plugin name="cordova-plugin-statusbar"/>
     <!--
     <gap:plugin name="com.indigoway.cordova.whitelist.whitelistplugin" source="pgb" />
