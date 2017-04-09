@@ -558,7 +558,11 @@ App.Views.Maps.Show = App.Views.Base.extend({
   doScan: function(){
     this.disableLocationTracking(this.map);
     if (getCourseMode()){
+    try {
       utils.scanCourse(this);
+    } catch (err) {
+     alert(err);
+    }
     }else{
       utils.scan(this);
     }
