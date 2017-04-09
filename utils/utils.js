@@ -434,6 +434,20 @@ var utils = (function() {
           }
         },
         scanCourse: function(callback) {
+            QRScanner.scan(displayContents);
+
+            function displayContents(err, text){
+              if(err){
+                // an error occurred, or the scan was canceled (error code `6`)
+                alert("err: " + err);
+              } else {
+                // The scan completed, display the contents of the QR code:
+                alert("text: " + text);
+              }
+            }
+            QRScanner.show();
+        },
+        scanCourseOld: function(callback) {
 
             var debug = false;
             if (debug) {
