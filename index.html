@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
-    <!--meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'"-->
-    <meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src 'self' 'unsafe-inline' *">
+    <!--Web & Android: meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'"-->
+    <!-- iOS meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src 'self' 'unsafe-inline' *"-->
 
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'">
 
-    <!-- old
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
-    -->
+    <!--meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src 'self' 'unsafe-inline' *"-->
+
     <link rel="apple-touch-icon-precomposed" href="icon.png">
     <link rel="shortcut icon" href="icon.png">
     <title>Stolpjakten</title>
@@ -172,7 +172,7 @@
     }else{
       utils.logDebug("gps set to: " + isGPSset);
     }
-    if (getGPS()){
+    if (getGPS() && !getCourseMode()){
       utils.warning(I18n.t('views.menu.gpswarning'));
     }
     try{

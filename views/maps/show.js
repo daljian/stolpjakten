@@ -165,6 +165,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     var startIcon = new LeafIcon({iconUrl: 'img/ringar/start.svg'});
     var controlIcon = new LeafIcon({iconUrl: 'img/ringar/oreggad.svg'});
     var goalIcon = new LeafIcon({iconUrl: 'img/ringar/goal.svg'});
+    var startGoalIcon = new LeafIcon({iconUrl: 'img/ringar/start_goal.svg'});
     var courseData = net.getMapCourse(getNetCredentials(), new CourseIdentifier(getCurrentCourse()));
     var allSticks = JSON.parse(localStorage.getItem(getSticksKey()));
     var courseSticks = [];
@@ -179,7 +180,11 @@ App.Views.Maps.Show = App.Views.Base.extend({
                 courseSticks.push(allSticks[i]);
                 allSticks[i].available = true;
                 allSticks[i].courseControlId = value.co;
-                if (value.is == 1){
+                if (value.is == 1 && value.ig == 1){
+                  allSticks[i]["icon"] = startGoalIcon;
+                  allSticks[i].start=true;
+                  allSticks[i].goal=true;
+                else if (value.is == 1){
                   allSticks[i]["icon"] = startIcon;
                   allSticks[i].start=true;
                 }else if (value.ig == 1){
@@ -278,7 +283,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     //osmLayer.getTileUrl = this.getTileUrl;
     osmLayer.addTo(map);
     //utils.logDebug("Will enable Location tracking!");
-    if (getGPS()){
+    if (getGPS() & !getCourseMode()){
       this.enableLocationTracking(map);
     }else{
       this.disableLocationTracking(map);
@@ -327,7 +332,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
         if (typeof stick.iconRotation != "undefined"){
             marker.setRotationAngle(stick.iconRotation);
         }
-        marker.bindPopup(' <div class="markers level'+stick.difficulty+'"> <span class="marker" markerId="'+stick.number+'" style="color:grey"><div class="stick-number" markerId="'+stick.number+'">'+I18n.t('views.map.stick')+' '+stick.number+'.</div>'+stick.description+'</div></span><span class="marker" markerId="'+stick.number+'"><div class="markerbtn map'+getCurrentMapId()+'" markerId="'+stick.number+'">Info</div></span>');
+        marker.bindPopup(' <div class="markers level'+stick.difficulty+'"> <span class="markerId="'+stick.number+'" style="color:grey"><div class="stick-number" markerId="'+stick.number+'">'+I18n.t('views.map.stick')+' '+stick.number+'.</div>'+stick.description+'</div></span>');
         marker.addTo(map);
         if (stick.number == this.openPopup){
           this.markerToOpen = marker;
@@ -443,19 +448,19 @@ App.Views.Maps.Show = App.Views.Base.extend({
     var line = new L.Polyline(pointList, {
     color: '#E6007E',
     weight: 2,
-    opacity: 1,
+    opacity: 0,
     smoothFactor: 1
 
     });
     line.addTo(map)
-    /*
+
     var decorator = L.polylineDecorator(line, {
         patterns: [
             // defines a pattern of 10px-wide dashes, repeated every 20px on the line
-            {offset: 20, endOffset: 20, repeat: 2, symbol: L.Symbol.dash({pixelSize: 1})}
+            {offset: 15, endOffset: 15, repeat: 2, symbol: L.Symbol.dash({pixelSize: 1, pathOptions: {color: '#E6007E'} })}
         ]
     }).addTo(map);
-    */
+
 
   },
   disableLocationTracking: function(map){
@@ -514,7 +519,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     window.location.href = '#maps/'+getCurrentMapId()+'/'+marker;
   },
   createGPSIconHtml: function() {
-    if (getGPS()){
+    if (getGPS() && !getCourseMode()){
       return '<span class="filter"><a class="icon'+getCurrentMapId()+'" href="#"><span class="glyphicon glyphicon-screenshot"></span></a></span>';
     }else{
         return '';

@@ -435,42 +435,7 @@ var utils = (function() {
         },
         scanCourse: function(callback) {
 
-            var debug = false;
-            if (debug) {
 
-                var next = getNextCourseControl();
-                next.timestamp = Date.now();
-                next.registrationdate = utils.formatDate(new Date(next.timestamp));
-                var progress = getCourseProgress();
-                progress.takenSticks.push(next);
-                setCourseProgress(progress);
-                if (next.ig == 1) {
-
-                    try {
-                        var elapsedTime = Date.now() - getCourseProgress().takenSticks[0].timestamp;
-                        var seconds = parseInt((elapsedTime / 1000) % 60);
-                        var minutes = parseInt(((elapsedTime / (1000*60)) % 60));
-                        var hours   = parseInt(((elapsedTime / (1000*60*60)) % 24));
-
-                        if (hours < 9) {
-                            hours = '0' + hours;
-                        }
-                        if (minutes < 9) {
-                            minutes = '0' + minutes;
-                        }
-                        if (seconds < 9) {
-                            seconds = '0' + seconds;
-                        }
-                        var timeString = hours + ':' + minutes + ':' + seconds;
-                        utils.postCourseResult();
-                        utils.success(I18n.t('views.map.marker.registercoursegoal') + '\n' + timeString);
-                    } catch (err) {
-                        alert(err)
-                    }
-                }
-                return;
-
-            }
             var self = this;
             self.callback = callback;
             //alert(JSON.stringify(getNextCourseControl()));
@@ -484,7 +449,7 @@ var utils = (function() {
                     var data = self.decodeQRText(result.text);
                     if (data.id == nextCourseControl.mi) {
 
-                        if (nextCourseControl.is == 1) {
+                        if (nextCourseControl.is == 1 && getCourseProgress().takenSticks.length == 0) {
                             self.success(I18n.t('views.map.marker.registercoursestart'));
                         } else if (nextCourseControl.ig == 1) {
                             var elapsedTime = Date.now() - getCourseProgress().takenSticks[0].timestamp;
