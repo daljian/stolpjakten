@@ -184,7 +184,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
                   allSticks[i]["icon"] = startGoalIcon;
                   allSticks[i].start=true;
                   allSticks[i].goal=true;
-                else if (value.is == 1){
+                }else if (value.is == 1){
                   allSticks[i]["icon"] = startIcon;
                   allSticks[i].start=true;
                 }else if (value.ig == 1){
