@@ -217,7 +217,7 @@ var net = (function() {
 
   //default to test
   var SERVER_URL= TEST_SERVER_URL;
-  //Set below flag to true for production
+  //Set below flag to true for production.
   var isProduction = true;
   if (isProduction) {
     SERVER_URL = PROD_SERVER_URL;
