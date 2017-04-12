@@ -212,8 +212,16 @@ var net = (function() {
   var API_TOKEN="%API%";
   //var SERVER_URL= "http://demo.stolpjakten.se/restservice/friskaservice.ashx?";
   //var SERVER_URL= "http://demo"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
-  // REAL ADDRESS var SERVER_URL= "http://app"+API_TOKEN+".stolpjakten.se/restservice/friskaservice.ashx?";
-  var SERVER_URL= "http://test.stolpjakten.se/Service/OLService.ashx?";
+  var PROD_SERVER_URL= "http://app"+API_TOKEN+".stolpjakten.se/service/olservice.ashx?";
+  var TEST_SERVER_URL= "http://test.stolpjakten.se/Service/OLService.ashx?";
+
+  //default to test
+  var SERVER_URL= TEST_SERVER_URL;
+  //Set below flag to tru for production
+  var isProduction = false;
+  if (isProduction) {
+    SERVER_URL = PROD_SERVER_URL;
+  }
   var NET_OPERATION_GET_USER="GetUser";
   var NET_OPERATION_GET_MAP="GetMap";
   var NET_OPERATION_CREATE_USER="CreateUser";
