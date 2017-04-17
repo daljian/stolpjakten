@@ -77,7 +77,12 @@ App.Views.Maps.Show = App.Views.Base.extend({
   validateMapCode: function(code, mapId){
     utils.logDebug("code is " + code);
     var valid = (code === "");
-    var mapcodes = toArray(net.getUser(getNetCredentials()).result.ud.emmcs.emmc);
+
+    var mapcodes = [];
+    try {
+      mapcodes = toArray(net.getUser(getNetCredentials()).result.ud.emmcs.emmc);
+    }catch(err){
+    }
     for (var i = 0; i < mapcodes.length; i++){
         try{
           if (code == mapcodes[i] || code.toLowerCase() == mapcodes[i].toLowerCase()){
