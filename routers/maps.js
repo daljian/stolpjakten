@@ -18,7 +18,11 @@ App.Routers.Maps = Backbone.Router.extend({
     var result = net.getMap(new NetCredentials(retrievedObject.username, retrievedObject.password, id));
     
     if (result.success){
-      var returnedSticks = result.result.sticks.stick;
+      var returnedSticks = [];
+      try {
+        returnedSticks = toArray(result.result.sticks.stick);
+      }catch(err) {
+      }
 
       // Spara stads information till localStorage
       if( returnedSticks ) { //ct är information om en stolpe, inte staden..

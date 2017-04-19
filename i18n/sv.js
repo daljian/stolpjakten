@@ -96,7 +96,8 @@ I18n.Translations.sv = {
       viewolmap: "Visa OL-karta",
       gpswarning: "Slå av positionering under inställningar för att spara batteri",
       gpslabel: "Visa min position",
-      synclabel: "Uppdatera stolpar"
+      synclabel: "Uppdatera stolpar",
+      nocourseavailable: "Ingen bana öppen just nu"
 
     },
 

@@ -95,7 +95,9 @@ I18n.Translations.en = {
       viewolmap: "Show overlayed map",
       gpswarning: "Disable positioning under settings to reduce power consumption",
       gpslabel: "Show my position",
-      synclabel: "Update posts"
+      synclabel: "Update posts",
+      nocourseavailable: "No course available right now"
+
 
 
     },

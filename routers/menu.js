@@ -99,18 +99,24 @@ App.Routers.Menu = Backbone.Router.extend({
                        '<span class="stick_info" style="color:#FFF"></span>'+
                        '<span style="color:#FF"><a style="color:#FFF" href="#maps/'+getCurrentMapId()+'/show" onclick="setCourseMode('+false+')">'+I18n.t('views.menu.allstickslabel')+'</a></span>'+
                        '</div>';
+                       /*
     optionsString += '<div class="option" >'+
                        '<span class="stick_info" style="color:#FFF"><b>Stolpar</b></span>'+
                        '<span style="color:#FF"><b>Bana</b></span>'+
                        '</div>';
-    var courses = net.getMapCourses(getNetCredentials());
-    $.each(courses.result.courses.course, function(key, course) {
-    setCourseOverview(course.ci, course);
-    optionsString += '<div class="option needsclick" >'+
+                       */
+    var netCourses = net.getMapCourses(getNetCredentials());
+    var course = toArray(netCourses.result.courses.course);
+    $.each(course, function(key, course) {
+      setCourseOverview(course.ci, course);
+      optionsString += '<div class="option needsclick" >'+
                        '<span class="level'+course.dif+' stick_info" style="color:#FFF">'+course.numsticks+'</span>'+
                        '<span style="color:#FF"><a style="color:#FFF" href="#maps/'+getCurrentMapId()+'/show" onclick="setCurrentCourse('+course.ci+')">'+course.cn+'</a></span>'+
                        '</div>';
     });
+    if (course.length == 0) {
+      utils.warning(I18n.t('views.menu.nocourseavailable'));
+    }
 
     return optionsString;
   },

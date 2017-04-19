@@ -548,8 +548,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
   },
   createScanIconHtml: function(){
     if ( typeof cordova == "undefined" || typeof cordova.require == "undefined" ) {
-//      return '';
-      return '<span class="filter"><a class="icon'+getCurrentMapId()+'" href="#"><span class="glyphicon glyphicon-qrcode"></span></a></span>';
+      return '';
     }else{
       return '<span class="filter"><a class="icon'+getCurrentMapId()+'" href="#"><span class="glyphicon glyphicon-qrcode"></span></a></span>';
     }

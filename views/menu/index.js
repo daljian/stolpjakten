@@ -74,7 +74,7 @@ App.Views.Menu.Index = App.Views.Base.extend({
                      '<div class="option" data-action="marker">'+I18n.t('views.menu.stickslabel')+'</div>'+
                      //'<div class="option" data-action="account">'+I18n.t('views.menu.accountlabel')+'</div>'+
                      //'<div class="option" data-action="info">'+I18n.t('views.menu.infolabel')+'</div>'+
-                     '<div class="option" data-action="result">'+I18n.t('views.menu.resultslabel')+'</div>'+
+                     //'<div class="option" data-action="result">'+I18n.t('views.menu.resultslabel')+'</div>'+
                      '<div class="option" data-action="toplist">'+I18n.t('views.menu.toplistlabel')+'</div>'+
                      '<div class="option" data-action="choosecity">'+I18n.t('views.menu.choosecity')+'</div>'+
                      '<div class="option" data-action="courseselection">'+I18n.t('views.menu.courseselectionlabel')+'</div>'+

@@ -96,7 +96,9 @@ I18n.Translations.no = {
       viewolmap: "Vis OL-kartet",
       gpswarning: "Deaktiver posisjonering under Innstillinger for å redusere strømforbruket",
       gpslabel: "Vis min posisjon",
-      synclabel: "Oppdatere stolper"
+      synclabel: "Oppdatere stolper",
+      nocourseavailable: "Ingen bane tilgjengelig"
+
 
     },
 
