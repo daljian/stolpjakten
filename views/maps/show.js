@@ -217,7 +217,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
   // Ritar ut kartan
   drawMap: function(sticks) {
     //var result = $("#myDiv").height();
-    alert("host name: " + window.location.hostname);
+    //alert("host name: " + window.location.hostname);
 
 
 
