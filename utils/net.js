@@ -406,6 +406,7 @@ var net = (function() {
         if (shouldUpdateCache(url)){
           //We use synchronous call if cache is not up to date
           if (dialog == null && operation != NET_OPERATION_GET_SERVER_STATUS && !isCacheUpToDate(url)){
+            alert("operation: " + operation);
             dialog = utils.serverSpinner(I18n.t('server.loading'), xmlHttp.open( "GET", url, isCacheUpToDate(url) ));
           }else{
             xmlHttp.open( "GET", url, isCacheUpToDate(url) );
