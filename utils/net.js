@@ -241,9 +241,9 @@ var net = (function() {
   var CACHE_INVALIDITY_TIME_MS = 604800000; //one week is 604800000
   var NET_OPERATION_GET_ALL_RESULTS= "GetAllResults";
   var NET_OPERATION_GET_MY_RESULTS= "GetMyResults";
-  var GETCOURSES_CACHE_INVALIDITY_TIME_MS = GETCOURSES_CACHE_INVALIDITY_TIME_MS / 3;
-  var GETMAPS_CACHE_INVALIDITY_TIME_MS = GETCOURSES_CACHE_INVALIDITY_TIME_MS;
-  var GETMAP_CACHE_INVALIDITY_TIME_MS = GETCOURSES_CACHE_INVALIDITY_TIME_MS / 3;
+  var GETCOURSES_CACHE_INVALIDITY_TIME_MS = 24*60*60*1000; //24h
+  var GETMAPS_CACHE_INVALIDITY_TIME_MS = 604800000;
+  var GETMAP_CACHE_INVALIDITY_TIME_MS = 604800000;
   var GET_ALL_RESULTS_CACHE_INVALIDITY_TIME_MS= 30000;
   var GET_MY_RESULTS_CACHE_INVALIDITY_TIME_MS= 30000;
   var SERVER_GET_GRACE_TIME_MS = 60000; //one minute before we proactively update cache
@@ -263,23 +263,28 @@ var net = (function() {
     var invalidityTime = CACHE_INVALIDITY_TIME_MS;
     if (url.indexOf(NET_OPERATION_GET_MAPS_ARRAY) != -1){
       invalidityTime = GETMAPS_CACHE_INVALIDITY_TIME_MS;
+    }else if(url.indexOf(NET_OPERATION_GET_MAP_COURSE_RESULTS) != -1){
+      invalidityTime = GET_ALL_RESULTS_CACHE_INVALIDITY_TIME_MS;
     }else if(url.indexOf(NET_OPERATION_GET_MAP_COURSES) != -1){
       invalidityTime = GETCOURSES_CACHE_INVALIDITY_TIME_MS;
     }else if(url.indexOf(NET_OPERATION_GET_MAP) != -1){
       invalidityTime = GETMAP_CACHE_INVALIDITY_TIME_MS;
     }else if(url.indexOf(NET_OPERATION_GET_ALL_RESULTS) != -1){
       invalidityTime = GET_ALL_RESULTS_CACHE_INVALIDITY_TIME_MS;
-    }else if(url.indexOf(NET_OPERATION_GET_MAP_COURSE_RESULTS) != -1){
-      invalidityTime = GET_ALL_RESULTS_CACHE_INVALIDITY_TIME_MS;
     }else if(url.indexOf(NET_OPERATION_GET_MY_RESULTS) != -1){
       invalidityTime = GET_MY_RESULTS_CACHE_INVALIDITY_TIME_MS;
     }
+    var age = "undefined";
+    if (utils.assertDefined(cached)) {
+      age = (Date.now() - cached.timestamp);
+    }
     if (cached != null &&
         ((Date.now() - cached.timestamp) < invalidityTime)){
-        utils.logDebug("cache is up to date");
+        utils.logDebug("cache is up to date, age: " + age +  " invalidity time: ");
       return true;
     }else{
-        utils.logDebug("cache is NOT up to date: \n" + url);
+        utils.logDebug("cache is NOT up to date, age: " + age + " invalidity time: "
+        + invalidityTime + "\nurl: "+ url);
       return false;
     }
   }
