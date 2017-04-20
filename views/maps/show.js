@@ -217,6 +217,8 @@ App.Views.Maps.Show = App.Views.Base.extend({
   // Ritar ut kartan
   drawMap: function(sticks) {
     //var result = $("#myDiv").height();
+    alert("host name: " + window.location.hostname);
+
 
 
 
@@ -313,14 +315,14 @@ App.Views.Maps.Show = App.Views.Base.extend({
         current.addTo(map);
 
     }
-    
-    //Päjsta här
-    //Admin features
-    L.control.mousePosition().addTo(map);
-    //Right click on the map activated
-    map.on('contextmenu', function(e) {
-        window.prompt("Copy to clipboard: Ctrl+C, Enter", e.latlng.lat +","+e.latlng.lng);
-    });
+    if (!utils.isApp()) {
+        //Admin features
+        L.control.mousePosition().addTo(map);
+        //Right click on the map activated
+        map.on('contextmenu', function(e) {
+            window.prompt("Copy to clipboard: Ctrl+C, Enter", e.latlng.lat +","+e.latlng.lng);
+        });
+    }
 
 
     L.control.scale().addTo(map);
@@ -547,10 +549,10 @@ App.Views.Maps.Show = App.Views.Base.extend({
     }
   },
   createScanIconHtml: function(){
-    if ( typeof cordova == "undefined" || typeof cordova.require == "undefined" ) {
-      return '';
-    }else{
+    if (utils.isApp()) {
       return '<span class="filter"><a class="icon'+getCurrentMapId()+'" href="#"><span class="glyphicon glyphicon-qrcode"></span></a></span>';
+    } else {
+      return '';
     }
   },
   doFilter: function(){
@@ -630,7 +632,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     var storage = getCurrentMap();
     var menuTitle = storage.mn;
     if (getCourseMode()) {
-        menuTitle += " - " + getCourseOverview(getCurrentCourse()).cn;
+        menuTitle = getCourseOverview(getCurrentCourse()).cn;
     }
     var data = { "menuTitle": menuTitle, mapCss: this.options.map };
     return data;  

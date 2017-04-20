@@ -37,6 +37,9 @@ var utils = (function() {
                 throw utils.getCacheKeyNullException();
             }
         },
+        isApp: function() {
+            return is_cordova();
+        },
         decodeHTML: function(value) {
             return value.replace(/&apos;/g, "'")
                 .replace(/&quot;/g, '"')

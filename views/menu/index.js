@@ -53,7 +53,7 @@ App.Views.Menu.Index = App.Views.Base.extend({
     }
     var source;
     if (courseMode) {
-    source = '<div class="navigation map{{mapCss}}"><div class="top"><a class="icon{{mapCss}} toMap" style="float:left;"><span class="glyphicon glyphicon-align-justify"></span></a>{{menuTitle}} - '+courseName+'</div></div>'+
+    source = '<div class="navigation map{{mapCss}}"><div class="top"><a class="icon{{mapCss}} toMap" style="float:left;"><span class="glyphicon glyphicon-align-justify"></span></a>'+courseName+'</div></div>'+
                      '<div class="menu">'+
                      '<div class="menu-title"><span class="display-title">{{login}}</span><br/>'+
 

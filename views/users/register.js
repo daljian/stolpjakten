@@ -103,25 +103,25 @@ App.Views.Users.Register = App.Views.Base.extend({
       var sil = $('input[name="sil"]').is(":checked") ? "1" : "0";
       var nl = $('input[name="nl"]').is(":checked") ? "1" : "0";
       var userData = new UserData(
-        utils.encodeHTML($('input[name="em"]').val()),
-        utils.encodeHTML($('input[name="fn"]').val()),
-        utils.encodeHTML($('input[name="ln"]').val()),
-        utils.encodeHTML($('input[name="dn"]').val()),
-        utils.encodeHTML($('input[name="sa"]').val()),
-        utils.encodeHTML($('input[name="zip"]').val()),
-        utils.encodeHTML($('input[name="ci"]').val()),
-        utils.encodeHTML($('input[name="ph"]').val()),
-        utils.encodeHTML($('select[name="ge"]').val()),
-        utils.encodeHTML($('input[name="pw"]').val()),
+        utils.encodeHTML($('input[name="em"]').val().trim()),
+        utils.encodeHTML($('input[name="fn"]').val().trim()),
+        utils.encodeHTML($('input[name="ln"]').val().trim()),
+        utils.encodeHTML($('input[name="dn"]').val().trim()),
+        utils.encodeHTML($('input[name="sa"]').val().trim()),
+        utils.encodeHTML($('input[name="zip"]').val().trim()),
+        utils.encodeHTML($('input[name="ci"]').val().trim()),
+        utils.encodeHTML($('input[name="ph"]').val().trim()),
+        utils.encodeHTML($('select[name="ge"]').val().trim()),
+        utils.encodeHTML($('input[name="pw"]').val().trim()),
         sil,
         nl,
         $('select[name="ag"]').val(),
         '', //skip premium code
         new Array());
       
-      var username = $('input[name="dn"]').val(),
-          pwd = $('input[name="pw"]').val(),
-          mapId = $('select[name="mapid"]').val();
+      var username = $('input[name="dn"]').val().trim(),
+          pwd = $('input[name="pw"]').val().trim(),
+          mapId = $('select[name="mapid"]').val().trim();
       var credentials = new NetCredentials(username, pwd, mapId);
       var result = net.createUser(credentials, userData);
       //console.log(userData);

@@ -169,9 +169,7 @@ App.Views.Maps.Marker = App.Views.Base.extend({
     var registrationHtml = null;
     if (!this.selectedStick.taken || getCourseMode()){
       registrationHtml = '<div class="normal"><input class="markerCode" name="markerCode"> <div class="button map'+getCurrentMapId()+'" data-action="register">'+I18n.t('views.map.marker.register')+'</div></div>';
-      if ( typeof cordova == "undefined" || typeof cordova.require == "undefined" ) {
-        //We can't scan so do not display scan button
-      }else{
+      if ( utils.isApp() ) {
         registrationHtml += '<div class="normal button map'+getCurrentMapId()+'" data-action="scan"> '+I18n.t('views.map.marker.scan')+' </div>';
       }
     }

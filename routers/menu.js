@@ -254,7 +254,7 @@ App.Routers.Menu = Backbone.Router.extend({
           var items = toArray(result.result.results.result);
           var html = "";
           for (var i = 0; i < items.length; i++){
-            html += '<div class="option needsclick"><span style="float: right;margin-right: 10px;">'+items[i].name+'</span><span>'+(i+1)+'. '+items[i].startdate+'</span></div>';
+            html += '<div class="option needsclick"><span style="float: right;margin-right: 10px;">'+items[i].name+'</span><span>'+(i+1)+'. '+items[i].runtime+'</span></div>';
           }
         }else{
           utils.warning(I18n.t('views.menu.toplisterror'));

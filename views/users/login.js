@@ -48,8 +48,8 @@ App.Views.Users.Login = App.Views.Base.extend({
         console.log("getMaps 2");
 
       net.getMaps();
-      var username = utils.encodeHTML($('input[name="username"]').val());
-      var password = utils.encodeHTML($('input[name="pwd"]').val());
+      var username = utils.encodeHTML($('input[name="username"]').val().trim());
+      var password = utils.encodeHTML($('input[name="pwd"]').val().trim());
       utils.logDebug("username: " + username);
       utils.logDebug("password: " + password);
       var mapId = getCurrentMapId();
