@@ -240,6 +240,7 @@ var net = (function() {
 
   var NET_OPERATION_GET_ALL_RESULTS= "GetAllResults";
   var NET_OPERATION_GET_MY_RESULTS= "GetMyResults";
+  var GETCOURSES_CACHE_INVALIDITY_TIME_MS = 3600000; //one hour
   var GETMAPS_CACHE_INVALIDITY_TIME_MS = 604800000;
   var GETMAP_CACHE_INVALIDITY_TIME_MS = 604800000;
   var GET_ALL_RESULTS_CACHE_INVALIDITY_TIME_MS= 30000;
@@ -249,11 +250,6 @@ var net = (function() {
   var previousOnlineStatus = true;
   var netCredentials;
 
-  var DUMMY_RESPONSES = new Object();
-  DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSES]='{  "rd": {    "courses": {      "course": [        {          "ci": "1",          "mi": "2",          "cn": "Gröna banan",          "oc": "1",          "dif": "1"        },        {          "ci": "2",          "mi": "2",          "cn": "Blå bananen",          "oc": "1",          "dif": "2"        }      ]    }  }}';
-  DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSE]='{  "rd": {    "course": {      "ci": "1",      "mi": "2",      "cn": "Gröna banan",      "oc": "1",      "dif": "1",      "ctrls": {        "ctrl": [         {            "mi": "2",            "co": "8",            "is": "1",            "ig": "0"          },{            "mi": "2",            "co": "7",            "is": "0",            "ig": "0"          },{            "mi": "2",            "co": "11",            "is": "0",            "ig": "0"          },{            "mi": "2",            "co": "30",            "is": "0",            "ig": "0"          },{            "mi": "2",            "co": "28",            "is": "0",            "ig": "0"          },{            "mi": "2",            "co": "10",            "is": "0",            "ig": "0"          },{            "mi": "2",            "co": "4",            "is": "0",            "ig": "0"          },{            "mi": "2",            "co": "27",            "is": "0",            "ig": "1"          }         ]      }    }  }}';
-  DUMMY_RESPONSES[NET_OPERATION_GET_MAP]='{"rd":{"maps":{"map":{"mid":"1","mn":"Centrum","tp":"http://localhost/","em":{"emid":"12","mn":"Extra 1","api":"2","mc":"Stan16"}}}}}';
-  //DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSE]='{  "rd": {    "course": {      "ci": "1",      "mi": "2",      "cn": "Gröna banan",      "oc": "1",      "dif": "1",      "ctrls": {        "ctrl": [          {            "mi": "2",            "co": "1",            "is": "1",            "ig": "0"          },          {            "mi": "3",            "co": "2",            "is": "0",            "ig": "0"          },          {            "mi": "4",            "co": "3",            "is": "0",            "ig": "0"          },          {            "mi": "5",            "co": "4",            "is": "0",            "ig": "1"          }        ]      }    }  }}';
 
   
 
@@ -267,9 +263,13 @@ var net = (function() {
     var invalidityTime = CACHE_INVALIDITY_TIME_MS;
     if (url.indexOf(NET_OPERATION_GET_MAPS_ARRAY) != -1){
       invalidityTime = GETMAPS_CACHE_INVALIDITY_TIME_MS;
+    }else if(url.indexOf(NET_OPERATION_GET_MAP_COURSES) != -1){
+      invalidityTime = GETCOURSES_CACHE_INVALIDITY_TIME_MS;
     }else if(url.indexOf(NET_OPERATION_GET_MAP) != -1){
       invalidityTime = GETMAP_CACHE_INVALIDITY_TIME_MS;
     }else if(url.indexOf(NET_OPERATION_GET_ALL_RESULTS) != -1){
+      invalidityTime = GET_ALL_RESULTS_CACHE_INVALIDITY_TIME_MS;
+    }else if(url.indexOf(NET_OPERATION_GET_MAP_COURSE_RESULTS) != -1){
       invalidityTime = GET_ALL_RESULTS_CACHE_INVALIDITY_TIME_MS;
     }else if(url.indexOf(NET_OPERATION_GET_MY_RESULTS) != -1){
       invalidityTime = GET_MY_RESULTS_CACHE_INVALIDITY_TIME_MS;
