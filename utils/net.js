@@ -710,7 +710,6 @@ var net = (function() {
       var jsonResult = new NetResult(false, null);
       try{
         var xmlData ="<rd>" + netCredentials.toXML() + "</rd>";
-        console.log("Dummy JSON:" + DUMMY_RESPONSES[NET_OPERATION_GET_MAP_COURSES]);
         var serverResult = sendToServer(NET_OPERATION_GET_MAP_COURSES,xmlData);
         utils.assertDefined(serverResult);
         utils.logDebug("["+serverResult+"]");

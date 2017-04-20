@@ -106,7 +106,13 @@ App.Routers.Menu = Backbone.Router.extend({
                        '</div>';
                        */
     var netCourses = net.getMapCourses(getNetCredentials());
-    var course = toArray(netCourses.result.courses.course);
+    var course = [];
+    try {
+        course = toArray(netCourses.result.courses.course);
+    } catch (err) {
+    }
+
+
     $.each(course, function(key, course) {
       setCourseOverview(course.ci, course);
       optionsString += '<div class="option needsclick" >'+
