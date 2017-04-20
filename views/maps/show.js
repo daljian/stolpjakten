@@ -464,7 +464,7 @@ App.Views.Maps.Show = App.Views.Base.extend({
     var decorator = L.polylineDecorator(line, {
         patterns: [
             // defines a pattern of 10px-wide dashes, repeated every 20px on the line
-            {offset: 15, endOffset: 15, repeat: 2, symbol: L.Symbol.dash({pixelSize: 1, pathOptions: {color: '#E6007E'} })}
+            {offset: 20, endOffset: 20, repeat: 6, symbol: L.Symbol.dash({pixelSize: 5, pathOptions: {color: '#E6007E'} })}
         ]
     }).addTo(map);
 
