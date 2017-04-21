@@ -151,7 +151,7 @@ App.Views.Users.Register = App.Views.Base.extend({
 
   },
   
-  // Om man vill ha ett annat startår än 1980 så är det bara att byta i if-satsen
+  // Om man vill ha ett annat startår än 1980 så är det bara att byta i if-satsen.
   createHtml: function(maps) {
     var year = '';
     for(i = 1920; i < 2016; i++) {
