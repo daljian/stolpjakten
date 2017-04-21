@@ -59,7 +59,7 @@ div.users-login div.login-form input {
   padding: 10px;
  /* border-bottom: 1px solid #468ee5 !important;*/
   border:none;
-  background-color: #a2c364;
+  background-color: #4e791c;
   color: #d8f0bd;
 }
 
@@ -79,4 +79,17 @@ div.users-login div.submit-button {
 
 div.users-login a {
   color: white;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: black;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: black;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: black;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: black;
 }
