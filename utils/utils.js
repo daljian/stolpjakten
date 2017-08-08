@@ -487,6 +487,7 @@ var utils = (function() {
                         }
                     }else {
                         self.error(I18n.t('views.map.marker.registerfail'));
+                        alert("data: " + JSON.stringify(data) + "\nnextControl: " + JSON.stringify(nextCourseControl));
                     }
                     if (self.callback != null) {
                         self.callback.render();
