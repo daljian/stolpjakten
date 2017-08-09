@@ -792,15 +792,14 @@ var net = (function() {
         utils.logDebug("["+serverResult+"]");
         serverResult.msgs = toArray(serverResult.msgs);
         serverResult.courseComplete = false;
-        for (var msg in serverResult.msgs) {
-          alert("msg: " + msg);
-        }
         jsonResult.success = true;
         jsonResult.result = serverResult;
 
       }catch(err){
         console.log("err: " + JSON.stringify(err));
+        alert("err: " + JSON.stringify(err));
       }
+        alert("msg: " + JSON.stringify(jsonResult));
         return jsonResult;
     }
   };
