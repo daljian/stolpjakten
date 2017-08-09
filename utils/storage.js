@@ -228,11 +228,18 @@ function getCourseDetailsKey(id) {
     return getCurrentMapId() + ".course." + id + ".details";
 }
 
-function getNextCourseControl() {
+function getNextCourseControlOld() {
     var numberOfTakenSTicks = getCourseProgress().takenSticks.length;
     utils.logDebug("course details: " + JSON.stringify(getCurrentCourseDetails()));
     return getCurrentCourseDetails().ctrls.ctrl[numberOfTakenSTicks];
 }
+
+function getNextCourseControl() {
+    var numberOfTakenSTicks = getCourseProgress().takenSticks.length;
+    var courseControls = JSON.parse(localStorage.getItem(getSticksKey()));
+    return courseControls[numberOfTakenSTicks];
+}
+
 
 function getCourseProgressKey(id) {
     return getCurrentMapId() + ".course." + id + ".progress";

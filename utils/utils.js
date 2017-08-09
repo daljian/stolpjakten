@@ -450,11 +450,13 @@ var utils = (function() {
                     var nextCourseControl = getNextCourseControl();
 
                     var data = self.decodeQRText(result.text);
-                    if (data.id == nextCourseControl.mi) {
+                    alert("data: " + JSON.stringify(data) + "\nnextControl: " + JSON.stringify(nextCourseControl));
 
-                        if (nextCourseControl.is == 1 && getCourseProgress().takenSticks.length == 0) {
+                    if (data.id == nextCourseControl.number) {
+
+                        if (nextCourseControl.start == true && getCourseProgress().takenSticks.length == 0) {
                             self.success(I18n.t('views.map.marker.registercoursestart'));
-                        } else if (nextCourseControl.ig == 1) {
+                        } else if (nextCourseControl.goal == true) {
                             var elapsedTime = Date.now() - getCourseProgress().takenSticks[0].timestamp;
                             var seconds = parseInt((elapsedTime / 1000) % 60);
                             var minutes = parseInt(((elapsedTime / (1000*60)) % 60));
@@ -487,7 +489,6 @@ var utils = (function() {
                         }
                     }else {
                         self.error(I18n.t('views.map.marker.registerfail'));
-                        //DEBUG: alert("data: " + JSON.stringify(data) + "\nnextControl: " + JSON.stringify(nextCourseControl));
                     }
                     if (self.callback != null) {
                         self.callback.render();

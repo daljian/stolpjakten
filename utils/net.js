@@ -193,7 +193,7 @@ function CourseControlsRegistration (controls){
   self.xmlBody = '';
   for (var i = 0; i < controls.length; i++) {
     self.xmlBody += '<control>' +
-                    '<controlid>'+controls[i].mi+'</controlid>' +
+                    '<controlid>'+controls[i].id+'</controlid>' +
                      '<registrationdate>'+controls[i].registrationdate+'</registrationdate>' +
                      '</control>';
   }
@@ -785,6 +785,8 @@ var net = (function() {
       var jsonResult = new NetResult(false, null);
       try{
         var xmlData ="<rd>" + netCredentials.toXML() + courseControlsRegistration.toXML() + "</rd>";
+        //debug
+        alert("posting: " + xmlData);
         var serverResult = sendToServer(NET_OPERATION_ADD_COURSE_CONTROLS,xmlData);
         utils.assertDefined(serverResult);
         utils.logDebug("["+serverResult+"]");
