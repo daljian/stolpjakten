@@ -450,7 +450,7 @@ var utils = (function() {
                     var nextCourseControl = getNextCourseControl();
 
                     var data = self.decodeQRText(result.text);
-                    alert("data: " + JSON.stringify(data) + "\nnextControl: " + JSON.stringify(nextCourseControl));
+                    //DEBUG alert("data: " + JSON.stringify(data) + "\nnextControl: " + JSON.stringify(nextCourseControl));
 
                     if (data.id == nextCourseControl.number) {
 
