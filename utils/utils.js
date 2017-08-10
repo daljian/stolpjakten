@@ -455,19 +455,10 @@ var utils = (function() {
                     if (data.id == nextCourseControl.number) {
 
                         if (nextCourseControl.start == true && getCourseProgress().takenSticks.length == 0) {
+                            self.registerProgress(nextCourseControl);
                             self.success(I18n.t('views.map.marker.registercoursestart'));
-                        }
-                        try {
-                            nextCourseControl.timestamp = Date.now();
-                            nextCourseControl.registrationdate = utils.formatDate(new Date(nextCourseControl.timestamp));
-                            var progress = getCourseProgress();
-                            progress.takenSticks.push(nextCourseControl);
-                            setCourseProgress(progress);
-                        } catch (err) {
-                            self.error(I18n.t('views.map.marker.registerfail'));
-                        }
-
-                        if (nextCourseControl.goal == true) {
+                        } else if (nextCourseControl.goal == true) {
+                            self.registerProgress(nextCourseControl);
                             var elapsedTime = Date.now() - getCourseProgress().takenSticks[0].timestamp;
                             var seconds = parseInt((elapsedTime / 1000) % 60);
                             var minutes = parseInt(((elapsedTime / (1000*60)) % 60));
@@ -486,6 +477,7 @@ var utils = (function() {
                             utils.postCourseResult();
                             utils.success(I18n.t('views.map.marker.registercoursegoal') + '\n' + timeString);
                         } else {
+                            self.registerProgress(nextCourseControl);
                             self.success(I18n.t('views.map.marker.registersuccess'));
                         }
 
@@ -499,6 +491,18 @@ var utils = (function() {
             }, function(error) {
                 alert("error" + error);//console.log("Scanning failed: ", error);
             });
+        },
+        registerProgress(nextCourseControl) {
+            try {
+                nextCourseControl.timestamp = Date.now();
+                nextCourseControl.registrationdate = utils.formatDate(new Date(nextCourseControl.timestamp));
+                var progress = getCourseProgress();
+                progress.takenSticks.push(nextCourseControl);
+                setCourseProgress(progress);
+            } catch (err) {
+                self.error(I18n.t('views.map.marker.registerfail'));
+            }
+
         },
         scan: function(callback) {
             var self = this;
