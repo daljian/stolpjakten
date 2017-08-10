@@ -453,6 +453,10 @@ var utils = (function() {
                     alert("data: " + JSON.stringify(data) + "\nnextControl: " + JSON.stringify(nextCourseControl));
 
                     if (data.id == nextCourseControl.number) {
+
+                        if (nextCourseControl.start == true && getCourseProgress().takenSticks.length == 0) {
+                            self.success(I18n.t('views.map.marker.registercoursestart'));
+                        }
                         try {
                             nextCourseControl.timestamp = Date.now();
                             nextCourseControl.registrationdate = utils.formatDate(new Date(nextCourseControl.timestamp));
@@ -463,9 +467,7 @@ var utils = (function() {
                             self.error(I18n.t('views.map.marker.registerfail'));
                         }
 
-                        if (nextCourseControl.start == true && getCourseProgress().takenSticks.length == 0) {
-                            self.success(I18n.t('views.map.marker.registercoursestart'));
-                        } else if (nextCourseControl.goal == true) {
+                        if (nextCourseControl.goal == true) {
                             var elapsedTime = Date.now() - getCourseProgress().takenSticks[0].timestamp;
                             var seconds = parseInt((elapsedTime / 1000) % 60);
                             var minutes = parseInt(((elapsedTime / (1000*60)) % 60));
