@@ -799,7 +799,7 @@ var net = (function() {
         console.log("err: " + JSON.stringify(err));
         alert("err: " + JSON.stringify(err));
       }
-        //DEBUG alert("msg: " + JSON.stringify(jsonResult));
+        alert("msg: " + JSON.stringify(jsonResult));
         return jsonResult;
     }
   };
