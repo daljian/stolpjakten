@@ -453,6 +453,15 @@ var utils = (function() {
                     alert("data: " + JSON.stringify(data) + "\nnextControl: " + JSON.stringify(nextCourseControl));
 
                     if (data.id == nextCourseControl.number) {
+                        try {
+                            nextCourseControl.timestamp = Date.now();
+                            nextCourseControl.registrationdate = utils.formatDate(new Date(nextCourseControl.timestamp));
+                            var progress = getCourseProgress();
+                            progress.takenSticks.push(nextCourseControl);
+                            setCourseProgress(progress);
+                        } catch (err) {
+                            self.error(I18n.t('views.map.marker.registerfail'));
+                        }
 
                         if (nextCourseControl.start == true && getCourseProgress().takenSticks.length == 0) {
                             self.success(I18n.t('views.map.marker.registercoursestart'));
@@ -478,15 +487,6 @@ var utils = (function() {
                             self.success(I18n.t('views.map.marker.registersuccess'));
                         }
 
-                        try {
-                            nextCourseControl.timestamp = Date.now();
-                            nextCourseControl.registrationdate = utils.formatDate(new Date(nextCourseControl.timestamp));
-                            var progress = getCourseProgress();
-                            progress.takenSticks.push(nextCourseControl);
-                            setCourseProgress(progress);
-                        } catch (err) {
-                            self.error(I18n.t('views.map.marker.registerfail'));
-                        }
                     }else {
                         self.error(I18n.t('views.map.marker.registerfail'));
                     }
