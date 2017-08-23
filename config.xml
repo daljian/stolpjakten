@@ -11,7 +11,9 @@
     </author>
     <preference name="phonegap-version" value="cli-7.0.1" />
     <plugin name="cordova-plugin-inappbrowser" />
-    <plugin name="phonegap-plugin-barcodescanner" />
+    <plugin name="phonegap-plugin-barcodescanner">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="We are using the camera to scan QR codes" />
+    </plugin>
     <plugin name="cordova-plugin-statusbar"/>
     <!--
     <gap:plugin name="com.indigoway.cordova.whitelist.whitelistplugin" source="pgb" />
