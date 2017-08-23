@@ -786,7 +786,7 @@ var net = (function() {
       try{
         var xmlData ="<rd>" + netCredentials.toXML() + courseControlsRegistration.toXML() + "</rd>";
         //debug
-        alert("posting: " + xmlData);
+        //alert("posting: " + xmlData);
         var serverResult = sendToServer(NET_OPERATION_ADD_COURSE_CONTROLS,xmlData);
         utils.assertDefined(serverResult);
         utils.logDebug("["+serverResult+"]");
@@ -799,7 +799,7 @@ var net = (function() {
         console.log("err: " + JSON.stringify(err));
         alert("err: " + JSON.stringify(err));
       }
-        alert("msg: " + JSON.stringify(jsonResult));
+        //alert("msg: " + JSON.stringify(jsonResult));
         return jsonResult;
     }
   };
