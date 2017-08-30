@@ -67,7 +67,7 @@ I18n.Translations.no = {
         register: "Registrer",
         showmarker: "Vis på kartet"
       },
-      areaNotOpen: "Dette arrangemanget er dessverre ikke åpent akkurat nå, se hjemmesiden får mer informasjon:\nhttp://www.stolpjakten.se",
+      areaNotOpen: "Kunne ikke finne noen stolpe får detta arrangemangetakkurat nå, se hjemmesiden får mer informasjon:\nhttp://www.stolpjakten.se",
       stick: "Stolpe"
 
     },

@@ -66,7 +66,7 @@ I18n.Translations.en = {
         register: "Register",
         showmarker: "Show on map"
       },
-      areaNotOpen: "This event is currently not avaliable, see homepage for more information:\nhttp://www.stolpjakten.se",
+      areaNotOpen: "Could not find any Posts for this map, please check the website for more information.\nhttp://www.stolpjakten.se",
       stick: "Post"
 
     },
